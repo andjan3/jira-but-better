@@ -19,3 +19,10 @@ model User {
   username String @unique @default("")
   password String @default("")
 }
+
+model Task {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String
+  isDone      Boolean
+}
