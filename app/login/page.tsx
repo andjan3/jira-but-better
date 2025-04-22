@@ -74,7 +74,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="form-container flex flex-col w-[30%] h-auto mx-auto gap-8 mt-28">
+    <div className="form-container flex flex-col w-[30%] h-auto mx-auto gap-8 mt-28 relative z-30">
       <Toaster closeButton={true} />
 
       <h2 className="text-center text-lg">{isLogin ? "Log in" : "Sign up"}</h2>
