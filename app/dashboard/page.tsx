@@ -1,3 +1,5 @@
+import { TaskColumn } from "@/components/ui/task-column";
+
 export default function SuperSecretPage() {
-  return <>Super secret page</>;
+  return <TaskColumn />;
 }
