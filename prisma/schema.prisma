@@ -19,3 +19,32 @@ model User {
   username String @unique @default("")
   password String @default("")
 }
+
+model Board {
+  id        Int      @id @default(autoincrement())
+  name      String
+  status    String   @default("inProgress")
+  createdAt DateTime @default(now())
+  tasks     Task[]
+  columns   Column[]
+}
+
+model Column {
+  id      Int    @id @default(autoincrement())
+  title   String
+  order   Int
+  boardId Int
+  board   Board  @relation(fields: [boardId], references: [id])
+  tasks   Task[]
+}
+
+model Task {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String
+  isDone      Boolean
+  boardId     Int?
+  board       Board?  @relation(fields: [boardId], references: [id])
+  columnId    Int?
+  column      Column? @relation(fields: [columnId], references: [id])
+}

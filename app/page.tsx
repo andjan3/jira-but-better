@@ -1,23 +1,19 @@
 import { authOptions } from "@/auth";
 import { getServerSession } from "next-auth";
-import { UserIcon } from "@/components/ui/user-icon";
+import { CreateBoard } from "@/components/ui/create-board";
+import { getBoards } from "./lib/get-boards";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
+  const boards = await getBoards();
 
   return (
     <>
-      <nav className="bg-black h-[100px] w-full flex flex-row items-center p-4 px-10 justify-between">
-        <div>
-          <div className="text-white">Jira but better</div>
+      {session && session.user?.name && (
+        <div className="w-full flex justify-center mt-[130px] relative z-20">
+          <CreateBoard />
         </div>
-
-        {session && session.user?.name && (
-          <div className="text-white">{`Welcome: ${session.user.name}`}</div>
-        )}
-
-        <UserIcon props={session ? true : false} />
-      </nav>
+      )}
     </>
   );
 }
