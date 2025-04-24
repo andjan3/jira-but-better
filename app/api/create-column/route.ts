@@ -1,16 +1,15 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-import { db } from "@/app/lib/prisma";
+import { db } from "../../lib/prisma";
 
 export async function GET() {
   try {
-    const boards = await db.board.findMany({});
-    const res = NextResponse.json(boards);
+    const columns = await db.board.findMany({});
+    const res = NextResponse.json(columns);
 
     return res;
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to fetch boards" },
+      { error: "Failed to fetch columns" },
       { status: 500 }
     );
   }
@@ -22,7 +21,7 @@ export async function POST(req: Request) {
 
   if (!name) {
     return NextResponse.json(
-      { error: "Board name is required" },
+      { error: "Column name is required" },
       { status: 400 }
     );
   }
