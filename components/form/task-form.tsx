@@ -5,24 +5,22 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { IoIosCloseCircleOutline } from "react-icons/io";
 
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { formSchema } from "./schemas/form-schema";
+import { Textarea } from "../ui/textarea";
 
 export function TaskForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      message: "",
     },
   });
 
@@ -64,11 +62,11 @@ export function TaskForm() {
             <div>
               <FormField
                 control={form.control}
-                name="name"
+                name="message"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input {...field} placeholder="Add task.." />
+                      <Textarea {...field} placeholder="Add task.." />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
