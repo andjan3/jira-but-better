@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { GoPlusCircle } from "react-icons/go";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export const CreateBoard = () => {
   const [name, setName] = useState("");
@@ -36,11 +37,11 @@ export const CreateBoard = () => {
           onClick={() => handleForm()}
         >
           <GoPlusCircle fontSize={30} />
-          <button className="text-[20px]">Create</button>
+          <button className="text-[20px]">Create board</button>
         </div>
       )}
       {showForm && (
-        <form className="p-4 bg-gray-100 rounded-md flex gap-2">
+        <form className="p-4 bg-gray-100 rounded-md flex items-center gap-2">
           <input
             type="text"
             placeholder="Board name"
@@ -52,8 +53,13 @@ export const CreateBoard = () => {
             onClick={createBoard}
             className="bg-blue-600 text-white px-4 py-2 rounded-md"
           >
-            Create Board
+            Create
           </button>
+          <IoIosCloseCircleOutline
+            fontSize={30}
+            className="cursor-pointer"
+            onClick={() => handleForm()}
+          />
         </form>
       )}
     </>

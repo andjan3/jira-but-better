@@ -16,7 +16,7 @@ export const SideBar = async () => {
               <AppSidebar boards={boards} />
             </div>
 
-            <main className="flex-1 overflow-auto p-6">
+            <main className="flex-1 overflow-auto p-6 ">
               <SidebarTrigger />
             </main>
           </div>

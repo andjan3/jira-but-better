@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 import {
   Form,
@@ -17,7 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { formSchema } from "./schemas/form-schema";
 
-export function ColumnForm({ boardId }: any) {
+export function TaskForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,16 +28,13 @@ export function ColumnForm({ boardId }: any) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/dashboard/${boardId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
+      const response = await fetch(`http://localhost:3000/api/dashboard/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
       if (response.ok) {
         form.reset();
 
@@ -62,10 +60,7 @@ export function ColumnForm({ boardId }: any) {
       <Toaster closeButton={true} />
       <div>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex items-center gap-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className=" ">
             <div>
               <FormField
                 control={form.control}
@@ -73,7 +68,7 @@ export function ColumnForm({ boardId }: any) {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input {...field} placeholder="Add column name.." />
+                      <Input {...field} placeholder="Add task.." />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -81,7 +76,9 @@ export function ColumnForm({ boardId }: any) {
               />
             </div>
 
-            <Button type="submit">Add column</Button>
+            <Button type="submit" className="!mt-4">
+              Add task
+            </Button>
           </form>
         </Form>
       </div>
