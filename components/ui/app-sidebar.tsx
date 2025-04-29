@@ -19,15 +19,9 @@ import {
 } from "@/components/ui/collapsible";
 
 import { ChevronDown } from "lucide-react";
-import useStore from "@/lib/store";
+import Link from "next/link";
 
 export function AppSidebar({ boards }: any) {
-  const { openBoard, setOpenBoard } = useStore();
-
-  console.log(openBoard);
-  const handleBoard = (id: number) => {
-    setOpenBoard(id);
-  };
   return (
     <Sidebar>
       <SidebarContent>
@@ -37,10 +31,10 @@ export function AppSidebar({ boards }: any) {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="/">
+                  <Link href="/">
                     <Home />
                     <span>Home</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
@@ -60,12 +54,7 @@ export function AppSidebar({ boards }: any) {
                     {boards.map((item: any) => (
                       <SidebarMenuItem key={item.id}>
                         <SidebarMenuButton asChild>
-                          <a
-                            href="/dashboard"
-                            onClick={() => handleBoard(item.id)}
-                          >
-                            {item.name}
-                          </a>
+                          <Link href={`/boards/${item.id}`}>{item.name}</Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}
@@ -75,28 +64,28 @@ export function AppSidebar({ boards }: any) {
 
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="#">
+                  <Link href="#">
                     <Calendar />
                     <span>Calendar</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="#">
+                  <Link href="#">
                     <Search />
                     <span>Search</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="#">
+                  <Link href="#">
                     <Settings />
                     <span>Settings</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
