@@ -1,6 +1,6 @@
 import { getBoard } from "@/app/actions/board";
 import { getTasks } from "@/app/actions/tasks";
-import { TaskColumn } from "@/components/ui/task-column";
+import { TaskColumn } from "@/components/board/task-column";
 import { notFound } from "next/navigation";
 
 type Props = {

@@ -52,7 +52,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/login",
+    signIn: "/auth/login",
   },
   callbacks: {
     session: ({ session, token }) => {

@@ -1,6 +1,6 @@
 import { authOptions } from "@/auth";
 import { getServerSession } from "next-auth";
-import { CreateBoard } from "@/components/ui/create-board";
+import { CreateBoard } from "@/components/board/create-board";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);

@@ -1,6 +1,6 @@
 import { authOptions } from "@/auth";
 import { getServerSession } from "next-auth";
-import { UserIcon } from "../user-icon";
+import { UserIcon } from "./user-icon";
 
 export const Nav = async () => {
   const session = await getServerSession(authOptions);

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-const publicRoutes = ["/login", "/register"];
+const publicRoutes = ["/auth/login", "/auth/register"];
 const authRoutes = ["/boards", "/", "/app"];
 const DEFAULT_LOGIN_REDIRECT = "/login";
 
@@ -15,12 +15,15 @@ export async function middleware(req: NextRequest) {
   const isAuth = authRoutes.some((route) => pathname.startsWith(route));
 
   if (isAuth && !isLoggedIn) {
-    const loginUrl = new URL("/login", req.url);
-    loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname);
+    const loginUrl = new URL("/auth/login", req.url);
+    //loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  if ((pathname === "/login" || pathname === "/register") && isLoggedIn) {
+  if (
+    (pathname === "/auth/login" || pathname === "/auth/register") &&
+    isLoggedIn
+  ) {
     return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, req.url));
   }
 
