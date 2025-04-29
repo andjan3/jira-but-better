@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginButton, LogoutButton } from "@/app/auth";
+import { signIn, signOut } from "next-auth/react";
 import { useState } from "react";
 import { FaRegUser } from "react-icons/fa6";
 
@@ -17,7 +17,11 @@ export function UserIcon({ props }: any) {
 
       {hover && (
         <div className="absolute top-20 text-center -right-0 bg-white text-black p-2 rounded shadow-lg w-[100px]">
-          {props ? <LogoutButton /> : <LoginButton />}
+          {props ? (
+            <button onClick={() => signOut()}>Sign out</button>
+          ) : (
+            <button onClick={() => signIn()}>Sign in</button>
+          )}
         </div>
       )}
     </div>
