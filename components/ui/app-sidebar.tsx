@@ -54,9 +54,7 @@ export function AppSidebar({ boards }: any) {
                     {boards.map((item: any) => (
                       <SidebarMenuItem key={item.id}>
                         <SidebarMenuButton asChild>
-                          <Link href={`/dashboard/${item.id}`}>
-                            {item.name}
-                          </Link>
+                          <Link href={`/boards/${item.id}`}>{item.name}</Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}

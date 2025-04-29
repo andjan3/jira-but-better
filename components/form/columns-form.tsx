@@ -1,90 +1,63 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Toaster, toast } from "sonner";
 import { Button } from "@/components/ui/button";
-
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { formSchema } from "./schemas/form-schema";
-
-export function ColumnForm({ boardId }: any) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+import { columnFormSchema, ColumnFormValues } from "./schemas/columns-schema";
+import { createColumnInBoard } from "@/app/actions/board";
+export function ColumnForm({ id }: { id: any }) {
+  const form = useForm<ColumnFormValues>({
+    resolver: zodResolver(columnFormSchema),
     defaultValues: {
       name: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (values: ColumnFormValues) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/dashboard/${boardId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
-      if (response.ok) {
-        form.reset();
+      const column = await createColumnInBoard({
+        boardId: id,
+        name: values.name,
+      });
 
-        toast("Column added", {
-          style: {
-            height: "10vh",
-            width: "30vw",
-            textAlign: "center",
-            display: "flex",
-            justifyContent: "center",
-            fontSize: "18px",
-          },
-        });
-      }
-    } catch (error) {
-      console.error("Error sending message.", error);
-      toast("Something went wrong!");
+      form.reset();
+      toast.success("Column added successfully!");
+    } catch (error: any) {
+      toast.error(error.message || "Something went wrong!");
     }
-  }
+  };
 
   return (
-    <div className="w-[100%] ">
-      <Toaster closeButton={true} />
-      <div>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex items-center gap-4"
-          >
-            <div>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input {...field} placeholder="Add column name.." />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <Button type="submit">Add column</Button>
-          </form>
-        </Form>
-      </div>
+    <div className="w-[100%]">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex items-center gap-4"
+        >
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input {...field} placeholder="Add column name.." />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Add column</Button>
+        </form>
+      </Form>
     </div>
   );
 }

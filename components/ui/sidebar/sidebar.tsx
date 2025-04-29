@@ -1,8 +1,9 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/app-sidebar";
-import { getBoards } from "@/app/lib/actions/get-boards";
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
+import { getBoards } from "@/app/actions/boards";
 
 export const SideBar = async () => {
   const session = await getServerSession(authOptions);

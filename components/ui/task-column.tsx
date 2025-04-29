@@ -4,8 +4,9 @@ import { GoPlus } from "react-icons/go";
 import { ColumnForm } from "../form/columns-form";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { TaskForm } from "../form/task-form";
+import { DisplayTask } from "./display-task";
 
-export const TaskColumn = ({ res }: any) => {
+export const TaskColumn = ({ res, tasks }: any) => {
   const [addColumn, setAddColumn] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
@@ -17,6 +18,9 @@ export const TaskColumn = ({ res }: any) => {
     setShowForm(id ? id : null);
   };
 
+  const test = res?.columns.map((item: any) => console.log(item.id));
+  console.log(res);
+
   return (
     <div className="flex justify-center items-start gap-10 relative top-40 z-20">
       {res?.columns?.map((col: any) => (
@@ -26,14 +30,24 @@ export const TaskColumn = ({ res }: any) => {
         >
           <div>{col.title}</div>
 
+          <div className="flex flex-col gap-5">
+            {tasks
+              .filter((task: any) => task.columnId === col.id)
+              .map((task: any) => (
+                <DisplayTask key={task.id} task={task} />
+              ))}
+          </div>
+
           {showForm == col.id ? (
-            <div className="flex items-end">
-              <TaskForm />
-              <IoIosCloseCircleOutline
-                fontSize={30}
-                className="cursor-pointer -ml-60"
-                onClick={handleForm}
-              />
+            <div>
+              <div className="flex items-end">
+                <TaskForm columnId={col.id} boardId={col.boardId} />
+                <IoIosCloseCircleOutline
+                  fontSize={30}
+                  className="cursor-pointer -ml-60"
+                  onClick={handleForm}
+                />
+              </div>
             </div>
           ) : (
             <button
@@ -53,7 +67,7 @@ export const TaskColumn = ({ res }: any) => {
             e.stopPropagation();
           }}
         >
-          <ColumnForm boardId={res.id} />
+          <ColumnForm id={res.id} />
           <IoIosCloseCircleOutline
             fontSize={30}
             className="cursor-pointer"

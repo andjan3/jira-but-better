@@ -13,30 +13,30 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { formSchema } from "./schemas/form-schema";
 import { Textarea } from "../ui/textarea";
+import { TaskFormSchema } from "./schemas/tasks-schema";
+import { CreateTask } from "@/app/actions/task";
 
-export function TaskForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+interface TaskFormProps {
+  columnId: number;
+  boardId: number;
+}
+
+export function TaskForm({ columnId, boardId }: TaskFormProps) {
+  const form = useForm<z.infer<typeof TaskFormSchema>>({
+    resolver: zodResolver(TaskFormSchema),
     defaultValues: {
       message: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof TaskFormSchema>) {
     try {
-      const response = await fetch(`http://localhost:3000/api/dashboard/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-      if (response.ok) {
+      const response = await CreateTask(values.message, columnId, boardId);
+      if (response) {
         form.reset();
 
-        toast("Column added", {
+        toast("Task added", {
           style: {
             height: "10vh",
             width: "30vw",
