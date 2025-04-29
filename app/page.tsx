@@ -7,11 +7,9 @@ export default async function Home() {
 
   return (
     <>
-      {session && session.user?.name && (
-        <div className="w-full flex justify-center mt-[130px] relative z-20">
-          <CreateBoard />
-        </div>
-      )}
+      <div className="w-full flex justify-center mt-[130px] relative z-20">
+        <CreateBoard />
+      </div>
     </>
   );
 }
