@@ -34,7 +34,6 @@ export default async function RootLayout({
         <Providers>
           <Nav />
           {children}
-          <SideBar />
         </Providers>
       </body>
     </html>
