@@ -5,10 +5,15 @@ import { ColumnForm } from "../form/columns-form";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { TaskForm } from "../form/task-form";
 import { DisplayTask } from "./display-task";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { updateColumnName } from "@/app/actions/update-column-name";
+import { ZodNumber } from "zod";
 
 export const TaskColumn = ({ res, tasks }: any) => {
   const [addColumn, setAddColumn] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [changeColumnName, setChangeColumnName] = useState(null);
+  const [columnName, setColumnName] = useState("");
 
   const handleColumns = () => {
     setAddColumn(!addColumn);
@@ -18,18 +23,62 @@ export const TaskColumn = ({ res, tasks }: any) => {
     setShowForm(id ? id : null);
   };
 
+  const handleColumnName = (id: any, title: string) => {
+    setChangeColumnName(id);
+    setColumnName(title);
+  };
+
+  const handleUpdateColumn = async (columnId: string, boardId: string) => {
+    try {
+      await updateColumnName({
+        columnId,
+        boardId,
+        columnName,
+      });
+      setChangeColumnName(null);
+    } catch (error) {
+      alert("Error updating column name");
+    }
+  };
+
   return (
     <div className=" pt-8 pl-8">
-      <h1 className="mb-8 text-[30px]">
-        {res.name.charAt(0).toUpperCase() + res.name.slice(1).toLowerCase()}
-      </h1>
+      <div className="flex gap-5 items-center mb-8">
+        <h1 className=" text-[30px]">
+          {res.name.charAt(0).toUpperCase() + res.name.slice(1).toLowerCase()}
+        </h1>
+        <HiOutlineDotsHorizontal
+          fontSize={30}
+          className="mt-[5px] cursor-pointer hover:bg-slate-200"
+        />
+      </div>
       <div className="flex items-start gap-10">
         {res?.columns?.map((col: any) => (
           <div
             key={col.id}
             className="text-xl bg-[#F7F8F9] p-4 w-96 shadow rounded flex flex-col gap-4"
           >
-            <div>{col.title}</div>
+            {changeColumnName == col.id ? (
+              <input
+                type="text"
+                value={columnName}
+                autoFocus
+                onChange={(e) => setColumnName(e.target.value)}
+                onBlur={() => handleUpdateColumn(col.id, col.boardId)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleUpdateColumn(col.id, col.boardId);
+                  }
+                }}
+              />
+            ) : (
+              <div
+                onClick={() => handleColumnName(col.id, col.title)}
+                className="cursor-pointer"
+              >
+                {col.title}
+              </div>
+            )}
 
             <div className="flex flex-col gap-5">
               {tasks
