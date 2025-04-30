@@ -124,4 +124,9 @@ input{
   body {
     @apply bg-background text-foreground;
   }
+
+
+  body{
+    margin-top: 112px;
+  }
 }

@@ -1,6 +1,8 @@
 import { getBoard } from "@/app/actions/board";
 import { getTasks } from "@/app/actions/tasks";
 import { TaskColumn } from "@/components/board/task-column";
+import { Nav } from "@/components/header/nav";
+import { SideBar } from "@/components/sidebar/sidebar";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -24,7 +26,15 @@ export default async function BoardPage({ params }: Props) {
       return notFound();
     }
 
-    return <TaskColumn res={boardData} tasks={tasks} />;
+    return (
+      <div>
+        <Nav />
+        <div className="grid grid-cols-[300px_1fr]">
+          <SideBar />
+          <TaskColumn res={boardData} tasks={tasks} />
+        </div>
+      </div>
+    );
   } catch (error) {
     console.error("Error loading board:", error);
     return <div>Error loading board. Please try again later.</div>;

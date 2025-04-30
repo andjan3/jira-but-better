@@ -24,7 +24,7 @@ export const CreateBoard = () => {
     <>
       {!showForm && (
         <div
-          className="flex items-center gap-2 cursor-pointer text-white p-4 rounded-md bg-[#1868db]"
+          className="flex items-center gap-2 cursor-pointer text-white p-4 rounded-md bg-[#1868db] h-[50px] mr-[22%]"
           onClick={() => setShowForm(true)}
         >
           <GoPlusCircle fontSize={30} />
@@ -34,7 +34,7 @@ export const CreateBoard = () => {
       {showForm && (
         <form
           onSubmit={handleSubmit}
-          className="p-4 bg-gray-100 rounded-md flex items-center gap-2"
+          className="p-4 bg-gray-100 rounded-md flex items-center gap-2 h-[70px] mr-[22%]"
         >
           <input
             type="text"

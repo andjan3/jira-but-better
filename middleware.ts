@@ -16,7 +16,7 @@ export async function middleware(req: NextRequest) {
 
   if (isAuth && !isLoggedIn) {
     const loginUrl = new URL("/auth/login", req.url);
-    //loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname);
+    loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname);
     return NextResponse.redirect(loginUrl);
   }
 

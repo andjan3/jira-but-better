@@ -1,15 +1,17 @@
-import { authOptions } from "@/auth";
-import { getServerSession } from "next-auth";
 import { CreateBoard } from "@/components/board/create-board";
+import { Nav } from "@/components/header/nav";
+import { SideBar } from "@/components/sidebar/sidebar";
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
-
   return (
-    <>
-      <div className="w-full flex justify-center mt-[130px] relative z-20">
-        <CreateBoard />
+    <div>
+      <Nav />
+      <div className="grid grid-cols-[18%_1fr]">
+        <SideBar />
+        <div className="w-full flex justify-center">
+          <CreateBoard />
+        </div>
       </div>
-    </>
+    </div>
   );
 }

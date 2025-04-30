@@ -1,0 +1,13 @@
+import { z } from "zod";
+
+export const registerSchema = z.object({
+  username: z.string().min(2, {
+    message: "Username is required.",
+  }),
+  email: z.string().email({ message: "Email is required" }),
+  password: z
+    .string()
+    .min(6, { message: "Password with at least 6 characters is required" }),
+});
+
+export type RegisterFormValues = z.infer<typeof registerSchema>;

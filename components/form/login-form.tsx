@@ -1,22 +1,31 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from "sonner";
+import { useForm } from "react-hook-form";
+import { LoginFormValues, logInSchema } from "./schemas/login-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(logInSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
+  const onSubmit = async (data: LoginFormValues) => {
     try {
       const result = await signIn("credentials", {
-        email,
-        password,
+        ...data,
         redirect: false,
       });
 
@@ -33,24 +42,32 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="form-container flex flex-col w-[30%] h-auto mx-auto gap-8 mt-28 relative z-30">
+    <div className="form-container flex flex-col w-[30%] h-auto mx-auto gap-8 ">
       <Toaster closeButton />
       <h2 className="text-center text-lg">Log in</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <input
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          {...register("email")}
           placeholder="E-mail"
-          required
+          className={errors.email ? "border border-red-500" : ""}
         />
+        {errors.email && (
+          <span className="text-red-500 text-sm">{errors.email.message}</span>
+        )}
+
         <input
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          {...register("password")}
           placeholder="Password"
-          required
+          className={errors.password ? "border border-red-500" : ""}
         />
+        {errors.password && (
+          <span className="text-red-500 text-sm">
+            {errors.password.message}
+          </span>
+        )}
+
         <button
           type="submit"
           className="bg-black text-white w-auto px-10 p-4 rounded-lg mx-auto hover:bg-[#212121] mt-2"
