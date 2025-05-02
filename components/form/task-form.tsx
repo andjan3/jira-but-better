@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "../ui/textarea";
 import { TaskFormSchema } from "./schemas/tasks-schema";
-import { CreateTask } from "@/app/actions/task";
+import { CreateTask } from "@/app/actions/create-task";
 
 interface TaskFormProps {
   columnId: number;

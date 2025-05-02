@@ -1,5 +1,5 @@
 import { getBoard } from "@/app/actions/board";
-import { getTasks } from "@/app/actions/tasks";
+import { getTasks } from "@/app/actions/get-tasks";
 import { Column } from "@/components/board/column";
 import { Nav } from "@/components/header/nav";
 import { SideBar } from "@/components/sidebar/sidebar";
