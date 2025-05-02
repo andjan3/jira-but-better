@@ -1,6 +1,6 @@
 import { getBoard } from "@/app/actions/board";
 import { getTasks } from "@/app/actions/tasks";
-import { TaskColumn } from "@/components/board/task-column";
+import { Column } from "@/components/board/column";
 import { Nav } from "@/components/header/nav";
 import { SideBar } from "@/components/sidebar/sidebar";
 import { notFound } from "next/navigation";
@@ -31,7 +31,7 @@ export default async function BoardPage({ params }: Props) {
         <Nav />
         <div className="grid grid-cols-[300px_1fr]">
           <SideBar />
-          <TaskColumn res={boardData} tasks={tasks} />
+          <Column res={boardData} tasks={tasks} />
         </div>
       </div>
     );

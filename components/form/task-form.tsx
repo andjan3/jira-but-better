@@ -31,8 +31,14 @@ export function TaskForm({ columnId, boardId }: TaskFormProps) {
   });
 
   async function onSubmit(values: z.infer<typeof TaskFormSchema>) {
+    const trimmedMessage = values.message.trim();
+
+    if (!trimmedMessage) {
+      toast("Task message cannot be empty or only spaces.");
+      return;
+    }
     try {
-      const response = await CreateTask(values.message, columnId, boardId);
+      const response = await CreateTask(trimmedMessage, columnId, boardId);
       if (response) {
         form.reset();
 

@@ -27,7 +27,7 @@ export const CreateBoard = () => {
           className="flex items-center gap-2 cursor-pointer text-white p-4 rounded-md bg-[#1868db] h-[50px] mr-[22%]"
           onClick={() => setShowForm(true)}
         >
-          <GoPlusCircle fontSize={30} />
+          <GoPlusCircle fontSize={30} aria-label="Create board" />
           <button className="text-[20px]">Create board</button>
         </div>
       )}
@@ -54,6 +54,7 @@ export const CreateBoard = () => {
             fontSize={30}
             className="cursor-pointer"
             onClick={() => setShowForm(false)}
+            aria-label="Close form for creating a bord"
           />
         </form>
       )}

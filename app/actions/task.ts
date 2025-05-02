@@ -7,11 +7,20 @@ export const CreateTask = async (
   columnId: number,
   boardId: number
 ) => {
+  const column = await db.column.findUnique({
+    where: { id: columnId },
+  });
+
+  if (!column || column.boardId !== boardId) {
+    throw new Error("Invalid column or board");
+  }
+
   const createdTask = await db.task.create({
     data: {
       title: message,
       description: "default description",
       isDone: false,
+      boardId: boardId,
       columnId: columnId,
     },
   });
