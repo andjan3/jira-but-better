@@ -3,9 +3,11 @@ import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { toast } from "sonner";
 import { Alert } from "../alert-dialog/alert";
+import { TaskDialog } from "../task-dialog/task-dialog";
 
 export const DisplayTask = ({ task }: any) => {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<{
     taskId: number | null;
     boardId: number | null;
@@ -15,6 +17,9 @@ export const DisplayTask = ({ task }: any) => {
     boardId: null,
     columnId: null,
   });
+  const handleDialog = () => {
+    setShowDialog(!showDialog);
+  };
 
   const handleDeleteClick = (data: {
     taskId: number;
@@ -65,18 +70,23 @@ export const DisplayTask = ({ task }: any) => {
 
   return (
     <>
-      <div className="flex justify-between items-center shadow-md p-4 rounded-md bg-white">
-        <div className="text-base">{task.title}</div>
-        <MdClose
-          className="cursor-pointer"
-          onClick={() =>
+      <div
+        onClick={(e) => {
+          const target = e.target as HTMLElement;
+          if (target.classList.contains("delete-icon")) {
             handleDeleteClick({
               taskId: task.id,
               boardId: task.boardId,
               columnId: task.columnId,
-            })
+            });
+          } else {
+            handleDialog();
           }
-        />
+        }}
+        className="flex justify-between items-center shadow-md p-4 rounded-md bg-white cursor-pointer releative"
+      >
+        <span>{task.title}</span>
+        <MdClose className="delete-icon" />
       </div>
 
       <Alert
@@ -84,6 +94,14 @@ export const DisplayTask = ({ task }: any) => {
         onClose={() => setIsAlertOpen(false)}
         onConfirm={handleConfirmDelete}
       />
+
+      {showDialog && (
+        <TaskDialog
+          task={task}
+          isOpen={showDialog}
+          onClose={() => setShowDialog(false)}
+        />
+      )}
     </>
   );
 };
