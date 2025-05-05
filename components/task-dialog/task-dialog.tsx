@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import DOMPurify from "dompurify";
 import {
   Dialog,
   DialogContent,
@@ -8,8 +9,8 @@ import {
   DialogTitle,
   DialogFooter,
 } from "../ui/dialog";
-import { Textarea } from "../ui/textarea";
 import { updateTask } from "@/app/actions/update-task";
+import RichTextEditor from "../rich-text-editor";
 
 export function TaskDialog({
   task,
@@ -22,6 +23,11 @@ export function TaskDialog({
 }) {
   const [description, setDescription] = useState(task.description || "");
   const [editingDescription, setEditingDescription] = useState<boolean>(false);
+
+  const safeHTML = DOMPurify.sanitize(task.description);
+  const handleRichTextChange = (content: string) => {
+    setDescription(content);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,18 +59,16 @@ export function TaskDialog({
           <DialogDescription
             className="cursor-pointer"
             onClick={() => setEditingDescription(true)}
-          >
-            {task.description || "No description. Click to add one."}
-          </DialogDescription>
+            dangerouslySetInnerHTML={{
+              __html: safeHTML || "No description. Click to add one.",
+            }}
+          />
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="grid gap-4 py-4">
-              <Textarea
-                id="description"
-                className="col-span-3"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Add a description"
+              <RichTextEditor
+                content={description}
+                onChange={handleRichTextChange}
               />
             </div>
 
