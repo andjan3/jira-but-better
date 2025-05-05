@@ -17,7 +17,7 @@ export const Column = ({ res, tasks }: any) => {
   return (
     <div className="pt-8 pl-8">
       <div className="flex gap-5 items-center mb-8">
-        <h1 className="text-[30px] capitalize">{res.name}</h1>
+        <h1 className="text-[30px] capitalize font-normal">{res.name}</h1>
         <HiOutlineDotsHorizontal
           fontSize={30}
           className="mt-[5px] cursor-pointer hover:bg-slate-200"
