@@ -9,8 +9,15 @@ import {
   DialogTitle,
   DialogFooter,
 } from "../ui/dialog";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 import { updateTask } from "@/app/actions/update-task";
 import RichTextEditor from "../rich-text-editor";
+import { PriorityForm } from "../form/priority-form";
 
 export function TaskDialog({
   task,
@@ -50,6 +57,18 @@ export function TaskDialog({
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:min-w-[825px] max-h-[800px] ">
+        <div
+          className={`${
+            task.priority === "lowPriority"
+              ? "bg-[#7EE2BB]"
+              : task.priority === "mediumPriority"
+              ? "bg-[#FEA362]"
+              : task.priority === "highPriority"
+              ? "bg-[#F87168]"
+              : "hidden"
+          } w-[60px] h-[10px] rounded mb-4`}
+        ></div>
+
         <DialogHeader>
           <DialogTitle>{task.title}</DialogTitle>
         </DialogHeader>
@@ -87,9 +106,25 @@ export function TaskDialog({
             )}
           </div>
           <div className="w-full lg:w-[30%] flex flex-col gap-4 ">
-            <button className="font-medium bg-[#F7F8F9] p-3 rounded-lg shadow-sm border-none text-start">
-              Label
-            </button>
+            <Popover>
+              <PopoverTrigger className="font-medium bg-[#F7F8F9] p-3 rounded-lg shadow-sm border-none text-start">
+                Label
+              </PopoverTrigger>
+              <PopoverContent>
+                <div className="space-y-2">
+                  <h4 className="font-medium leading-none">Labels</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Set priority for your task.
+                  </p>
+                </div>
+
+                <PriorityForm
+                  taskId={task.id}
+                  boardId={task.boardId}
+                  columnId={task.columnId}
+                />
+              </PopoverContent>
+            </Popover>
 
             <button className="font-medium bg-[#F7F8F9] p-3 rounded-lg shadow-sm border-none text-start">
               Members

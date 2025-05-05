@@ -4,6 +4,11 @@ import { MdClose } from "react-icons/md";
 import { toast } from "sonner";
 import { Alert } from "../alert-dialog/alert";
 import { TaskDialog } from "../task-dialog/task-dialog";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/tiptap-ui-primitive/tooltip";
 
 export const DisplayTask = ({ task }: any) => {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -21,6 +26,7 @@ export const DisplayTask = ({ task }: any) => {
     setShowDialog(!showDialog);
   };
 
+  console.log("task from display-task", task);
   const handleDeleteClick = (data: {
     taskId: number;
     boardId: number;
@@ -69,25 +75,62 @@ export const DisplayTask = ({ task }: any) => {
   };
 
   return (
-    <>
-      <div
-        onClick={(e) => {
-          const target = e.target as HTMLElement;
-          if (target.classList.contains("delete-icon")) {
-            handleDeleteClick({
-              taskId: task.id,
-              boardId: task.boardId,
-              columnId: task.columnId,
-            });
-          } else {
-            handleDialog();
-          }
-        }}
-        className="flex justify-between items-center shadow-md p-4 rounded-md bg-white cursor-pointer releative"
-      >
-        <span>{task.title}</span>
-        <MdClose className="delete-icon" />
-      </div>
+    <div className="shadow-md p-4 rounded-md bg-white hover:bg-slate-200">
+      {task.priority !== null ? (
+        <div onClick={handleDialog} className="cursor-pointer">
+          <div className="flex items-center justify-between">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div
+                  className={`${
+                    task.priority === "lowPriority"
+                      ? "bg-[#7EE2BB]"
+                      : task.priority === "highPriority"
+                      ? "bg-[#F87168]"
+                      : "bg-[#FEA362]"
+                  } w-[60px] h-[10px] rounded mb-4`}
+                ></div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Priority category - {task.priority}</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <div className="flex items-center relative">
+              <MdClose
+                className="delete-icon -mt-2"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteClick({
+                    taskId: task.id,
+                    boardId: task.boardId,
+                    columnId: task.columnId,
+                  });
+                }}
+              />
+            </div>
+          </div>
+          <div>{task.title}</div>
+        </div>
+      ) : (
+        <div
+          onClick={handleDialog}
+          className="flex justify-between items-center cursor-pointer relative"
+        >
+          <span>{task.title}</span>
+          <MdClose
+            className="delete-icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDeleteClick({
+                taskId: task.id,
+                boardId: task.boardId,
+                columnId: task.columnId,
+              });
+            }}
+          />
+        </div>
+      )}
 
       <Alert
         isOpen={isAlertOpen}
@@ -102,6 +145,6 @@ export const DisplayTask = ({ task }: any) => {
           onClose={() => setShowDialog(false)}
         />
       )}
-    </>
+    </div>
   );
 };
