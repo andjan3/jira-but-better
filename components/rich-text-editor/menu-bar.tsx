@@ -1,4 +1,5 @@
-import { Paintbrush2, X } from "lucide-react";
+import { ChevronLeft, X } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Toggle } from "../ui/toggle";
 import { Editor } from "@tiptap/react";
 import { useState } from "react";
@@ -25,6 +26,8 @@ import {
 
 export default function MenuBar({ editor }: { editor: Editor | null }) {
   const [color, setColor] = useState("#000000");
+  const [showAll, setShowAll] = useState(false);
+  const visibleOptionsCount = 10;
 
   if (!editor) return null;
 
@@ -39,7 +42,29 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
       .run();
   };
 
-  const Options = [
+  const allOptions = [
+    {
+      type: "color-picker",
+      element: (
+        <Tooltip key="color-picker">
+          <TooltipTrigger asChild>
+            <input
+              type="color"
+              value={color}
+              onChange={(e) => {
+                setColor(e.target.value);
+                editor.chain().focus().setColor(e.target.value).run();
+              }}
+              className="w-10 h-8 border-transparent rounded p-0 cursor-pointer shrink-0"
+              aria-label="Text color"
+            />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Text color</p>
+          </TooltipContent>
+        </Tooltip>
+      ),
+    },
     {
       icon: <Heading1 className="size-4" />,
       tooltip: "H1",
@@ -120,43 +145,57 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
     },
   ];
 
-  return (
-    <div className="border rounded-md p-1 mb-1 bg-slate-50 space-x-2 z-50 flex items-center gap-2 pl-4">
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <input
-            type="color"
-            value={color}
-            onChange={(e) => {
-              const newColor = e.target.value;
-              setColor(newColor);
-              editor.chain().focus().setColor(newColor).run();
-            }}
-            className="w-10 h-8 border-transparent rounded p-0 cursor-pointer "
-            aria-label="Text color"
-          />
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Text color</p>
-        </TooltipContent>
-      </Tooltip>
+  const toggleShowAll = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowAll(!showAll);
+  };
 
-      {Options.map((option, index) => (
-        <Tooltip key={index}>
+  const visibleOptions = showAll
+    ? allOptions.slice(-4)
+    : allOptions.slice(0, visibleOptionsCount);
+  return (
+    <div className="border rounded-md p-1 mb-1 bg-slate-50 flex items-center gap-2 pl-4">
+      <div className="flex gap-2 overflow-x-hidden">
+        {visibleOptions.map((option, index) =>
+          option.type === "color-picker" ? (
+            option.element
+          ) : (
+            <Tooltip key={index}>
+              <TooltipTrigger asChild>
+                <Toggle
+                  pressed={option.pressed}
+                  onPressedChange={option.onClick}
+                  aria-label={option.tooltip}
+                  className="shrink-0"
+                >
+                  {option.icon}
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{option.tooltip}</p>
+              </TooltipContent>
+            </Tooltip>
+          )
+        )}
+      </div>
+
+      {allOptions.length > visibleOptionsCount && (
+        <Tooltip>
           <TooltipTrigger asChild>
-            <Toggle
-              pressed={option.pressed}
-              onPressedChange={option.onClick}
-              aria-label={option.tooltip}
+            <button
+              onClick={toggleShowAll}
+              className="p-1 rounded hover:bg-gray-200 shrink-0"
+              aria-label={showAll ? "Show less" : "Show more"}
             >
-              {option.icon}
-            </Toggle>
+              {showAll ? (
+                <ChevronLeft className="size-4" />
+              ) : (
+                <ChevronRight className="size-4" />
+              )}
+            </button>
           </TooltipTrigger>
-          <TooltipContent>
-            <p>{option.tooltip}</p>
-          </TooltipContent>
         </Tooltip>
-      ))}
+      )}
     </div>
   );
 }
