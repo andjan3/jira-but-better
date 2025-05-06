@@ -20,10 +20,11 @@ enum Priority {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  username String @unique @default("")
-  password String @default("")
+  id       Int        @id @default(autoincrement())
+  email    String     @unique
+  username String     @unique @default("")
+  password String
+  tasks    UserTask[]
 }
 
 model Board {
@@ -45,13 +46,24 @@ model Column {
 }
 
 model Task {
-  id          Int       @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   title       String
   description String
   isDone      Boolean
   priority    Priority?
+  assignedTo  UserTask[]
   boardId     Int?
-  board       Board?    @relation(fields: [boardId], references: [id])
+  board       Board?     @relation(fields: [boardId], references: [id])
   columnId    Int?
-  column      Column?   @relation(fields: [columnId], references: [id])
+  column      Column?    @relation(fields: [columnId], references: [id])
+}
+
+model UserTask {
+  userId     Int
+  taskId     Int
+  assignedAt DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  task       Task     @relation(fields: [taskId], references: [id])
+
+  @@id([userId, taskId])
 }

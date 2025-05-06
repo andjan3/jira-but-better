@@ -1,5 +1,7 @@
 import { getBoard } from "@/app/actions/board";
+import { getAssignedUsers } from "@/app/actions/get-assigned-users";
 import { getTasks } from "@/app/actions/get-tasks";
+import { getUsers } from "@/app/actions/get-users";
 import { Column } from "@/components/board/column";
 import { Nav } from "@/components/header/nav";
 import { SideBar } from "@/components/sidebar/sidebar";
@@ -21,6 +23,7 @@ export default async function BoardPage({ params }: Props) {
 
     const boardData = await getBoard(boardId);
     const tasks = await getTasks();
+    const assignedUser = await getAssignedUsers(boardId);
 
     if (!boardData) {
       return notFound();
@@ -31,7 +34,7 @@ export default async function BoardPage({ params }: Props) {
         <Nav />
         <div className="grid grid-cols-[300px_1fr]">
           <SideBar />
-          <Column res={boardData} tasks={tasks} />
+          <Column res={boardData} tasks={tasks} assignedUser={assignedUser} />
         </div>
       </div>
     );

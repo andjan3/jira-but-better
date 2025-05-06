@@ -7,7 +7,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { ColumnForm } from "../form/columns-form";
 import { ColumnCard } from "./column-card";
 
-export const Column = ({ res, tasks }: any) => {
+export const Column = ({ res, tasks, assignedUser }: any) => {
   const [addColumn, setAddColumn] = useState(false);
   const [showTaskForm, setShowTaskForm] = useState(false);
 
@@ -35,6 +35,7 @@ export const Column = ({ res, tasks }: any) => {
               tasks={tasks}
               showForm={showTaskForm}
               onToggleForm={toggleForm}
+              assignedUser={assignedUser}
             />
           ))}
 

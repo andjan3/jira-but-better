@@ -10,7 +10,7 @@ import {
   TooltipContent,
 } from "@/components/tiptap-ui-primitive/tooltip";
 
-export const DisplayTask = ({ task }: any) => {
+export const DisplayTask = ({ task, assignedUser }: any) => {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<{
@@ -114,7 +114,7 @@ export const DisplayTask = ({ task }: any) => {
       ) : (
         <div
           onClick={handleDialog}
-          className="flex justify-between items-center cursor-pointer relative"
+          className="flex justify-between items-center cursor-pointer relative mb-4"
         >
           <span>{task.title}</span>
           <MdClose
@@ -144,6 +144,19 @@ export const DisplayTask = ({ task }: any) => {
           onClose={() => setShowDialog(false)}
         />
       )}
+
+      <div className="flex justify-end gap-1">
+        {assignedUser
+          .filter((user: any) => user.taskId == task.id)
+          .map((item: any) => (
+            <div
+              className="text-white bg-[#1868DB] rounded-full w-8 h-8 flex items-center justify-center text-xs uppercase"
+              key={item.id}
+            >
+              {item.user.username.slice(0, 2)}
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
