@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import DOMPurify from "dompurify";
@@ -18,6 +20,8 @@ import {
 import { updateTask } from "@/app/actions/update-task";
 import RichTextEditor from "../rich-text-editor";
 import { PriorityForm } from "../form/priority-form";
+
+import { Members } from "../members/members";
 
 export function TaskDialog({
   task,
@@ -126,9 +130,20 @@ export function TaskDialog({
               </PopoverContent>
             </Popover>
 
-            <button className="font-medium bg-[#F7F8F9] p-3 rounded-lg shadow-sm border-none text-start">
-              Members
-            </button>
+            <Popover>
+              <PopoverTrigger className="font-medium bg-[#F7F8F9] p-3 rounded-lg shadow-sm border-none text-start">
+                Members
+              </PopoverTrigger>
+              <PopoverContent className="max-h-[250px] w-[300px] ">
+                <div className="space-y-2">
+                  <h4 className="font-medium leading-none">Members</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Assign a member to task.
+                  </p>
+                </div>
+                <Members taskId={task.id} boardId={task.boardId} />
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </DialogContent>

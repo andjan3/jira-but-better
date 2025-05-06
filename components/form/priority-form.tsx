@@ -38,7 +38,7 @@ export const PriorityForm = ({ taskId, columnId, boardId }: any) => {
 
   return (
     <Select onValueChange={handlePriorityChange} disabled={isSubmitting}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Priority" />
       </SelectTrigger>
       <SelectContent>

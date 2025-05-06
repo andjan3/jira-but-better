@@ -4,7 +4,13 @@ import { EditableColumnTitle } from "./editable-column-title";
 import { GoPlus } from "react-icons/go";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
-export const ColumnCard = ({ column, tasks, showForm, onToggleForm }: any) => {
+export const ColumnCard = ({
+  column,
+  tasks,
+  showForm,
+  onToggleForm,
+  assignedUser,
+}: any) => {
   return (
     <div className="text-xl bg-[#F7F8F9] p-4 w-96 shadow rounded flex flex-col gap-4">
       <EditableColumnTitle column={column} />
@@ -13,7 +19,11 @@ export const ColumnCard = ({ column, tasks, showForm, onToggleForm }: any) => {
         {tasks
           .filter((task: any) => task.columnId === column.id)
           .map((task: any) => (
-            <DisplayTask key={task.id} task={task} />
+            <DisplayTask
+              key={task.id}
+              task={task}
+              assignedUser={assignedUser}
+            />
           ))}
       </div>
 
