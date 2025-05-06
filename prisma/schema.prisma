@@ -13,6 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Priority {
+  lowPriority
+  mediumPriority
+  highPriority
+}
+
 model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
@@ -39,12 +45,13 @@ model Column {
 }
 
 model Task {
-  id          Int     @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   title       String
   description String
   isDone      Boolean
+  priority    Priority?
   boardId     Int?
-  board       Board?  @relation(fields: [boardId], references: [id])
+  board       Board?    @relation(fields: [boardId], references: [id])
   columnId    Int?
-  column      Column? @relation(fields: [columnId], references: [id])
+  column      Column?   @relation(fields: [columnId], references: [id])
 }
