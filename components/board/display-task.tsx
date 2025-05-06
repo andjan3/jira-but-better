@@ -26,7 +26,6 @@ export const DisplayTask = ({ task }: any) => {
     setShowDialog(!showDialog);
   };
 
-  console.log("task from display-task", task);
   const handleDeleteClick = (data: {
     taskId: number;
     boardId: number;
