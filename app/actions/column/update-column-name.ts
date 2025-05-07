@@ -1,15 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { db } from "../lib/prisma";
+import { db } from "../../lib/prisma";
 
-export async function updateColumnName(params: {
-  columnId: number;
-  boardId: number;
-  columnName: string;
-}) {
-  const { boardId, columnName, columnId } = params;
-
+export async function updateColumnName(
+  columnId: number,
+  boardId: number,
+  columnName: string
+) {
   const convertedColumnId = Number(columnId);
   const convertedBoardId = Number(boardId);
 

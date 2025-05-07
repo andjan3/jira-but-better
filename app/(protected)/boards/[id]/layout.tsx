@@ -1,7 +1,7 @@
-import { getBoard } from "@/app/actions/board";
-import { getAssignedUsers } from "@/app/actions/get-assigned-users";
-import { getTasks } from "@/app/actions/get-tasks";
-import { getUsers } from "@/app/actions/get-users";
+import { getAssignedUsers } from "@/app/actions/user/get-assigned-users";
+import { getBoard } from "@/app/actions/board/get-board";
+import { getTasks } from "@/app/actions/task/get-tasks";
+import { getUsers } from "@/app/actions/user/get-users";
 import { BoardProvider } from "@/app/context/board-context";
 
 import { SideBar } from "@/components/sidebar/sidebar";

@@ -1,4 +1,4 @@
-import { create } from "zustand";
+/* import { create } from "zustand";
 
 interface OpenBoard {
   openBoard: number;
@@ -10,4 +10,4 @@ const useStore = create<OpenBoard>((set) => ({
   setOpenBoard: (value) => set({ openBoard: value }),
 }));
 
-export default useStore;
+export default useStore; */

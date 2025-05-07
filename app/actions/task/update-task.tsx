@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { db } from "../lib/prisma";
+import { db } from "../../lib/prisma";
 import { Priority } from "@prisma/client";
 
 export const updateTask = async (

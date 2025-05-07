@@ -53,7 +53,7 @@ export const Columns = () => {
             className="relative flex items-center gap-4 bg-[#F7F8F9] z-20 p-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <ColumnForm id={boardData?.id && boardData?.id} />
+            <ColumnForm boardId={boardData.id} />
             <IoIosCloseCircleOutline
               fontSize={30}
               className="cursor-pointer"

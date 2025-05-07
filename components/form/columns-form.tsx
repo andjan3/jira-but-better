@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,13 +13,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { columnFormSchema, ColumnFormValues } from "./schemas/columns-schema";
-import { createColumnInBoard } from "@/app/actions/board";
+import { createColumn } from "@/app/actions/column/create-column";
 
-export function ColumnForm({ id }: { id: number | undefined }) {
-  if (id === undefined) {
-    return <div>Error: No board ID provided</div>;
-  }
-
+export function ColumnForm({ boardId }: { boardId: number | undefined }) {
   const form = useForm<ColumnFormValues>({
     resolver: zodResolver(columnFormSchema),
     defaultValues: {
@@ -28,11 +24,11 @@ export function ColumnForm({ id }: { id: number | undefined }) {
   });
 
   const onSubmit = async (values: ColumnFormValues) => {
+    if (boardId === undefined) {
+      return;
+    }
     try {
-      const column = await createColumnInBoard({
-        boardId: id,
-        name: values.name,
-      });
+      const column = await createColumn(boardId, values.name);
 
       form.reset();
       toast.success("Column added successfully!");

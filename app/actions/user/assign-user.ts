@@ -1,14 +1,14 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { db } from "../lib/prisma";
+import { db } from "../../lib/prisma";
 
 export const assignUser = async (
   taskId: number,
   userId: number,
   boardId: number
 ) => {
-  const existing = await db.userTask.findUnique({
+  const userAlreadyAssigned = await db.userTask.findUnique({
     where: {
       userId_taskId: {
         userId,
@@ -17,7 +17,7 @@ export const assignUser = async (
     },
   });
 
-  if (!existing) {
+  if (!userAlreadyAssigned) {
     await db.userTask.create({
       data: {
         userId,

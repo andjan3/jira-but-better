@@ -8,7 +8,7 @@ import {
 
 import { PriorityFormValues, PrioritySchema } from "./schemas/priority-schema";
 import { toast } from "sonner";
-import { updateTaskPriority } from "@/app/actions/update-task";
+import { updateTaskPriority } from "@/app/actions/task/update-task";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 

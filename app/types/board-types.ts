@@ -6,7 +6,7 @@ export interface Columns {
 }
 
 export interface BoardData {
-  id: number;
+  id?: number;
   name?: string;
   status?: string;
   createdAt?: Date;
@@ -21,8 +21,8 @@ export interface Tasks {
   description?: string;
   isDone?: boolean;
   priority?: Priority | null;
-  boardId?: number | null;
-  columnId?: number | null;
+  boardId: number;
+  columnId: number;
 }
 
 export interface Users {

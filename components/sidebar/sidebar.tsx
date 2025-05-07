@@ -1,9 +1,8 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/app-sidebar";
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
-import { getBoards } from "@/app/actions/boards";
+import { getAllBoards } from "@/app/actions/board/get-all-boards";
 
 export const SideBar = async () => {
   const session = await getServerSession(authOptions);
@@ -12,7 +11,7 @@ export const SideBar = async () => {
     return null;
   }
 
-  const boards = await getBoards();
+  const boards = await getAllBoards();
 
   return (
     <SidebarProvider>

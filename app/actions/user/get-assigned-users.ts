@@ -1,5 +1,5 @@
 import { revalidatePath } from "next/cache";
-import { db } from "../lib/prisma";
+import { db } from "../../lib/prisma";
 
 export const getAssignedUsers = async (boardId: number) => {
   const assignedUsers = await db.userTask.findMany({
