@@ -21,7 +21,16 @@ import {
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 
-export function AppSidebar({ boards }: any) {
+interface Board {
+  createdAt: Date;
+  id: number;
+  name: string;
+  status: string;
+}
+interface AppSideBarProps {
+  boards: Board[];
+}
+export function AppSidebar({ boards }: AppSideBarProps) {
   return (
     <Sidebar>
       <SidebarContent>
@@ -51,7 +60,7 @@ export function AppSidebar({ boards }: any) {
 
                 <CollapsibleContent>
                   <SidebarMenu className="pl-6">
-                    {boards.map((item: any) => (
+                    {boards.map((item: Board) => (
                       <SidebarMenuItem key={item.id}>
                         <SidebarMenuButton asChild>
                           <Link href={`/boards/${item.id}`}>{item.name}</Link>

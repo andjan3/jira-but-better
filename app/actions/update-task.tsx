@@ -5,10 +5,10 @@ import { db } from "../lib/prisma";
 import { Priority } from "@prisma/client";
 
 export const updateTask = async (
-  taskId: any,
-  boardId: any,
-  columnId: any,
-  description: any
+  taskId: number,
+  boardId: number,
+  columnId: number,
+  description: string
 ) => {
   const task = await db.task.findUnique({
     where: {

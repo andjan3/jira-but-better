@@ -4,14 +4,14 @@ import { revalidatePath } from "next/cache";
 import { db } from "../lib/prisma";
 
 export async function updateColumnName(params: {
-  columnId: string;
-  boardId: string;
+  columnId: number;
+  boardId: number;
   columnName: string;
 }) {
   const { boardId, columnName, columnId } = params;
 
-  const convertedColumnId = parseInt(columnId);
-  const convertedBoardId = parseInt(boardId);
+  const convertedColumnId = Number(columnId);
+  const convertedBoardId = Number(boardId);
 
   const existingColumn = await db.column.findUnique({
     where: { id: convertedColumnId },

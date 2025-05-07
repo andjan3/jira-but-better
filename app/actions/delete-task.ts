@@ -3,7 +3,11 @@
 import { revalidatePath } from "next/cache";
 import { db } from "../lib/prisma";
 
-export const deleteTask = async (taskId: any, boardId: any, columnId: any) => {
+export const deleteTask = async (
+  taskId: number,
+  boardId: number,
+  columnId: number
+) => {
   const task = await db.task.findUnique({
     where: {
       id: taskId,

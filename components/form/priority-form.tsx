@@ -14,7 +14,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 type Priority = "lowPriority" | "mediumPriority" | "highPriority";
 
-export const PriorityForm = ({ taskId, columnId, boardId }: any) => {
+interface PriorityFormProps {
+  taskId: number;
+  columnId: number;
+  boardId: number;
+}
+export const PriorityForm = ({
+  taskId,
+  columnId,
+  boardId,
+}: PriorityFormProps) => {
   const {
     control,
     handleSubmit,

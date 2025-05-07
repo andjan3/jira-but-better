@@ -42,15 +42,8 @@ export function TaskForm({ columnId, boardId }: TaskFormProps) {
       if (response) {
         form.reset();
 
-        toast("Task added", {
-          style: {
-            height: "10vh",
-            width: "30vw",
-            textAlign: "center",
-            display: "flex",
-            justifyContent: "center",
-            fontSize: "18px",
-          },
+        toast.message("Task added!", {
+          description: "Your task has been successfully added.",
         });
       }
     } catch (error) {

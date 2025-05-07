@@ -14,7 +14,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { columnFormSchema, ColumnFormValues } from "./schemas/columns-schema";
 import { createColumnInBoard } from "@/app/actions/board";
-export function ColumnForm({ id }: { id: any }) {
+
+export function ColumnForm({ id }: { id: number | undefined }) {
+  if (id === undefined) {
+    return <div>Error: No board ID provided</div>;
+  }
+
   const form = useForm<ColumnFormValues>({
     resolver: zodResolver(columnFormSchema),
     defaultValues: {

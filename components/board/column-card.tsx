@@ -1,30 +1,53 @@
+import { Tasks } from "@/app/types/board-types";
 import { TaskForm } from "../form/task-form";
 import { DisplayTask } from "./display-task";
 import { EditableColumnTitle } from "./editable-column-title";
 import { GoPlus } from "react-icons/go";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { Priority } from "@prisma/client";
+
+interface Task {
+  id: number;
+  title: string;
+  description?: string;
+  isDone?: boolean;
+  priority?: Priority | null;
+  boardId?: number | null;
+  columnId?: number | null;
+}
+
+interface ColumnCardProps {
+  column: {
+    id: number;
+    title?: string;
+    order?: number;
+    boardId?: number;
+  };
+  tasks: Tasks[];
+  showForm: number | null;
+  onToggleForm: (id: number | null) => void;
+}
 
 export const ColumnCard = ({
   column,
   tasks,
   showForm,
   onToggleForm,
-  assignedUser,
-}: any) => {
+}: ColumnCardProps) => {
+  if (!column.boardId) {
+    console.error("Board ID is missing for column:", column);
+    return <div>Invalid column data</div>;
+  }
   return (
     <div className="text-xl bg-[#F7F8F9] p-4 w-96 shadow rounded flex flex-col gap-4">
       <EditableColumnTitle column={column} />
 
       <div className="flex flex-col gap-5">
         {tasks
-          .filter((task: any) => task.columnId === column.id)
-          .map((task: any) => (
-            <DisplayTask
-              key={task.id}
-              task={task}
-              assignedUser={assignedUser}
-            />
-          ))}
+          .filter((task: Task) => task.columnId === column.id)
+          .map((task: Task) => {
+            return <DisplayTask key={task.id} task={task} />;
+          })}
       </div>
 
       {showForm === column.id ? (

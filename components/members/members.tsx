@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getUsers } from "@/app/actions/get-users";
 import {
   Select,
   SelectContent,
@@ -13,12 +11,16 @@ import { MemberFormValues, MemberSchema } from "../form/schemas/members-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { assignUser } from "@/app/actions/assign-user";
+import { useBoard } from "@/app/context/board-context";
+import { toast } from "sonner";
 
-export const Members = ({ boardId, taskId }: any) => {
+interface MembersProps {
+  boardId: number;
+  taskId: number;
+}
+export const Members = ({ boardId, taskId }: MembersProps) => {
+  const { allUsers } = useBoard();
   const {
-    control,
-    handleSubmit,
-    setValue,
     formState: { isSubmitting },
   } = useForm<MemberFormValues>({
     resolver: zodResolver(MemberSchema),
@@ -26,26 +28,19 @@ export const Members = ({ boardId, taskId }: any) => {
       userId: 0,
     },
   });
-  const [users, setUsers] = useState<any[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await getUsers();
-        setUsers(result);
-      } catch (err) {
-        console.error("Failed to load users", err);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const handleAssignMember = async (userId: any) => {
+  const handleAssignMember = async (userId: string) => {
     try {
-      await assignUser(parseInt(taskId), parseInt(userId), boardId);
-      console.log("assigned task");
+      const assignmentRes = await assignUser(
+        Number(taskId),
+        Number(userId),
+        boardId
+      );
+      toast.message("Assignment was successful!", {
+        description: "The user has been assigned to the task.",
+      });
     } catch (error) {
-      console.log("error", error);
+      toast.error("Unexpected error. Please try again!");
     }
   };
 
@@ -55,7 +50,7 @@ export const Members = ({ boardId, taskId }: any) => {
         <SelectValue placeholder="Select a user" />
       </SelectTrigger>
       <SelectContent>
-        {users.map((user) => (
+        {allUsers.map((user) => (
           <SelectItem
             value={String(user.id)}
             key={user.id}

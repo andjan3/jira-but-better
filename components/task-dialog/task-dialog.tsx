@@ -20,28 +20,46 @@ import {
 import { updateTask } from "@/app/actions/update-task";
 import RichTextEditor from "../rich-text-editor";
 import { PriorityForm } from "../form/priority-form";
-
 import { Members } from "../members/members";
+import { Priority } from "@/app/types/board-types";
+
+interface Task {
+  id: number;
+  title: string;
+  description?: string;
+  isDone?: boolean;
+  priority?: Priority | null;
+  boardId?: number | null;
+  columnId?: number | null;
+}
 
 export function TaskDialog({
   task,
   isOpen,
   onClose,
 }: {
-  task: any;
+  task: Task;
   isOpen: boolean;
   onClose: () => void;
 }) {
   const [description, setDescription] = useState(task.description || "");
   const [editingDescription, setEditingDescription] = useState<boolean>(false);
+  if (task.boardId == null || task.columnId == null) {
+    console.error("Board ID or Column ID is missing!");
+    return;
+  }
+  const safeHTML = DOMPurify.sanitize(task.description || "");
 
-  const safeHTML = DOMPurify.sanitize(task.description);
   const handleRichTextChange = (content: string) => {
     setDescription(content);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (task.boardId == null || task.columnId == null) {
+      console.error("Board ID or Column ID is missing!");
+      return;
+    }
     try {
       const response = await updateTask(
         task.id,

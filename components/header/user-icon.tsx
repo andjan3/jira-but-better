@@ -4,7 +4,10 @@ import { signIn, signOut } from "next-auth/react";
 import { useState } from "react";
 import { FaRegUser } from "react-icons/fa6";
 
-export function UserIcon({ props }: any) {
+interface UserIconProps {
+  props: boolean;
+}
+export function UserIcon({ props }: UserIconProps) {
   const [hover, setHover] = useState(false);
 
   return (

@@ -6,18 +6,27 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { ColumnForm } from "../form/columns-form";
 import { ColumnCard } from "./column-card";
+import { useBoard } from "@/app/context/board-context";
 
-export const Column = ({ res, tasks, assignedUser }: any) => {
+export const Columns = () => {
+  const { boardData, tasks } = useBoard();
   const [addColumn, setAddColumn] = useState(false);
-  const [showTaskForm, setShowTaskForm] = useState(false);
+  const [showTaskForm, setShowTaskForm] = useState<number | null>(null);
 
   const toggleAddColumn = () => setAddColumn((prev) => !prev);
-  const toggleForm = (id: any) => setShowTaskForm(id ? id : null);
+
+  const toggleForm = (id: number | null) => {
+    setShowTaskForm((prev) => (prev === id ? null : id));
+  };
+
+  const columns = boardData?.columns || [];
 
   return (
     <div className="pt-8 pl-8">
       <div className="flex gap-5 items-center mb-8">
-        <h1 className="text-[30px] capitalize font-normal">{res.name}</h1>
+        <h1 className="text-[30px] capitalize font-normal">
+          {boardData?.name && boardData.name}
+        </h1>
         <HiOutlineDotsHorizontal
           fontSize={30}
           className="mt-[5px] cursor-pointer hover:bg-slate-200"
@@ -26,25 +35,25 @@ export const Column = ({ res, tasks, assignedUser }: any) => {
       </div>
 
       <div className="flex items-start gap-10">
-        {res?.columns
-          .sort((a: any, b: any) => a.order - b.order)
-          .map((col: any) => (
-            <ColumnCard
-              key={col.id}
-              column={col}
-              tasks={tasks}
-              showForm={showTaskForm}
-              onToggleForm={toggleForm}
-              assignedUser={assignedUser}
-            />
-          ))}
+        {columns &&
+          columns
+            .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+            .map((col) => (
+              <ColumnCard
+                key={col.id}
+                column={col}
+                tasks={tasks}
+                showForm={showTaskForm}
+                onToggleForm={toggleForm}
+              />
+            ))}
 
         {addColumn ? (
           <div
             className="relative flex items-center gap-4 bg-[#F7F8F9] z-20 p-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <ColumnForm id={res.id} />
+            <ColumnForm id={boardData?.id && boardData?.id} />
             <IoIosCloseCircleOutline
               fontSize={30}
               className="cursor-pointer"
