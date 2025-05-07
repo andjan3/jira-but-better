@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { updateColumnName } from "@/app/actions/update-column-name";
+import { updateColumnName } from "@/app/actions/column/update-column-name";
 
 interface ColumnProps {
   column: {
@@ -25,11 +25,7 @@ export const EditableColumnTitle = ({ column }: ColumnProps) => {
     }
 
     try {
-      await updateColumnName({
-        columnId: column.id,
-        boardId: column.boardId,
-        columnName: columnName.trim(),
-      });
+      await updateColumnName(column.id, column.boardId, columnName.trim());
     } catch (error) {
       alert("Error updating column name");
     } finally {

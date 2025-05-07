@@ -1,4 +1,4 @@
-import { deleteTask } from "@/app/actions/delete-task";
+import { deleteTask } from "@/app/actions/task/delete-task";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { toast } from "sonner";

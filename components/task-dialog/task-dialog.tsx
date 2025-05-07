@@ -17,7 +17,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { updateTask } from "@/app/actions/update-task";
+import { updateTask } from "@/app/actions/task/update-task";
 import RichTextEditor from "../rich-text-editor";
 import { PriorityForm } from "../form/priority-form";
 import { Members } from "../members/members";

@@ -12,8 +12,8 @@ interface Task {
   description?: string;
   isDone?: boolean;
   priority?: Priority | null;
-  boardId?: number | null;
-  columnId?: number | null;
+  boardId: number;
+  columnId: number;
 }
 
 interface ColumnCardProps {

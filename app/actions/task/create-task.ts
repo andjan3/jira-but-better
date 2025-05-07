@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { db } from "../lib/prisma";
+import { db } from "../../lib/prisma";
 
 export const CreateTask = async (
   message: string,

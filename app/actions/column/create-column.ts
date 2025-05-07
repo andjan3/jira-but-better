@@ -3,18 +3,7 @@
 import { db } from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
-export async function getBoard(id: number) {
-  return await db.board.findUnique({
-    where: { id },
-    include: { columns: true },
-  });
-}
-
-export async function createColumnInBoard(params: {
-  boardId: number;
-  name: string;
-}) {
-  const { boardId, name } = params;
+export async function createColumn(boardId: number, name: string) {
   const convertedBoardID = Number(boardId);
 
   const boardExists = await db.board.findUnique({

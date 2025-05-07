@@ -3,12 +3,12 @@ import { createContext, useContext } from "react";
 import { AssignedUsers, BoardData, Tasks, Users } from "../types/board-types";
 
 export const BoardContext = createContext<{
-  boardData: BoardData | null;
+  boardData: BoardData;
   tasks: Tasks[];
   assignedUser: AssignedUsers[];
   allUsers: Users[];
 }>({
-  boardData: null,
+  boardData: {},
   tasks: [],
   assignedUser: [],
   allUsers: [],

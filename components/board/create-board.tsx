@@ -1,8 +1,9 @@
 "use client";
-import { createBoard } from "@/app/actions/boards";
+import { createBoard } from "@/app/actions/board/create-board";
 import { useState } from "react";
 import { GoPlusCircle } from "react-icons/go";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { toast } from "sonner";
 
 export const CreateBoard = () => {
   const [name, setName] = useState("");
@@ -12,7 +13,9 @@ export const CreateBoard = () => {
     e.preventDefault();
     try {
       const newBoard = await createBoard(name);
-      alert(`Board "${newBoard.name}" created!`);
+      toast.message(`Board successfully added`, {
+        description: `Board "${newBoard.name}" created!`,
+      });
       setName("");
       setShowForm(false);
     } catch (error) {

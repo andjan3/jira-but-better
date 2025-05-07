@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { db } from "../lib/prisma";
+import { db } from "../../lib/prisma";
 
 export const deleteTask = async (
   taskId: number,

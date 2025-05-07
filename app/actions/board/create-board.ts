@@ -2,10 +2,6 @@
 import { db } from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
-export async function getBoards() {
-  return await db.board.findMany({});
-}
-
 export async function createBoard(name: string) {
   if (!name) throw new Error("Board name is required");
 

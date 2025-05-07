@@ -6,7 +6,7 @@ import { Toaster, toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { RegisterFormValues, registerSchema } from "./schemas/register-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerUser } from "@/app/actions/register-user";
+import { registerUser } from "@/app/actions/user/register-user";
 
 export const RegisterForm = () => {
   const router = useRouter();
