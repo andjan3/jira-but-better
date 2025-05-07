@@ -11,11 +11,11 @@ export async function getBoard(id: number) {
 }
 
 export async function createColumnInBoard(params: {
-  boardId: string;
+  boardId: number;
   name: string;
 }) {
   const { boardId, name } = params;
-  const convertedBoardID = parseInt(boardId);
+  const convertedBoardID = Number(boardId);
 
   const boardExists = await db.board.findUnique({
     where: { id: convertedBoardID },

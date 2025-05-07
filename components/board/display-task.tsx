@@ -9,8 +9,23 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/tiptap-ui-primitive/tooltip";
+import { useBoard } from "@/app/context/board-context";
+import { Priority } from "@/app/types/board-types";
 
-export const DisplayTask = ({ task, assignedUser }: any) => {
+interface Task {
+  task: {
+    id: number;
+    title: string;
+    description?: string;
+    isDone?: boolean;
+    priority?: Priority | null;
+    boardId?: number | null;
+    columnId?: number | null;
+  };
+}
+
+export const DisplayTask = ({ task }: Task) => {
+  const { assignedUser } = useBoard();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<{
@@ -45,24 +60,14 @@ export const DisplayTask = ({ task, assignedUser }: any) => {
     }
 
     try {
-      const delResponse = await deleteTask(
+      await deleteTask(
         taskToDelete.taskId,
         taskToDelete.boardId,
         taskToDelete.columnId
       );
-
-      if ("success" in delResponse && delResponse.success) {
-        toast("Task deleted successfully!", {
-          style: {
-            height: "10vh",
-            width: "30vw",
-            textAlign: "center",
-            display: "flex",
-            justifyContent: "center",
-            fontSize: "18px",
-          },
-        });
-      }
+      toast.message("Task deleted successfully!", {
+        description: "The has been removed",
+      });
     } catch (err) {
       throw new Error(
         "Failed to delete task: " +
@@ -100,11 +105,15 @@ export const DisplayTask = ({ task, assignedUser }: any) => {
                 className="delete-icon -mt-2"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleDeleteClick({
-                    taskId: task.id,
-                    boardId: task.boardId,
-                    columnId: task.columnId,
-                  });
+                  if (task.columnId != null) {
+                    handleDeleteClick({
+                      taskId: task.id,
+                      boardId: task.boardId!,
+                      columnId: task.columnId,
+                    });
+                  } else {
+                    console.error("Task has no valid columnId!");
+                  }
                 }}
               />
             </div>
@@ -121,11 +130,15 @@ export const DisplayTask = ({ task, assignedUser }: any) => {
             className="delete-icon"
             onClick={(e) => {
               e.stopPropagation();
-              handleDeleteClick({
-                taskId: task.id,
-                boardId: task.boardId,
-                columnId: task.columnId,
-              });
+              if (task.columnId != null) {
+                handleDeleteClick({
+                  taskId: task.id,
+                  boardId: task.boardId!,
+                  columnId: task.columnId,
+                });
+              } else {
+                console.error("Task has no valid columnId!");
+              }
             }}
           />
         </div>
@@ -151,7 +164,7 @@ export const DisplayTask = ({ task, assignedUser }: any) => {
           .map((item: any) => (
             <div
               className="text-white bg-[#1868DB] rounded-full w-8 h-8 flex items-center justify-center text-xs uppercase"
-              key={item.id}
+              key={`${item.user.id}-${task.id}`}
             >
               {item.user.username.slice(0, 2)}
             </div>

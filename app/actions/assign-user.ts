@@ -27,4 +27,5 @@ export const assignUser = async (
   }
 
   revalidatePath(`/boards/${boardId}`);
+  return { success: true };
 };

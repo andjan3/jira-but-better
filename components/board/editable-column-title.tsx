@@ -2,13 +2,25 @@
 import { useState } from "react";
 import { updateColumnName } from "@/app/actions/update-column-name";
 
-export const EditableColumnTitle = ({ column }: any) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [columnName, setColumnName] = useState(column.title);
+interface ColumnProps {
+  column: {
+    id: number;
+    title?: string;
+    order?: number;
+    boardId?: number;
+  };
+}
 
+export const EditableColumnTitle = ({ column }: ColumnProps) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [columnName, setColumnName] = useState(column.title || "");
   const handleUpdateColumn = async () => {
-    if (column.title === columnName.trim()) {
+    if (columnName.trim() === column.title?.trim()) {
       setIsEditing(false);
+      return;
+    }
+
+    if (column.boardId == null || columnName.trim() === "") {
       return;
     }
 
