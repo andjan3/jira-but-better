@@ -1,33 +1,33 @@
 "use client";
-import { useState } from "react";
-import { updateColumnName } from "@/app/actions/column/update-column-name";
 
-interface ColumnProps {
-  column: {
-    id: number;
-    title?: string;
-    order?: number;
-    boardId?: number;
-  };
+import { useState } from "react";
+
+interface EditableTitleProps {
+  title: string;
+  id: number;
+  boardId?: number;
+  columnId?: number;
+  onSave: (newTitle: string) => Promise<void>;
 }
 
-export const EditableColumnTitle = ({ column }: ColumnProps) => {
+export const EditableTitle = ({
+  title,
+
+  onSave,
+}: EditableTitleProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [columnName, setColumnName] = useState(column.title || "");
-  const handleUpdateColumn = async () => {
-    if (columnName.trim() === column.title?.trim()) {
+  const [value, setValue] = useState(title);
+
+  const handleSave = async () => {
+    if (value.trim() === title.trim() || value.trim() === "") {
       setIsEditing(false);
       return;
     }
 
-    if (column.boardId == null || columnName.trim() === "") {
-      return;
-    }
-
     try {
-      await updateColumnName(column.id, column.boardId, columnName.trim());
+      await onSave(value.trim());
     } catch (error) {
-      alert("Error updating column name");
+      alert("Failed to update title");
     } finally {
       setIsEditing(false);
     }
@@ -35,26 +35,28 @@ export const EditableColumnTitle = ({ column }: ColumnProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await handleUpdateColumn();
+    await handleSave();
   };
 
   return isEditing ? (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        value={columnName}
+        value={value}
         autoFocus
-        onChange={(e) => setColumnName(e.target.value)}
-        onBlur={handleUpdateColumn}
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={handleSave}
         className="w-full p-1 border rounded"
       />
     </form>
   ) : (
-    <div
-      onClick={() => setIsEditing(true)}
-      className="cursor-pointer font-semibold"
-    >
-      {column.title}
+    <div className="flex items-center">
+      <div
+        onClick={() => setIsEditing(true)}
+        className="cursor-pointer font-semibold"
+      >
+        {title}
+      </div>
     </div>
   );
 };

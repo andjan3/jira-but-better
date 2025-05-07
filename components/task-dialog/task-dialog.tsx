@@ -22,6 +22,10 @@ import RichTextEditor from "../rich-text-editor";
 import { PriorityForm } from "../form/priority-form";
 import { Members } from "../members/members";
 import { Priority } from "@/app/types/board-types";
+import { useSession } from "next-auth/react";
+import { assignUserToTask } from "@/app/actions/user-task/assign-user-client";
+import { EditableTitle } from "../board/editable-column-title";
+import { updateTaskName } from "@/app/actions/task/update-task-name";
 
 interface Task {
   id: number;
@@ -44,6 +48,8 @@ export function TaskDialog({
 }) {
   const [description, setDescription] = useState(task.description || "");
   const [editingDescription, setEditingDescription] = useState<boolean>(false);
+  const { data: session } = useSession();
+
   if (task.boardId == null || task.columnId == null) {
     console.error("Board ID or Column ID is missing!");
     return;
@@ -76,6 +82,21 @@ export function TaskDialog({
     }
   };
 
+  const handleAssignment = async () => {
+    if (task.boardId == null) {
+      console.error("No board ID found");
+      return;
+    }
+    if (session?.user.id == null) {
+      console.error("No session user ID found");
+      return;
+    }
+
+    const userId = Number(session.user.id);
+
+    await assignUserToTask(task.id, userId, task.boardId);
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:min-w-[825px] max-h-[800px] ">
@@ -92,7 +113,14 @@ export function TaskDialog({
         ></div>
 
         <DialogHeader>
-          <DialogTitle>{task.title}</DialogTitle>
+          <EditableTitle
+            title={task.title || ""}
+            id={task.id}
+            boardId={task.boardId}
+            onSave={async (newTitle) => {
+              await updateTaskName(task.id, task.boardId!, newTitle);
+            }}
+          />
         </DialogHeader>
 
         <div className="flex flex-col lg:flex-row gap-10 pt-5">
@@ -155,9 +183,12 @@ export function TaskDialog({
               <PopoverContent className="max-h-[250px] w-[300px] ">
                 <div className="space-y-2">
                   <h4 className="font-medium leading-none">Members</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Assign a member to task.
-                  </p>
+                  <div
+                    className="text-sm text-muted-foreground cursor-pointer"
+                    onClick={() => handleAssignment()}
+                  >
+                    Assign yourself
+                  </div>
                 </div>
                 <Members taskId={task.id} boardId={task.boardId} />
               </PopoverContent>
