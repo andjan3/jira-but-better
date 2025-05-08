@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+/* import { PrismaClient } from "@prisma/client";
 import { hash } from "bcrypt";
 
 const prisma = new PrismaClient();
@@ -23,3 +23,4 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
+ */

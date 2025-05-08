@@ -125,7 +125,8 @@ export function TaskDialog({
 
         <div className="flex flex-col lg:flex-row gap-10 pt-5">
           <div className="flex-1 min-w-0">
-            <div className="font-medium mb-2">Description</div>
+            <DialogTitle className="font-medium mb-2">Description</DialogTitle>
+
             {!editingDescription ? (
               <DialogDescription
                 className="cursor-pointer "

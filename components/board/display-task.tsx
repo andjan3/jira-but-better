@@ -12,6 +12,7 @@ import {
 import { useBoard } from "@/app/context/board-context";
 import { Priority } from "@/app/types/board-types";
 import { MembersPopOver } from "../members-popover/members-popover";
+import { ZodNumber } from "zod";
 
 interface Task {
   task: {
@@ -125,7 +126,11 @@ export const DisplayTask = ({ task }: Task) => {
             {assignedUser
               .filter((user: any) => user.taskId == task.id)
               .map((item: any) => (
-                <MembersPopOver item={item} boardId={task.boardId} />
+                <MembersPopOver
+                  item={item}
+                  boardId={task.boardId}
+                  key={`${item.userId}-${task.id}`}
+                />
               ))}
           </div>
         </div>
@@ -154,7 +159,11 @@ export const DisplayTask = ({ task }: Task) => {
             {assignedUser
               .filter((user: any) => user.taskId == task.id)
               .map((item: any) => (
-                <MembersPopOver item={item} boardId={task.boardId} />
+                <MembersPopOver
+                  item={item}
+                  boardId={task.boardId}
+                  key={`${item.userId}-${task.id}`}
+                />
               ))}
           </div>
         </div>

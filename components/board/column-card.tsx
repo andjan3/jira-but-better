@@ -62,7 +62,11 @@ export const ColumnCard = ({
         {tasks
           .filter((task: Task) => task.columnId === column.id)
           .map((task: Task) => {
-            return <DisplayTask key={task.id} task={task} />;
+            return (
+              <div key={task.id}>
+                <DisplayTask task={task} />
+              </div>
+            );
           })}
       </div>
 
