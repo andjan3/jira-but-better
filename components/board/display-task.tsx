@@ -11,6 +11,8 @@ import {
 } from "@/components/tiptap-ui-primitive/tooltip";
 import { useBoard } from "@/app/context/board-context";
 import { Priority } from "@/app/types/board-types";
+import { MembersPopOver } from "../members-popover/members-popover";
+import { ZodNumber } from "zod";
 
 interface Task {
   task: {
@@ -28,6 +30,7 @@ export const DisplayTask = ({ task }: Task) => {
   const { assignedUser } = useBoard();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
+
   const [taskToDelete, setTaskToDelete] = useState<{
     taskId: number | null;
     boardId: number | null;
@@ -79,10 +82,10 @@ export const DisplayTask = ({ task }: Task) => {
   };
 
   return (
-    <div className="shadow-md p-4 rounded-md bg-white hover:bg-slate-200">
+    <div className="shadow-md p-4 rounded-md bg-white hover:bg-slate-200 ">
       {task.priority !== null ? (
         <div onClick={handleDialog} className="cursor-pointer">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between ">
             <Tooltip>
               <TooltipTrigger asChild>
                 <div
@@ -119,28 +122,50 @@ export const DisplayTask = ({ task }: Task) => {
             </div>
           </div>
           <div>{task.title}</div>
+          <div className="flex justify-end gap-1">
+            {assignedUser
+              .filter((user: any) => user.taskId == task.id)
+              .map((item: any) => (
+                <MembersPopOver
+                  item={item}
+                  boardId={task.boardId}
+                  key={`${item.userId}-${task.id}`}
+                />
+              ))}
+          </div>
         </div>
       ) : (
-        <div
-          onClick={handleDialog}
-          className="flex justify-between items-center cursor-pointer relative mb-4"
-        >
-          <span>{task.title}</span>
-          <MdClose
-            className="delete-icon"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (task.columnId != null) {
-                handleDeleteClick({
-                  taskId: task.id,
-                  boardId: task.boardId!,
-                  columnId: task.columnId,
-                });
-              } else {
-                console.error("Task has no valid columnId!");
-              }
-            }}
-          />
+        <div onClick={handleDialog} className="cursor-pointer ">
+          <div className="flex justify-between items-center  relative mb-7 ">
+            <span>{task.title}</span>
+
+            <MdClose
+              className="delete-icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (task.columnId != null) {
+                  handleDeleteClick({
+                    taskId: task.id,
+                    boardId: task.boardId!,
+                    columnId: task.columnId,
+                  });
+                } else {
+                  console.error("Task has no valid columnId!");
+                }
+              }}
+            />
+          </div>
+          <div className="flex justify-end gap-1">
+            {assignedUser
+              .filter((user: any) => user.taskId == task.id)
+              .map((item: any) => (
+                <MembersPopOver
+                  item={item}
+                  boardId={task.boardId}
+                  key={`${item.userId}-${task.id}`}
+                />
+              ))}
+          </div>
         </div>
       )}
 
@@ -157,19 +182,6 @@ export const DisplayTask = ({ task }: Task) => {
           onClose={() => setShowDialog(false)}
         />
       )}
-
-      <div className="flex justify-end gap-1">
-        {assignedUser
-          .filter((user: any) => user.taskId == task.id)
-          .map((item: any) => (
-            <div
-              className="text-white bg-[#1868DB] rounded-full w-8 h-8 flex items-center justify-center text-xs uppercase"
-              key={`${item.user.id}-${task.id}`}
-            >
-              {item.user.username.slice(0, 2)}
-            </div>
-          ))}
-      </div>
     </div>
   );
 };

@@ -21,6 +21,9 @@ export const deleteTask = async (
   if (task.boardId !== boardId || task.columnId !== columnId) {
     return new Error("Task dosent belong to this board or column");
   }
+  await db.userTask.deleteMany({
+    where: { taskId },
+  });
 
   await db.task.delete({
     where: {

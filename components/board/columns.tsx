@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { GoPlus } from "react-icons/go";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { ColumnForm } from "../form/columns-form";
 import { ColumnCard } from "./column-card";
 import { useBoard } from "@/app/context/board-context";
+import { RemovePopOver } from "../remove-popover/remove-popover";
 
 export const Columns = () => {
   const { boardData, tasks } = useBoard();
@@ -27,11 +27,8 @@ export const Columns = () => {
         <h1 className="text-[30px] capitalize font-normal">
           {boardData?.name && boardData.name}
         </h1>
-        <HiOutlineDotsHorizontal
-          fontSize={30}
-          className="mt-[5px] cursor-pointer hover:bg-slate-200"
-          aria-label="Open board settings"
-        />
+
+        <RemovePopOver boardId={boardData.id} isColumn={false} />
       </div>
 
       <div className="flex items-start gap-10">

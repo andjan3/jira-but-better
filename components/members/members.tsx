@@ -10,7 +10,7 @@ import {
 import { MemberFormValues, MemberSchema } from "../form/schemas/members-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { assignUser } from "@/app/actions/user/assign-user";
+import { assignUser } from "@/app/actions/user-task/assign-user";
 import { useBoard } from "@/app/context/board-context";
 import { toast } from "sonner";
 

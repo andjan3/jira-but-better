@@ -1,4 +1,4 @@
-import { getAssignedUsers } from "@/app/actions/user/get-assigned-users";
+import { getAssignedUsers } from "@/app/actions/user-task/get-assigned-users";
 import { getBoard } from "@/app/actions/board/get-board";
 import { getTasks } from "@/app/actions/task/get-tasks";
 import { getUsers } from "@/app/actions/user/get-users";
