@@ -52,10 +52,13 @@ model Task {
   isDone      Boolean
   priority    Priority?
   assignedTo  UserTask[]
+  order       Int        @default(0)
   boardId     Int
   board       Board      @relation(fields: [boardId], references: [id])
   columnId    Int
   column      Column     @relation(fields: [columnId], references: [id])
+
+  @@unique([columnId, order])
 }
 
 model UserTask {

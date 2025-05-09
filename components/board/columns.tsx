@@ -1,22 +1,95 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { ColumnForm } from "../form/columns-form";
 import { ColumnCard } from "./column-card";
 import { useBoard } from "@/app/context/board-context";
 import { RemovePopOver } from "../remove-popover/remove-popover";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
+import { clientUpdateTaskOrder } from "@/app/actions/task/client-update.task-order";
+import { toast } from "sonner";
 
 export const Columns = () => {
   const { boardData, tasks } = useBoard();
   const [addColumn, setAddColumn] = useState(false);
   const [showTaskForm, setShowTaskForm] = useState<number | null>(null);
+  const [localTasks, setLocalTasks] = useState(tasks);
 
   const toggleAddColumn = () => setAddColumn((prev) => !prev);
 
   const toggleForm = (id: number | null) => {
     setShowTaskForm((prev) => (prev === id ? null : id));
+  };
+
+  useEffect(() => {
+    setLocalTasks(tasks);
+  }, [tasks]);
+
+  const handleDragEnd = async (result: DropResult) => {
+    const { destination, source, draggableId } = result;
+
+    if (
+      !destination ||
+      (destination.droppableId === source.droppableId &&
+        destination.index === source.index)
+    )
+      return;
+
+    const taskId = parseInt(draggableId);
+    const targetColumnId = parseInt(destination.droppableId);
+    const targetIndex = destination.index;
+
+    setLocalTasks((prevTasks) => {
+      const filteredTasks = prevTasks.filter((t) => t.id !== taskId);
+      const taskToMove = prevTasks.find((t) => t.id === taskId);
+      if (!taskToMove) return prevTasks;
+
+      const updatedTask = { ...taskToMove, columnId: targetColumnId };
+      const targetColumnTasks = filteredTasks.filter(
+        (t) => t.columnId === targetColumnId
+      );
+
+      if (destination.index >= targetColumnTasks.length) {
+        return [...filteredTasks, updatedTask];
+      } else {
+        const before = targetColumnTasks.slice(0, destination.index);
+        const after = targetColumnTasks.slice(destination.index);
+        return [
+          ...filteredTasks.filter((t) => t.columnId !== targetColumnId),
+          ...before,
+          updatedTask,
+          ...after,
+        ];
+      }
+    });
+
+    try {
+      if (!boardData.id) return;
+
+      const res = await clientUpdateTaskOrder({
+        taskId,
+        newColumnId: targetColumnId,
+        newIndex: targetIndex,
+        boardId: boardData.id,
+      });
+
+      if (!res.success) {
+        toast.message("Something went wrong!", {
+          description: "Please try again later",
+        });
+        setLocalTasks(tasks);
+      }
+    } catch (err) {
+      console.error("Serverfel:", err);
+      setLocalTasks(tasks);
+    }
   };
 
   const columns = boardData?.columns || [];
@@ -32,18 +105,29 @@ export const Columns = () => {
       </div>
 
       <div className="flex items-start gap-10">
-        {columns &&
-          columns
-            .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-            .map((col) => (
-              <ColumnCard
-                key={col.id}
-                column={col}
-                tasks={tasks}
-                showForm={showTaskForm}
-                onToggleForm={toggleForm}
-              />
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <div className="flex items-start gap-10">
+            {columns.map((col) => (
+              <Droppable key={col.id} droppableId={col.id.toString()}>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className="w-96"
+                  >
+                    <ColumnCard
+                      column={col}
+                      tasks={localTasks}
+                      showForm={showTaskForm}
+                      onToggleForm={toggleForm}
+                    />
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
             ))}
+          </div>
+        </DragDropContext>
 
         {addColumn ? (
           <div
