@@ -23,6 +23,7 @@ export interface Tasks {
   priority?: Priority | null;
   boardId: number;
   columnId: number;
+  order: number;
 }
 
 export interface Users {

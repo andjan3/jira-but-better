@@ -15,6 +15,13 @@ export const CreateTask = async (
     throw new Error("Invalid column or board");
   }
 
+  const maxOrderTask = await db.task.findFirst({
+    where: { columnId: columnId },
+    orderBy: { order: "desc" },
+  });
+
+  const newOrder = maxOrderTask ? maxOrderTask.order + 1 : 0;
+
   const createdTask = await db.task.create({
     data: {
       title: message,
@@ -22,6 +29,7 @@ export const CreateTask = async (
       isDone: false,
       boardId: boardId,
       columnId: columnId,
+      order: newOrder,
     },
   });
 

@@ -7,6 +7,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { Priority } from "@prisma/client";
 import { updateColumnName } from "@/app/actions/column/update-column-name";
 import { RemovePopOver } from "../remove-popover/remove-popover";
+import { Droppable, Draggable } from "@hello-pangea/dnd";
 
 interface Task {
   id: number;
@@ -61,11 +62,23 @@ export const ColumnCard = ({
       <div className="flex flex-col gap-5">
         {tasks
           .filter((task: Task) => task.columnId === column.id)
-          .map((task: Task) => {
+          .map((task: Task, index) => {
             return (
-              <div key={task.id}>
-                <DisplayTask task={task} />
-              </div>
+              <Draggable
+                key={task.id}
+                draggableId={task.id.toString()}
+                index={index}
+              >
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <DisplayTask task={task} />
+                  </div>
+                )}
+              </Draggable>
             );
           })}
       </div>
