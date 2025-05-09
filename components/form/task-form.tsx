@@ -57,7 +57,7 @@ export function TaskForm({ columnId, boardId }: TaskFormProps) {
       <Toaster closeButton={true} />
       <div>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className=" ">
+          <form onSubmit={form.handleSubmit(onSubmit)}>
             <div>
               <FormField
                 control={form.control}

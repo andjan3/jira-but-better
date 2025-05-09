@@ -1,4 +1,4 @@
-import { deleteAssignmentAction } from "@/app/actions/user-task/delete-assignment-client-actions";
+import { unAssignUser } from "@/app/actions/client-actions";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -28,7 +28,7 @@ export function MembersPopOver({ item, boardId }: MembersPopOverProps) {
     if (boardId == null) {
       return;
     }
-    await deleteAssignmentAction(item.taskId, item.userId, boardId);
+    await unAssignUser(item.taskId, item.userId, boardId);
   };
 
   const handlePopoverClick = (e: React.MouseEvent) => {

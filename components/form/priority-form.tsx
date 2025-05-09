@@ -8,7 +8,7 @@ import {
 
 import { PriorityFormValues, PrioritySchema } from "./schemas/priority-schema";
 import { toast } from "sonner";
-import { updateTaskPriority } from "@/app/actions/task/update-task";
+import { updateTaskPriority } from "@/app/actions/task/update-task-priority";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -25,9 +25,6 @@ export const PriorityForm = ({
   boardId,
 }: PriorityFormProps) => {
   const {
-    control,
-    handleSubmit,
-    setValue,
     formState: { isSubmitting },
   } = useForm<PriorityFormValues>({
     resolver: zodResolver(PrioritySchema),

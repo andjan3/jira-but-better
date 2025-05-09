@@ -26,7 +26,7 @@ export interface Tasks {
   order: number;
 }
 
-export interface Users {
+export interface User {
   id: number;
   email: string;
   password: string;
@@ -36,5 +36,5 @@ export interface AssignedUsers {
   userId: number;
   taskId: number;
   assignedAt: Date;
-  user: Users;
+  user: User;
 }

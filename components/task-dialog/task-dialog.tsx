@@ -17,15 +17,16 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { updateTask } from "@/app/actions/task/update-task";
 import RichTextEditor from "../rich-text-editor";
 import { PriorityForm } from "../form/priority-form";
 import { Members } from "../members/members";
 import { Priority } from "@/app/types/board-types";
 import { useSession } from "next-auth/react";
-import { assignUserToTask } from "@/app/actions/user-task/assign-user-client";
 import { EditableTitle } from "../board/editable-column-title";
 import { updateTaskName } from "@/app/actions/task/update-task-name";
+import { assignUserToTask } from "@/app/actions/client-actions";
+import { updateTaskDescription } from "@/app/actions/task/update-task-description";
+import { getPriorityClass } from "@/lib/priority-utils";
 
 interface Task {
   id: number;
@@ -67,7 +68,7 @@ export function TaskDialog({
       return;
     }
     try {
-      const response = await updateTask(
+      const response = await updateTaskDescription(
         task.id,
         task.boardId,
         task.columnId,
@@ -101,17 +102,8 @@ export function TaskDialog({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:min-w-[825px] max-h-[800px] ">
         <div
-          className={`${
-            task.priority === "lowPriority"
-              ? "bg-[#7EE2BB]"
-              : task.priority === "mediumPriority"
-              ? "bg-[#FEA362]"
-              : task.priority === "highPriority"
-              ? "bg-[#F87168]"
-              : "hidden"
-          } w-[60px] h-[10px] rounded mb-4`}
+          className={`${getPriorityClass(task)} w-[60px] h-[10px] rounded mb-4`}
         ></div>
-
         <DialogHeader>
           <EditableTitle
             title={task.title || ""}

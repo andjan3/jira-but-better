@@ -3,7 +3,7 @@
 import { db } from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
-export const UpdateTaskOrder = async ({
+export const updateTaskOrder = async ({
   taskId,
   newColumnId,
   newIndex,

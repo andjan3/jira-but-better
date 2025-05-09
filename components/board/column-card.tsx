@@ -7,7 +7,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { Priority } from "@prisma/client";
 import { updateColumnName } from "@/app/actions/column/update-column-name";
 import { RemovePopOver } from "../remove-popover/remove-popover";
-import { Droppable, Draggable } from "@hello-pangea/dnd";
+import { Draggable } from "@hello-pangea/dnd";
 
 interface Task {
   id: number;
@@ -27,7 +27,7 @@ interface ColumnCardProps {
     boardId?: number;
   };
   tasks: Tasks[];
-  showForm: number | null;
+  showForm: any;
   onToggleForm: (id: number | null) => void;
 }
 
@@ -96,7 +96,9 @@ export const ColumnCard = ({
       ) : (
         <button
           className="cursor-pointer text-base flex items-center gap-2 hover:bg-slate-200 p-4 rounded-md"
-          onClick={() => onToggleForm(column.id)}
+          onClick={() => {
+            onToggleForm(column.id);
+          }}
         >
           <GoPlus fontSize={25} aria-label="Create a task" /> Create task
         </button>

@@ -3,9 +3,7 @@ import { getBoard } from "@/app/actions/board/get-board";
 import { getTasks } from "@/app/actions/task/get-tasks";
 import { getUsers } from "@/app/actions/user/get-users";
 import { BoardProvider } from "@/app/context/board-context";
-
 import { SideBar } from "@/components/sidebar/sidebar";
-
 import { notFound } from "next/navigation";
 
 export default async function BoardLayout({
