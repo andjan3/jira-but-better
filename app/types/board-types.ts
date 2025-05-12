@@ -6,7 +6,7 @@ export interface Columns {
 }
 
 export interface BoardData {
-  id?: number;
+  id: number;
   name?: string;
   status?: string;
   createdAt?: Date;
@@ -37,4 +37,15 @@ export interface AssignedUsers {
   taskId: number;
   assignedAt: Date;
   user: User;
+}
+
+export interface Board {
+  id: number;
+  name: string;
+  status: string;
+  createdAt: Date;
+}
+
+export interface Boards {
+  boards: Board[];
 }

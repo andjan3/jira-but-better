@@ -1,17 +1,22 @@
-import { CreateBoard } from "@/components/board/create-board";
-import { Nav } from "@/components/header/nav";
-import { SideBar } from "@/components/sidebar/sidebar";
+import { getServerSession } from "next-auth";
+import { getAllBoards } from "./actions/board/get-all-boards";
+import { authOptions } from "@/auth";
+import { DashboardPage } from "@/components/board/dashboard-page";
+import { getAssignedUsers } from "./actions/user-task/get-assigned-users";
 
 export default async function Home() {
-  return (
-    <div>
-      <Nav />
-      <div className="grid grid-cols-[18%_1fr]">
-        <SideBar />
-        <div className="w-full flex justify-center">
-          <CreateBoard />
-        </div>
-      </div>
-    </div>
-  );
+  try {
+    const [boards, session] = await Promise.all([
+      getAllBoards(),
+      getServerSession(authOptions),
+    ]);
+
+    if (session == null) {
+      return;
+    }
+
+    return <DashboardPage boards={boards} session={session} />;
+  } catch (error) {
+    return <div>Error loading dashboard.</div>;
+  }
 }

@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/popover";
 
 import { removeBoard, removeColumn } from "@/app/actions/client-actions";
+import { Alert } from "../alert-dialog/alert";
+import { useState } from "react";
 
 interface RemovePopOverProps {
   boardId?: number;
@@ -19,9 +21,12 @@ export function RemovePopOver({
   columnId,
   isColumn = false,
 }: RemovePopOverProps) {
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+
   const handleRemove = async () => {
     if (isColumn && columnId != null && boardId != null) {
       await removeColumn(columnId, boardId);
+      setIsAlertOpen(true);
     } else if (boardId != null) {
       const result = await removeBoard(boardId);
       if (result.success) {
@@ -44,9 +49,15 @@ export function RemovePopOver({
       <PopoverContent className="w-40">
         <div className="grid gap-4">
           <div className="space-y-2">
+            <Alert
+              isOpen={isAlertOpen}
+              onClose={() => setIsAlertOpen(false)}
+              onConfirm={handleRemove}
+              item={isColumn ? "column" : "board"}
+            />
             <div
               className="font-medium leading-none text-center cursor-pointer"
-              onClick={handleRemove}
+              onClick={() => setIsAlertOpen(true)}
             >
               {isColumn ? "Delete column" : "Delete board"}
             </div>

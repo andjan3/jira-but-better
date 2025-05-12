@@ -8,11 +8,12 @@ interface EditableTitleProps {
   boardId?: number;
   columnId?: number;
   onSave: (newTitle: string) => Promise<void>;
+  boardTitle: boolean;
 }
 
 export const EditableTitle = ({
   title,
-
+  boardTitle,
   onSave,
 }: EditableTitleProps) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -53,7 +54,9 @@ export const EditableTitle = ({
     <div className="flex items-center">
       <div
         onClick={() => setIsEditing(true)}
-        className="cursor-pointer font-semibold"
+        className={`cursor-pointer font-semibold ${
+          boardTitle && "text-[26px]"
+        }`}
       >
         {title}
       </div>

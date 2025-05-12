@@ -52,6 +52,7 @@ export const ColumnCard = ({
           onSave={async (newTitle) => {
             await updateColumnName(column.id, column.boardId!, newTitle);
           }}
+          boardTitle={false}
         />
         <RemovePopOver
           columnId={column.id}

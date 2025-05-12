@@ -16,10 +16,12 @@ export function UserIcon({ props }: UserIconProps) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <FaRegUser className="text-white cursor-pointer" fontSize={25} />
+      <div className="bg-[#1868DB] p-3 rounded-full">
+        <FaRegUser className="text-white cursor-pointer" fontSize={20} />
+      </div>
 
       {hover && (
-        <div className="absolute top-20 text-center -right-0 bg-white text-black p-2 rounded shadow-lg w-[100px]">
+        <div className="absolute top-[85px] text-center -right-0 bg-white text-black p-2 rounded shadow-lg w-[100px]">
           {props ? (
             <button onClick={() => signOut()}>Sign out</button>
           ) : (

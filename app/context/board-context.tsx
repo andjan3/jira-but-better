@@ -8,7 +8,7 @@ export const BoardContext = createContext<{
   assignedUser: AssignedUsers[];
   allUsers: User[];
 }>({
-  boardData: {},
+  boardData: { id: 0 },
   tasks: [],
   assignedUser: [],
   allUsers: [],

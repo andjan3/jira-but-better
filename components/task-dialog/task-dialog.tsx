@@ -112,6 +112,7 @@ export function TaskDialog({
             onSave={async (newTitle) => {
               await updateTaskName(task.id, task.boardId!, newTitle);
             }}
+            boardTitle={false}
           />
         </DialogHeader>
 

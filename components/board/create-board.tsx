@@ -1,13 +1,20 @@
 "use client";
-import { createBoard } from "@/app/actions/board/create-board";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { GoPlus } from "react-icons/go";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { useState } from "react";
-import { GoPlusCircle } from "react-icons/go";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { createBoard } from "@/app/actions/board/create-board";
 import { toast } from "sonner";
 
-export const CreateBoard = () => {
+export function CreateBoard() {
   const [name, setName] = useState("");
-  const [showForm, setShowForm] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,50 +24,48 @@ export const CreateBoard = () => {
         description: `Board "${newBoard.name}" created!`,
       });
       setName("");
-      setShowForm(false);
     } catch (error) {
       alert(error instanceof Error ? error.message : "Failed to create board");
     }
   };
 
   return (
-    <>
-      {!showForm && (
-        <div
-          className="flex items-center gap-2 cursor-pointer text-white p-4 rounded-md bg-[#1868db] h-[50px] mr-[22%]"
-          onClick={() => setShowForm(true)}
-        >
-          <GoPlusCircle fontSize={30} aria-label="Create board" />
-          <button className="text-[20px]">Create board</button>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="ghost" className="w-full h-[250px] text-base">
+          <GoPlus fontSize={25} aria-label="Create new board" />
+          Create new board
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-80">
+        <div className="grid gap-4">
+          <div className="space-y-2">
+            <h4 className="font-medium leading-none">New board</h4>
+            <p className="text-sm text-muted-foreground">
+              Give your board a name.
+            </p>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="grid gap-2">
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="width">Board name*</Label>
+                <Input
+                  id="width"
+                  type="text"
+                  placeholder="Board name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="col-span-2 h-8"
+                />
+              </div>
+            </div>
+            <Button variant="default" type="submit" className="!mt-7 w-full">
+              Add board
+            </Button>
+          </form>
         </div>
-      )}
-      {showForm && (
-        <form
-          onSubmit={handleSubmit}
-          className="p-4 bg-gray-100 rounded-md flex items-center gap-2 h-[70px] mr-[22%]"
-        >
-          <input
-            type="text"
-            placeholder="Board name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="p-2 border rounded-md"
-            required
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded-md"
-          >
-            Create
-          </button>
-          <IoIosCloseCircleOutline
-            fontSize={30}
-            className="cursor-pointer"
-            onClick={() => setShowForm(false)}
-            aria-label="Close form for creating a bord"
-          />
-        </form>
-      )}
-    </>
+      </PopoverContent>
+    </Popover>
   );
-};
+}

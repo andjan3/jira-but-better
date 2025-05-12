@@ -1,10 +1,11 @@
 "use client";
 
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Home, Inbox } from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -20,6 +21,9 @@ import {
 
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { NavUser } from "./nav-user";
+import { useSession } from "next-auth/react";
+import { LuDot } from "react-icons/lu";
 
 interface Board {
   createdAt: Date;
@@ -31,6 +35,8 @@ interface AppSideBarProps {
   boards: Board[];
 }
 export function AppSidebar({ boards }: AppSideBarProps) {
+  const { data: session } = useSession();
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -42,7 +48,7 @@ export function AppSidebar({ boards }: AppSideBarProps) {
                 <SidebarMenuButton asChild>
                   <Link href="/">
                     <Home />
-                    <span>Home</span>
+                    <span>Dashboard</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -63,44 +69,23 @@ export function AppSidebar({ boards }: AppSideBarProps) {
                     {boards.map((item: Board) => (
                       <SidebarMenuItem key={item.id}>
                         <SidebarMenuButton asChild>
-                          <Link href={`/boards/${item.id}`}>{item.name}</Link>
+                          <Link href={`/boards/${item.id}`}>
+                            <LuDot />
+                            {item.name}
+                          </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}
                   </SidebarMenu>
                 </CollapsibleContent>
               </Collapsible>
-
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="#">
-                    <Calendar />
-                    <span>Calendar</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="#">
-                    <Search />
-                    <span>Search</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="#">
-                    <Settings />
-                    <span>Settings</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        {session ? <NavUser user={session} /> : null}
+      </SidebarFooter>
     </Sidebar>
   );
 }

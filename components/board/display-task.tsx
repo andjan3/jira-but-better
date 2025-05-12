@@ -13,6 +13,7 @@ import { useBoard } from "@/app/context/board-context";
 import { MembersPopOver } from "../members-popover/members-popover";
 import { getPriorityClass } from "@/lib/priority-utils";
 import { User } from "@/app/types/board-types";
+import { ConvertPriorityLabels } from "@/lib/convert-priority-labels";
 
 interface Task {
   task: {
@@ -26,7 +27,7 @@ interface Task {
   };
 }
 
-interface Userrr {
+interface UserProps {
   assignedAt: Date;
   taskId: number;
   user: User;
@@ -78,7 +79,7 @@ export const DisplayTask = ({ task }: Task) => {
   };
 
   const assignedMembers = assignedUser.filter(
-    (user: Userrr) => user.taskId === task.id
+    (user: UserProps) => user.taskId === task.id
   );
 
   return (
@@ -99,7 +100,7 @@ export const DisplayTask = ({ task }: Task) => {
                 ></div>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Priority: {task.priority}</p>
+                <p>Priority: {ConvertPriorityLabels[task.priority]}</p>
               </TooltipContent>
             </Tooltip>
           ) : (
@@ -138,6 +139,7 @@ export const DisplayTask = ({ task }: Task) => {
         isOpen={isAlertOpen}
         onClose={() => setIsAlertOpen(false)}
         onConfirm={handleConfirmDelete}
+        item={"task"}
       />
       {showDialog && (
         <TaskDialog task={task} isOpen={showDialog} onClose={handleDialog} />
