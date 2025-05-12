@@ -13,7 +13,7 @@ export interface Task {
 export const getPriorityClass = (task: Task) => {
   switch (task.priority) {
     case "lowPriority":
-      return "bg-[#7EE2BB]";
+      return "bg-[#7EE2B8]";
     case "highPriority":
       return "bg-[#F87168]";
     case "mediumPriority":
