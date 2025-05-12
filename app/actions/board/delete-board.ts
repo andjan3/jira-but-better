@@ -1,7 +1,6 @@
 "use server";
 
 import { db } from "@/app/lib/prisma";
-import { revalidatePath } from "next/cache";
 
 export async function deleteBoard(boardId: number) {
   try {
