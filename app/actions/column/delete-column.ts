@@ -21,9 +21,17 @@ export const deleteColumn = async (columnId: number, boardId: number) => {
     return new Error("Column does not belong to the specified board");
   }
 
+  const taskIds = column.tasks.map((task) => task.id);
+
+  await db.userTask.deleteMany({
+    where: {
+      taskId: { in: taskIds },
+    },
+  });
+
   await db.task.deleteMany({
     where: {
-      columnId: columnId,
+      id: { in: taskIds },
     },
   });
 

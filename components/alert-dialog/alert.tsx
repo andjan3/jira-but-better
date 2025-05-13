@@ -13,17 +13,18 @@ interface AlertProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  item: string;
 }
 
-export const Alert = ({ isOpen, onClose, onConfirm }: AlertProps) => {
+export const Alert = ({ isOpen, onClose, onConfirm, item }: AlertProps) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your task
-            and remove your data from our servers.
+            {`This action cannot be undone. This will permanently delete your ${item}
+            and remove your data from our servers.`}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
