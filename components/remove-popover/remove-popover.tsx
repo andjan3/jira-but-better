@@ -26,7 +26,7 @@ export function RemovePopOver({
   const handleRemove = async () => {
     if (isColumn && columnId != null && boardId != null) {
       await removeColumn(columnId, boardId);
-      setIsAlertOpen(true);
+      setIsAlertOpen(false);
     } else if (boardId != null) {
       const result = await removeBoard(boardId);
       if (result.success) {

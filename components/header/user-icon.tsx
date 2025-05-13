@@ -3,13 +3,11 @@
 import { signIn, signOut } from "next-auth/react";
 import { useState } from "react";
 import { FaRegUser } from "react-icons/fa6";
+import { useSession } from "next-auth/react";
 
-interface UserIconProps {
-  props: boolean;
-}
-export function UserIcon({ props }: UserIconProps) {
+export function UserIcon() {
   const [hover, setHover] = useState(false);
-
+  const { data: session } = useSession();
   return (
     <div
       className="relative flex items-center p-10"
@@ -22,10 +20,10 @@ export function UserIcon({ props }: UserIconProps) {
 
       {hover && (
         <div className="absolute top-[85px] text-center -right-0 bg-white text-black p-2 rounded shadow-lg w-[100px]">
-          {props ? (
-            <button onClick={() => signOut()}>Sign out</button>
+          {session ? (
+            <button onClick={() => signOut()}>Log out</button>
           ) : (
-            <button onClick={() => signIn()}>Sign in</button>
+            <button onClick={() => signIn()}>Log in</button>
           )}
         </div>
       )}
