@@ -38,9 +38,9 @@ export function RemovePopOver({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost">
+        <Button variant="ghost" className="!-mt-[0.1rem]">
           <HiOutlineDotsHorizontal
-            fontSize={30}
+            fontSize={25}
             className="cursor-pointer mt-1"
             aria-label="Open settings"
           />

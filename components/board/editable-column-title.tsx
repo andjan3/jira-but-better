@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { HiOutlinePencilSquare } from "react-icons/hi2";
 
 interface EditableTitleProps {
   title: string;
@@ -51,15 +52,14 @@ export const EditableTitle = ({
       />
     </form>
   ) : (
-    <div className="flex items-center">
-      <div
-        onClick={() => setIsEditing(true)}
-        className={`cursor-pointer font-semibold ${
-          boardTitle && "text-[26px]"
-        }`}
-      >
+    <div
+      className="flex items-center gap-3 cursor-pointer"
+      onClick={() => setIsEditing(true)}
+    >
+      <div className={` font-semibold ${boardTitle && "text-[26px]"}`}>
         {title}
       </div>
+      {!boardTitle && <HiOutlinePencilSquare fontSize={20} />}
     </div>
   );
 };

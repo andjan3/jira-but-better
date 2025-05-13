@@ -17,6 +17,7 @@ interface Task {
   priority?: Priority | null;
   boardId: number;
   columnId: number;
+  order: number;
 }
 
 interface ColumnCardProps {
@@ -41,10 +42,13 @@ export const ColumnCard = ({
     console.error("Board ID is missing for column:", column);
     return <div>Invalid column data</div>;
   }
+  const sortedTasks = tasks
+    .filter((task: Task) => task.columnId === column.id)
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
 
   return (
-    <div className="text-xl bg-[#F7F8F9] p-4 w-96 shadow rounded flex flex-col gap-4">
-      <div className="flex items-center">
+    <div className="text-xl  p-4 w-[320px] lg:w-96  flex flex-col gap-4 mb-5 rounded-xl border border-slate-200  text-slate-950 shadow bg-slate-50 ">
+      <div className="flex items-center justify-between">
         <EditableTitle
           title={column.title || ""}
           id={column.id}
@@ -61,7 +65,7 @@ export const ColumnCard = ({
         />
       </div>
       <div className="flex flex-col gap-5">
-        {tasks
+        {sortedTasks
           .filter((task: Task) => task.columnId === column.id)
           .map((task: Task, index) => {
             return (
@@ -89,7 +93,7 @@ export const ColumnCard = ({
           <TaskForm columnId={column.id} boardId={column.boardId} />
           <IoIosCloseCircleOutline
             fontSize={30}
-            className="cursor-pointer -ml-60"
+            className="cursor-pointer -ml-44 lg:-ml-60"
             onClick={() => onToggleForm(null)}
             aria-label="Close form for adding task to a column"
           />

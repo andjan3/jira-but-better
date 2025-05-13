@@ -30,7 +30,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="font-sans">
+      <body className="font-sans ">
         <Providers>
           <Nav />
           {children}

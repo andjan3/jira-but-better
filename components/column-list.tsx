@@ -35,14 +35,14 @@ export const ColumnList = ({
   toggleForm,
 }: ColumnListProps) => {
   return (
-    <div className="flex items-start gap-10">
+    <div className="md:flex items-start gap-10">
       {columns.map((col: Column) => (
         <Droppable key={col.id} droppableId={col.id.toString()}>
           {(provided) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="w-96"
+              className="lg:w-96"
             >
               <ColumnCard
                 column={col}

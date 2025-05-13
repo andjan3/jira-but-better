@@ -1,9 +1,10 @@
 import { Board } from "@/app/types/board-types";
 import { Nav } from "../header/nav";
 import { LatestProjects } from "../latest-projects";
-import { SideBar } from "../sidebar/sidebar";
+
 import { Session } from "next-auth";
 import { TaskSummery } from "../task-summery";
+import { ServerSidebar } from "../sidebar/server-sidebar";
 
 interface DashboardPageProps {
   boards: Board[];
@@ -12,11 +13,10 @@ interface DashboardPageProps {
 export const DashboardPage = ({ boards, session }: DashboardPageProps) => {
   return (
     <div>
-      {/*  <Nav /> */}
-      <div className="grid grid-cols-[18%_1fr]">
-        <SideBar />
-        <div className="flex flex-col w-[85%] mx-auto gap-5 my-10 mt-20">
-          <div className="flex flex-col items-center">
+      <div className="grid grid-cols-[0%_1fr] lg:grid-cols-[17%_1fr] mt-24 lg:mt-0 ">
+        <ServerSidebar />
+        <div className="flex flex-col w-[85%] lg:w-[92%] mx-auto gap-5 my-10 mt-20 lg:mt-40">
+          <div className="flex flex-col lg:items-center">
             {session?.user?.name && (
               <div className="flex text-xl gap-2 text-center">
                 <span>👋</span>

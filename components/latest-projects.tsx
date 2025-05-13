@@ -14,12 +14,12 @@ export const LatestProjects = ({ boards }: Boards) => {
   return (
     <div>
       <h2 className="mb-3">Latest projects</h2>
-      <div className="flex  justify-center gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-center gap-5">
         {sortedBoards.slice(0, 3).map((board: any, index: number) => (
           <Link
             href={`/boards/${board.id}`}
             key={index}
-            className="shadow-lg w-full h-[250px] rounded-lg grid grid-rows-[70%,30%] hover:opacity-80"
+            className="shadow-lg w-full h-[250px] rounded-lg grid grid-rows-[70%,30%] hover:opacity-80 mb-5 lg:mb-0"
           >
             <div className="bg-gradient-to-r from-emerald-500 to-emerald-900 rounded-t-lg"></div>
             <div className="pt-5 pb-5 pl-2 text-base capitalize">

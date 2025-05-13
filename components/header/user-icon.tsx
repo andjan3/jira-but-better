@@ -10,7 +10,7 @@ export function UserIcon() {
   const { data: session } = useSession();
   return (
     <div
-      className="relative flex items-center p-10"
+      className="relative flex items-center "
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -19,7 +19,7 @@ export function UserIcon() {
       </div>
 
       {hover && (
-        <div className="absolute top-[85px] text-center -right-0 bg-white text-black p-2 rounded shadow-lg w-[100px]">
+        <div className="absolute top-12 lg:top-[45px] text-center -right-6  bg-white text-black p-2 rounded shadow-lg w-[100px]">
           {session ? (
             <button onClick={() => signOut()}>Log out</button>
           ) : (

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import {
   Form,
   FormControl,
@@ -15,7 +16,13 @@ import { Input } from "@/components/ui/input";
 import { columnFormSchema, ColumnFormValues } from "./schemas/columns-schema";
 import { createColumn } from "@/app/actions/column/create-column";
 
-export function ColumnForm({ boardId }: { boardId: number | undefined }) {
+export function ColumnForm({
+  boardId,
+  onCancel,
+}: {
+  boardId: number | undefined;
+  onCancel: () => void;
+}) {
   const form = useForm<ColumnFormValues>({
     resolver: zodResolver(columnFormSchema),
     defaultValues: {
@@ -38,11 +45,11 @@ export function ColumnForm({ boardId }: { boardId: number | undefined }) {
   };
 
   return (
-    <div className="w-[100%]">
+    <div className="[100%] p-2 lg:p-0">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex items-center gap-4"
+          className="lg:flex items-center gap-4"
         >
           <FormField
             control={form.control}
@@ -50,13 +57,24 @@ export function ColumnForm({ boardId }: { boardId: number | undefined }) {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} placeholder="Add column name.." />
+                  <Input
+                    {...field}
+                    placeholder="Add column name.."
+                    className="w-full"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Add column</Button>
+          <div className="flex items-center gap-2 ">
+            <Button type="submit">Add column</Button>{" "}
+            <IoIosCloseCircleOutline
+              className="cursor-pointer pt-4 lg:pt-0 text-[45px] lg:text-[30px]"
+              aria-label="Close form for adding column to board"
+              onClick={onCancel}
+            />
+          </div>
         </form>
       </Form>
     </div>

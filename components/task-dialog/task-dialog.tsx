@@ -100,7 +100,7 @@ export function TaskDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:min-w-[825px] max-h-[800px] ">
+      <DialogContent className="sm:min-w-[825px] max-h-[90vh] overflow-y-auto lg:overflow-y-hidden overflow-x-hidden">
         <div
           className={`${getPriorityClass(task)} w-[60px] h-[10px] rounded mb-4`}
         ></div>
@@ -116,7 +116,13 @@ export function TaskDialog({
           />
         </DialogHeader>
 
-        <div className="flex flex-col lg:flex-row gap-10 pt-5">
+        <div
+          className={`flex flex-col md:flex-row gap-10 pt-5  ${
+            editingDescription
+              ? "overflow-hidden md:w-full"
+              : "w-full md:w-full"
+          }`}
+        >
           <div className="flex-1 min-w-0">
             <DialogTitle className="font-medium mb-2">Description</DialogTitle>
 
@@ -149,7 +155,7 @@ export function TaskDialog({
               </form>
             )}
           </div>
-          <div className="w-full lg:w-[30%] flex flex-col gap-4 ">
+          <div className="w-full md:w-[30%] flex flex-col gap-4 ">
             <Popover>
               <PopoverTrigger className="font-medium bg-[#F7F8F9] p-3 rounded-lg shadow-sm border-none text-start">
                 Label
@@ -178,7 +184,7 @@ export function TaskDialog({
                 <div className="space-y-2">
                   <h4 className="font-medium leading-none">Members</h4>
                   <div
-                    className="text-sm text-muted-foreground cursor-pointer"
+                    className="lg:text-sm text-[16px]  text-muted-foreground cursor-pointer"
                     onClick={() => handleAssignment()}
                   >
                     Assign yourself
