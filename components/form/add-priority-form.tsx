@@ -8,9 +8,10 @@ import {
 
 import { PriorityFormValues, PrioritySchema } from "./schemas/priority-schema";
 import { toast } from "sonner";
-import { updateTaskPriority } from "@/app/actions/task/update-task-priority";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { updateTaskPriority } from "@/app/actions/task/update-task-priority";
 
 type Priority = "lowPriority" | "mediumPriority" | "highPriority";
 
@@ -19,7 +20,7 @@ interface PriorityFormProps {
   columnId: number;
   boardId: number;
 }
-export const PriorityForm = ({
+export const AddPriorityForm = ({
   taskId,
   columnId,
   boardId,

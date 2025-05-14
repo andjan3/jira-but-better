@@ -1,8 +1,7 @@
 import { getServerSession } from "next-auth";
 import { getAllBoards } from "./actions/board/get-all-boards";
 import { authOptions } from "@/auth";
-import { DashboardPage } from "@/components/board/dashboard-page";
-import { getAssignedUsers } from "./actions/user-task/get-assigned-users";
+import { DashboardPage } from "@/components/dashboard/dashboard-page";
 
 export default async function Home() {
   try {

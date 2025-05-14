@@ -57,7 +57,10 @@ export const updateTaskOrder = async ({
     return { success: true };
   } catch (error) {
     console.error("Error updating task order:", error);
-    return { success: false };
+    return {
+      success: false,
+      error: "Something went wrong while updating the task order",
+    };
   }
 };
 

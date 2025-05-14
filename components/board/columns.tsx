@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { useBoard } from "@/app/context/board-context";
 import { DragDropContext } from "@hello-pangea/dnd";
-import { BoardHeader } from "../board-header";
-import { AddColumn } from "../add-column";
-import { ColumnList } from "../column-list";
+
 import { useDragAndDrop } from "@/hooks/use-drag-and-drop";
+import { ColumnList } from "./column-list";
+import { AddColumnButton } from "./add-column-button";
+import { BoardHeader } from "./board-header";
 
 export const Columns = () => {
   const { boardData } = useBoard();
@@ -38,7 +39,10 @@ export const Columns = () => {
         </DragDropContext>
 
         <div className="min-w-[250px] lg:min-w-[450px] shrink-0">
-          <AddColumn addColumn={addColumn} toggleAddColumn={toggleAddColumn} />
+          <AddColumnButton
+            addColumn={addColumn}
+            toggleAddColumn={toggleAddColumn}
+          />
         </div>
       </div>
     </div>

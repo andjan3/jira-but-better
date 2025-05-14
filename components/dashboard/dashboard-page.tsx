@@ -1,10 +1,9 @@
 import { Board } from "@/app/types/board-types";
-import { Nav } from "../header/nav";
-import { LatestProjects } from "../latest-projects";
+import { LatestProjects } from "./latest-projects";
 
 import { Session } from "next-auth";
-import { TaskSummery } from "../task-summery";
-import { ServerSidebar } from "../sidebar/server-sidebar";
+import { TaskSummery } from "./task-summery";
+import { ServerSidebar } from "../layout/sidebar/server-sidebar";
 
 interface DashboardPageProps {
   boards: Board[];

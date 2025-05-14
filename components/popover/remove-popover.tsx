@@ -7,8 +7,8 @@ import {
 } from "@/components/ui/popover";
 
 import { removeBoard, removeColumn } from "@/app/actions/client-actions";
-import { Alert } from "../alert-dialog/alert";
 import { useState } from "react";
+import { DeleteConfirmationDialog } from "../dialogs/delete-confirmation-dialog";
 
 interface RemovePopOverProps {
   boardId?: number;
@@ -49,7 +49,7 @@ export function RemovePopOver({
       <PopoverContent className="w-40">
         <div className="grid gap-4">
           <div className="space-y-2">
-            <Alert
+            <DeleteConfirmationDialog
               isOpen={isAlertOpen}
               onClose={() => setIsAlertOpen(false)}
               onConfirm={handleRemove}

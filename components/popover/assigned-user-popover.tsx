@@ -22,7 +22,7 @@ interface MembersPopOverProps {
   boardId?: number | null;
 }
 
-export function MembersPopOver({ item, boardId }: MembersPopOverProps) {
+export function AssignedUserPopover({ item, boardId }: MembersPopOverProps) {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleRemoveAssignment = async () => {

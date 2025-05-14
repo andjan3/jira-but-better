@@ -1,10 +1,12 @@
 import { useBoard } from "@/app/context/board-context";
-import { RemovePopOver } from "./remove-popover/remove-popover";
-import { EditableTitle } from "./board/editable-column-title";
+import { RemovePopOver } from "../popover/remove-popover";
+import { EditableTitle } from "./editable-title";
 import { updateBoardName } from "@/app/actions/board/update-board-name";
 
 export const BoardHeader = () => {
   const { boardData } = useBoard();
+
+  if (!boardData) return null;
 
   return (
     <div className="flex gap-3 items-center mb-8 mt-10">
@@ -15,7 +17,7 @@ export const BoardHeader = () => {
         onSave={async (newTitle) => {
           await updateBoardName(boardData.id, newTitle);
         }}
-        boardTitle={true}
+        variant="board"
       />
       <RemovePopOver boardId={boardData.id} isColumn={false} />
     </div>

@@ -22,7 +22,7 @@ interface TaskFormProps {
   boardId: number;
 }
 
-export function TaskForm({ columnId, boardId }: TaskFormProps) {
+export function AddTaskForm({ columnId, boardId }: TaskFormProps) {
   const form = useForm<z.infer<typeof TaskFormSchema>>({
     resolver: zodResolver(TaskFormSchema),
     defaultValues: {

@@ -2,20 +2,20 @@ import { deleteTask } from "@/app/actions/task/delete-task";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { toast } from "sonner";
-import { Alert } from "../alert-dialog/alert";
-import { TaskDialog } from "../task-dialog/task-dialog";
+import { TaskDialog } from "../dialogs/task-dialog";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
 } from "@/components/tiptap-ui-primitive/tooltip";
 import { useBoard } from "@/app/context/board-context";
-import { MembersPopOver } from "../members-popover/members-popover";
+import { AssignedUserPopover } from "../popover/assigned-user-popover";
 import { getPriorityClass } from "@/lib/priority-utils";
 import { User } from "@/app/types/board-types";
 import { ConvertPriorityLabels } from "@/lib/convert-priority-labels";
+import { DeleteConfirmationDialog } from "../dialogs/delete-confirmation-dialog";
 
-interface Task {
+interface TaskCardProps {
   task: {
     id: number;
     title: string;
@@ -35,7 +35,7 @@ interface UserProps {
   userId: number;
 }
 
-export const DisplayTask = ({ task }: Task) => {
+export const TaskCard = ({ task }: TaskCardProps) => {
   const { assignedUser } = useBoard();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
@@ -83,6 +83,19 @@ export const DisplayTask = ({ task }: Task) => {
     (user: UserProps) => user.taskId === task.id
   );
 
+  const handleDeleteIconClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (task.columnId != null) {
+      handleDeleteClick({
+        taskId: task.id,
+        boardId: task.boardId!,
+        columnId: task.columnId!,
+      });
+    } else {
+      toast.error("Task has no valid columnId!");
+    }
+  };
+
   return (
     <div
       className=" p-4  bg-white hover:bg-slate-200 rounded-xl border border-slate-200  text-slate-950 shadow "
@@ -113,25 +126,14 @@ export const DisplayTask = ({ task }: Task) => {
           )}
           <MdClose
             className="delete-icon -mt-2"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (task.columnId != null) {
-                handleDeleteClick({
-                  taskId: task.id,
-                  boardId: task.boardId!,
-                  columnId: task.columnId!,
-                });
-              } else {
-                toast.error("Task has no valid columnId!");
-              }
-            }}
+            onClick={handleDeleteIconClick}
             aria-label="Delete task"
           />
         </div>
         <div>{task.title}</div>
         <div className="flex justify-end gap-1">
           {assignedMembers.map((item: any) => (
-            <MembersPopOver
+            <AssignedUserPopover
               item={item}
               boardId={task.boardId}
               key={`${item.userId}-${task.id}`}
@@ -140,7 +142,7 @@ export const DisplayTask = ({ task }: Task) => {
         </div>
       </div>
 
-      <Alert
+      <DeleteConfirmationDialog
         isOpen={isAlertOpen}
         onClose={() => setIsAlertOpen(false)}
         onConfirm={handleConfirmDelete}

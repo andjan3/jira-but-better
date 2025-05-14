@@ -17,12 +17,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import RichTextEditor from "../rich-text-editor";
-import { PriorityForm } from "../form/priority-form";
-import { Members } from "../members/members";
+import RichTextEditor from "../editor/richtext-editor";
+import { AddPriorityForm } from "../form/add-priority-form";
+import { TaskMemberAssignment } from "../board/task-member-assignment";
 import { Priority } from "@/app/types/board-types";
 import { useSession } from "next-auth/react";
-import { EditableTitle } from "../board/editable-column-title";
+import { EditableTitle } from "../board/editable-title";
 import { updateTaskName } from "@/app/actions/task/update-task-name";
 import { assignUserToTask } from "@/app/actions/client-actions";
 import { updateTaskDescription } from "@/app/actions/task/update-task-description";
@@ -118,7 +118,7 @@ export function TaskDialog({
             onSave={async (newTitle) => {
               await updateTaskName(task.id, task.boardId!, newTitle);
             }}
-            boardTitle={false}
+            variant="task"
           />
         </DialogHeader>
 
@@ -174,7 +174,7 @@ export function TaskDialog({
                   </p>
                 </div>
 
-                <PriorityForm
+                <AddPriorityForm
                   taskId={task.id}
                   boardId={task.boardId}
                   columnId={task.columnId}
@@ -196,7 +196,7 @@ export function TaskDialog({
                     Assign yourself
                   </div>
                 </div>
-                <Members taskId={task.id} boardId={task.boardId} />
+                <TaskMemberAssignment taskId={task.id} boardId={task.boardId} />
               </PopoverContent>
             </Popover>
           </div>

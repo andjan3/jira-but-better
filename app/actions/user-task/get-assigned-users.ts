@@ -1,15 +1,19 @@
+import { db } from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { db } from "../../lib/prisma";
 
 export const getAssignedUsers = async (boardId?: number) => {
-  const assignedUsers = await db.userTask.findMany({
-    include: {
-      user: true,
-      task: true,
-    },
-  });
+  try {
+    const assignedUsers = await db.userTask.findMany({
+      include: {
+        user: true,
+        task: true,
+      },
+    });
 
-  revalidatePath(`/boards/${boardId}`);
-
-  return assignedUsers;
+    revalidatePath(`/boards/${boardId}`);
+    return assignedUsers;
+  } catch (error) {
+    console.error("Fel vid hämtning av användare:", error);
+    return [];
+  }
 };

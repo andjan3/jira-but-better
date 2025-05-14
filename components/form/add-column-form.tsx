@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { columnFormSchema, ColumnFormValues } from "./schemas/columns-schema";
 import { createColumn } from "@/app/actions/column/create-column";
 
-export function ColumnForm({
+export function AddColumnForm({
   boardId,
   onCancel,
 }: {

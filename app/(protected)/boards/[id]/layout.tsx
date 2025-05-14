@@ -5,7 +5,7 @@ import { getUsers } from "@/app/actions/user/get-users";
 import { BoardProvider } from "@/app/context/board-context";
 
 import { notFound } from "next/navigation";
-import { ServerSidebar } from "@/components/sidebar/server-sidebar";
+import { ServerSidebar } from "@/components/layout/sidebar/server-sidebar";
 
 export default async function BoardLayout({
   children,

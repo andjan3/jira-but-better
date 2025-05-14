@@ -9,12 +9,12 @@ interface EditableTitleProps {
   boardId?: number;
   columnId?: number;
   onSave: (newTitle: string) => Promise<void>;
-  boardTitle: boolean;
+  variant: "board" | "column" | "task";
 }
 
 export const EditableTitle = ({
   title,
-  boardTitle,
+  variant,
   onSave,
 }: EditableTitleProps) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -56,10 +56,14 @@ export const EditableTitle = ({
       className="flex items-center gap-3 cursor-pointer"
       onClick={() => setIsEditing(true)}
     >
-      <div className={` font-semibold ${boardTitle && "text-[26px]"}`}>
+      <div
+        className={`font-semibold ${
+          variant === "board" ? "text-[26px]" : "text-[18px]"
+        }`}
+      >
         {title}
       </div>
-      {!boardTitle && <HiOutlinePencilSquare fontSize={20} />}
+      {variant !== "board" && <HiOutlinePencilSquare fontSize={20} />}
     </div>
   );
 };
