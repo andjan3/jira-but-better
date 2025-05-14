@@ -51,7 +51,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="form-container flex flex-col w-[30%] h-auto mx-auto gap-8">
+    <div className="form-container flex flex-col w-[90%] lg:w-[30%] h-auto mx-auto gap-8">
       <Toaster closeButton />
       <h2 className="text-center text-lg">Sign up</h2>
 

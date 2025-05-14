@@ -15,24 +15,19 @@ export const AddColumn = ({ addColumn, toggleAddColumn }: AddColumnProps) => {
     <>
       {addColumn ? (
         <div
-          className="relative flex items-center gap-4 bg-[#F7F8F9] z-20 p-4"
+          className="w-[100%] lg:w-[80%] grid grid-cols-1 gap-4 z-20 p-4  rounded-xl border border-slate-200  text-slate-950 shadow bg-slate-50
+ "
           onClick={(e) => e.stopPropagation()}
         >
-          <ColumnForm boardId={boardData.id} />
-          <IoIosCloseCircleOutline
-            fontSize={30}
-            className="cursor-pointer"
-            onClick={toggleAddColumn}
-            aria-label="Close form for adding column to board"
-          />
+          <ColumnForm boardId={boardData.id} onCancel={toggleAddColumn} />
         </div>
       ) : (
         <div
-          className="flex items-center h-[70px] gap-4 bg-[#F7F8F9] p-4 pl-20 pr-20 cursor-pointer hover:bg-slate-200 min-w-[300px]"
+          className="flex items-center h-[70px] gap-4  p-4  cursor-pointer hover:bg-slate-200 w-[320px] lg:w-80 lg:min-w-[300px] justify-center rounded-xl border border-slate-200  text-slate-950 shadow bg-slate-50"
           onClick={toggleAddColumn}
         >
           <GoPlus fontSize={25} aria-label="Add a column to board" />
-          <div className="text-[20px]">Create column</div>
+          <div className="text-[20px] ">Create column</div>
         </div>
       )}
     </>

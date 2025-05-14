@@ -7,7 +7,7 @@ export const BoardHeader = () => {
   const { boardData } = useBoard();
 
   return (
-    <div className="flex gap-3 items-center mb-8">
+    <div className="flex gap-3 items-center mb-8 mt-10">
       <EditableTitle
         title={boardData?.name || ""}
         id={boardData.id}

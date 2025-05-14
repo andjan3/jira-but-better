@@ -154,7 +154,7 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
     ? allOptions.slice(-4)
     : allOptions.slice(0, visibleOptionsCount);
   return (
-    <div className="border rounded-md p-1 mb-1 bg-slate-50 flex items-center gap-2 pl-4">
+    <div className="border rounded-md p-1 mb-1 bg-slate-50  flex items-center gap-2 lg:pl-4 ">
       <div className="flex gap-2 overflow-x-hidden">
         {visibleOptions.map((option, index) =>
           option.type === "color-picker" ? (

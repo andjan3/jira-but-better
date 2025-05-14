@@ -24,6 +24,7 @@ interface Task {
     priority?: "lowPriority" | "highPriority" | "mediumPriority" | null;
     boardId: number | null;
     columnId: number | null;
+    order: number;
   };
 }
 
@@ -83,7 +84,11 @@ export const DisplayTask = ({ task }: Task) => {
   );
 
   return (
-    <div className="shadow-md p-4 rounded-md bg-white hover:bg-slate-200">
+    <div
+      className=" p-4  bg-white hover:bg-slate-200 rounded-xl border border-slate-200  text-slate-950 shadow "
+      data-task-id={task.id}
+      data-order={task.order}
+    >
       <div onClick={handleDialog} className="cursor-pointer">
         <div
           className={`flex items-center justify-between ${
