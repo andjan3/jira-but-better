@@ -27,6 +27,7 @@ import { updateTaskName } from "@/app/actions/task/update-task-name";
 import { assignUserToTask } from "@/app/actions/client-actions";
 import { updateTaskDescription } from "@/app/actions/task/update-task-description";
 import { getPriorityClass } from "@/lib/priority-utils";
+import { toast } from "sonner";
 
 interface Task {
   id: number;
@@ -95,7 +96,12 @@ export function TaskDialog({
 
     const userId = Number(session.user.id);
 
-    await assignUserToTask(task.id, userId, task.boardId);
+    const assignRes = await assignUserToTask(task.id, userId, task.boardId);
+    if (assignRes) {
+      toast.message("Assignment was successful!", {
+        description: "You have been assigned to the task.",
+      });
+    }
   };
 
   return (

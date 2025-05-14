@@ -23,7 +23,13 @@ export const registerUser = async ({
   if (existingUser) {
     return { error: "An account with this email already exists." };
   }
+  const existingUsername = await prisma.user.findUnique({
+    where: { username: username },
+  });
 
+  if (existingUsername) {
+    return { error: "An account with this username already exists." };
+  }
   const hashedPassword = await hash(password, 12);
 
   const user = await prisma.user.create({
