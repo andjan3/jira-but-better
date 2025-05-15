@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
+import { toast } from "sonner";
 
 interface EditableTitleProps {
   title: string;
@@ -23,13 +24,14 @@ export const EditableTitle = ({
   const handleSave = async () => {
     if (value.trim() === title.trim() || value.trim() === "") {
       setIsEditing(false);
+      toast.message("Failed to update title");
       return;
     }
 
     try {
       await onSave(value.trim());
     } catch (error) {
-      alert("Failed to update title");
+      toast.message("Failed to update title");
     } finally {
       setIsEditing(false);
     }
@@ -48,6 +50,7 @@ export const EditableTitle = ({
         autoFocus
         onChange={(e) => setValue(e.target.value)}
         onBlur={handleSave}
+        required
         className="w-full p-1 border rounded"
       />
     </form>

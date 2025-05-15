@@ -190,7 +190,7 @@ export function TaskDialog({
                 <div className="space-y-2">
                   <h4 className="font-medium leading-none">Members</h4>
                   <div
-                    className="lg:text-sm text-[16px]  text-muted-foreground cursor-pointer"
+                    className="lg:text-sm text-[16px]  text-muted-foreground cursor-pointer hover:text-black"
                     onClick={() => handleAssignment()}
                   >
                     Assign yourself
