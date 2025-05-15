@@ -46,7 +46,7 @@ export function AppSidebar({ boards }: AppSideBarProps) {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link href="/">
+                  <Link href="/dashboard">
                     <Home />
                     <span>Dashboard</span>
                   </Link>

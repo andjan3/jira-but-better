@@ -30,7 +30,7 @@ export function RemovePopOver({
     } else if (boardId != null) {
       const result = await removeBoard(boardId);
       if (result.success) {
-        window.location.href = "/";
+        window.location.href = "/dashboard";
       }
     }
   };

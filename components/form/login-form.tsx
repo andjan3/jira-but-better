@@ -30,7 +30,7 @@ export const LoginForm = () => {
         toast.error("Invalid email or password");
       } else {
         toast.success("Login successful!");
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch (err) {
       toast.error("Unexpected error");
@@ -39,7 +39,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="form-container flex flex-col w-[90%] lg:w-[30%] h-auto mx-auto gap-8">
+    <div className="form-container flex flex-col w-[90%] lg:w-[30%] h-auto mx-auto gap-8 ">
       <Toaster closeButton />
       <h2 className="text-center text-lg">Log in</h2>
 
@@ -79,7 +79,7 @@ export const LoginForm = () => {
           />
           <button
             type="submit"
-            className="bg-black text-white w-auto px-10 p-4 rounded-lg mx-auto hover:bg-[#212121] mt-2"
+            className="bg-black text-white w-auto px-8 p-3 rounded-lg mx-auto hover:bg-[#212121] mt-2"
           >
             Log in
           </button>
