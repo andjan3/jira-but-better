@@ -2,12 +2,14 @@
 
 import { revalidatePath } from "next/cache";
 import { db } from "../../lib/prisma";
+import { Priority } from "@prisma/client";
 
-export const deleteTask = async (
+export const updateTaskPriority = async (
   taskId: number,
   boardId: number,
-  columnId: number
-) => {
+  columnId: number,
+  priority: Priority | null
+): Promise<{ success: boolean; error?: string }> => {
   try {
     const task = await db.task.findUnique({
       where: {
@@ -16,21 +18,25 @@ export const deleteTask = async (
     });
 
     if (!task) {
-      return new Error("Task not found!");
+      return { success: false, error: "Task not found" };
     }
 
     if (task.boardId !== boardId || task.columnId !== columnId) {
-      return new Error("Task dosent belong to this board or column");
+      return {
+        success: false,
+        error: "Task doesn't belong to the specified board or column",
+      };
     }
-    await db.userTask.deleteMany({
-      where: { taskId },
-    });
 
-    await db.task.delete({
+    await db.task.update({
       where: {
         id: taskId,
       },
+      data: {
+        priority,
+      },
     });
+
     revalidatePath(`/boards/${boardId}`);
     return { success: true };
   } catch (error) {

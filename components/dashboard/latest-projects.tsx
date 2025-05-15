@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CreateBoard } from "./board/create-board";
+import { CreateBoard } from "../board/create-board";
 import { Boards } from "@/app/types/board-types";
 
 export const LatestProjects = ({ boards }: Boards) => {

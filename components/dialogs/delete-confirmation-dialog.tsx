@@ -16,7 +16,12 @@ interface AlertProps {
   item: string;
 }
 
-export const Alert = ({ isOpen, onClose, onConfirm, item }: AlertProps) => {
+export const DeleteConfirmationDialog = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  item,
+}: AlertProps) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <AlertDialogContent>

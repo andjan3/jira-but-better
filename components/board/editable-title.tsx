@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
+import { toast } from "sonner";
 
 interface EditableTitleProps {
   title: string;
@@ -9,12 +10,12 @@ interface EditableTitleProps {
   boardId?: number;
   columnId?: number;
   onSave: (newTitle: string) => Promise<void>;
-  boardTitle: boolean;
+  variant: "board" | "column" | "task";
 }
 
 export const EditableTitle = ({
   title,
-  boardTitle,
+  variant,
   onSave,
 }: EditableTitleProps) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -23,13 +24,14 @@ export const EditableTitle = ({
   const handleSave = async () => {
     if (value.trim() === title.trim() || value.trim() === "") {
       setIsEditing(false);
+      toast.message("Failed to update title");
       return;
     }
 
     try {
       await onSave(value.trim());
     } catch (error) {
-      alert("Failed to update title");
+      toast.message("Failed to update title");
     } finally {
       setIsEditing(false);
     }
@@ -48,6 +50,7 @@ export const EditableTitle = ({
         autoFocus
         onChange={(e) => setValue(e.target.value)}
         onBlur={handleSave}
+        required
         className="w-full p-1 border rounded"
       />
     </form>
@@ -56,10 +59,14 @@ export const EditableTitle = ({
       className="flex items-center gap-3 cursor-pointer"
       onClick={() => setIsEditing(true)}
     >
-      <div className={` font-semibold ${boardTitle && "text-[26px]"}`}>
+      <div
+        className={`font-semibold ${
+          variant === "board" ? "text-[26px]" : "text-[18px]"
+        }`}
+      >
         {title}
       </div>
-      {!boardTitle && <HiOutlinePencilSquare fontSize={20} />}
+      {variant !== "board" && <HiOutlinePencilSquare fontSize={20} />}
     </div>
   );
 };

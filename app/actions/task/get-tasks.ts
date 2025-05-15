@@ -1,7 +1,13 @@
 "use server";
 
-import { db } from "../../lib/prisma";
+import { db } from "@/app/lib/prisma";
 
 export const getTasks = async () => {
-  return await db.task.findMany({});
+  try {
+    const task = await db.task.findMany({});
+    return task;
+  } catch (error) {
+    console.error("Error while fetching tasks:", error);
+    throw new Error("Could not find any tasks. Please try again later.");
+  }
 };

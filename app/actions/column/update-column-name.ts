@@ -1,34 +1,38 @@
 "use server";
 
+import { db } from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { db } from "../../lib/prisma";
 
 export async function updateColumnName(
   columnId: number,
   boardId: number,
   columnName: string
 ) {
-  const convertedColumnId = Number(columnId);
-  const convertedBoardId = Number(boardId);
+  try {
+    const convertedColumnId = Number(columnId);
+    const convertedBoardId = Number(boardId);
 
-  const existingColumn = await db.column.findUnique({
-    where: { id: convertedColumnId },
-  });
+    const existingColumn = await db.column.findUnique({
+      where: { id: convertedColumnId },
+    });
 
-  if (!existingColumn) {
-    throw new Error("Column not found");
+    if (!existingColumn) {
+      throw new Error("Column not found");
+    }
+
+    if (existingColumn.boardId !== convertedBoardId) {
+      throw new Error("Column does not belong to the specified board");
+    }
+
+    const updatedColumn = await db.column.update({
+      where: { id: convertedColumnId },
+      data: { title: columnName, order: existingColumn.order },
+    });
+
+    revalidatePath(`/boards/${boardId}`);
+
+    return updatedColumn;
+  } catch (error) {
+    throw new Error("Failed to update column");
   }
-
-  if (existingColumn.boardId !== convertedBoardId) {
-    throw new Error("Column does not belong to the specified board");
-  }
-
-  const updatedColumn = await db.column.update({
-    where: { id: convertedColumnId },
-    data: { title: columnName, order: existingColumn.order },
-  });
-
-  revalidatePath(`/boards/${boardId}`);
-
-  return updatedColumn;
 }

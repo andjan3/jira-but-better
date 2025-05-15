@@ -1,23 +1,27 @@
 "use server";
 
+import { db } from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { db } from "../../lib/prisma";
 
 export const deleteUserAssignment = async (
   taskId: number,
   userId: number,
   boardId: number
 ) => {
-  const userTask = await db.userTask.findUnique({
-    where: {
-      userId_taskId: {
-        userId,
-        taskId,
+  try {
+    const userTask = await db.userTask.findUnique({
+      where: {
+        userId_taskId: {
+          userId,
+          taskId,
+        },
       },
-    },
-  });
+    });
 
-  if (userTask) {
+    if (!userTask) {
+      throw new Error("User-task assignment not found");
+    }
+
     await db.userTask.delete({
       where: {
         userId_taskId: {
@@ -26,8 +30,12 @@ export const deleteUserAssignment = async (
         },
       },
     });
-  }
 
-  revalidatePath(`/boards/${boardId}`);
-  return { success: true };
+    revalidatePath(`/boards/${boardId}`);
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error in deleteUserAssignment:", error);
+    return { success: false, error: (error as Error).message };
+  }
 };

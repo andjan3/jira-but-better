@@ -8,24 +8,32 @@ export const assignUser = async (
   userId: number,
   boardId: number
 ) => {
-  const userAlreadyAssigned = await db.userTask.findUnique({
-    where: {
-      userId_taskId: {
-        userId,
-        taskId,
-      },
-    },
-  });
-
-  if (!userAlreadyAssigned) {
-    await db.userTask.create({
-      data: {
-        userId,
-        taskId,
+  try {
+    const userAlreadyAssigned = await db.userTask.findUnique({
+      where: {
+        userId_taskId: {
+          userId,
+          taskId,
+        },
       },
     });
-  }
 
-  revalidatePath(`/boards/${boardId}`);
-  return { success: true };
+    if (!userAlreadyAssigned) {
+      await db.userTask.create({
+        data: {
+          userId,
+          taskId,
+        },
+      });
+    }
+
+    revalidatePath(`/boards/${boardId}`);
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to assign user:", error);
+    return {
+      success: false,
+      error: (error as Error).message || "Unknown error occurred",
+    };
+  }
 };

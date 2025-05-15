@@ -48,9 +48,9 @@ export function CreateBoard() {
           <form onSubmit={handleSubmit}>
             <div className="grid gap-2">
               <div className="grid grid-cols-3 items-center gap-4">
-                <Label htmlFor="width">Board name*</Label>
+                <Label htmlFor="boardName">Board name*</Label>
                 <Input
-                  id="width"
+                  id="boardName"
                   type="text"
                   placeholder="Board name"
                   value={name}

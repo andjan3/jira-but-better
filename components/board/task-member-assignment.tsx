@@ -18,7 +18,7 @@ interface MembersProps {
   boardId: number;
   taskId: number;
 }
-export const Members = ({ boardId, taskId }: MembersProps) => {
+export const TaskMemberAssignment = ({ boardId, taskId }: MembersProps) => {
   const { allUsers } = useBoard();
   const {
     formState: { isSubmitting },
