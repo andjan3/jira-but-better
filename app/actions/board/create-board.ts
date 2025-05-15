@@ -1,13 +1,13 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export async function createBoard(name: string) {
   try {
     if (!name) throw new Error("Board name is required");
 
-    const createdBoard = await db.board.create({
+    const createdBoard = await prisma.board.create({
       data: { name, status: "inProgress" },
     });
 

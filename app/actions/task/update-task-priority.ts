@@ -1,8 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { db } from "../../lib/prisma";
 import { Priority } from "@prisma/client";
+import prisma from "@/app/lib/prisma";
 
 export const updateTaskPriority = async (
   taskId: number,
@@ -11,7 +11,7 @@ export const updateTaskPriority = async (
   priority: Priority | null
 ): Promise<{ success: boolean; error?: string }> => {
   try {
-    const task = await db.task.findUnique({
+    const task = await prisma.task.findUnique({
       where: {
         id: taskId,
       },
@@ -28,7 +28,7 @@ export const updateTaskPriority = async (
       };
     }
 
-    await db.task.update({
+    await prisma.task.update({
       where: {
         id: taskId,
       },

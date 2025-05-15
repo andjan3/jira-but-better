@@ -1,10 +1,10 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 
 export async function getBoard(id: number) {
   try {
-    const board = await db.board.findUnique({
+    const board = await prisma.board.findUnique({
       where: { id },
       include: { columns: true },
     });

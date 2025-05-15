@@ -1,11 +1,11 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export const deleteColumn = async (columnId: number, boardId: number) => {
   try {
-    const column = await db.column.findUnique({
+    const column = await prisma.column.findUnique({
       where: {
         id: columnId,
       },
@@ -24,19 +24,19 @@ export const deleteColumn = async (columnId: number, boardId: number) => {
 
     const taskIds = column.tasks.map((task) => task.id);
 
-    await db.userTask.deleteMany({
+    await prisma.userTask.deleteMany({
       where: {
         taskId: { in: taskIds },
       },
     });
 
-    await db.task.deleteMany({
+    await prisma.task.deleteMany({
       where: {
         id: { in: taskIds },
       },
     });
 
-    await db.column.delete({
+    await prisma.column.delete({
       where: {
         id: columnId,
       },

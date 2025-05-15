@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export const deleteUserAssignment = async (
@@ -9,7 +9,7 @@ export const deleteUserAssignment = async (
   boardId: number
 ) => {
   try {
-    const userTask = await db.userTask.findUnique({
+    const userTask = await prisma.userTask.findUnique({
       where: {
         userId_taskId: {
           userId,
@@ -22,7 +22,7 @@ export const deleteUserAssignment = async (
       throw new Error("User-task assignment not found");
     }
 
-    await db.userTask.delete({
+    await prisma.userTask.delete({
       where: {
         userId_taskId: {
           userId,

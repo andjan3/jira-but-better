@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export async function updateColumnName(
@@ -12,7 +12,7 @@ export async function updateColumnName(
     const convertedColumnId = Number(columnId);
     const convertedBoardId = Number(boardId);
 
-    const existingColumn = await db.column.findUnique({
+    const existingColumn = await prisma.column.findUnique({
       where: { id: convertedColumnId },
     });
 
@@ -24,7 +24,7 @@ export async function updateColumnName(
       throw new Error("Column does not belong to the specified board");
     }
 
-    const updatedColumn = await db.column.update({
+    const updatedColumn = await prisma.column.update({
       where: { id: convertedColumnId },
       data: { title: columnName, order: existingColumn.order },
     });

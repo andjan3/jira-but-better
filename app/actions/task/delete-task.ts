@@ -1,7 +1,7 @@
 "use server";
 
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { db } from "../../lib/prisma";
 
 export const deleteTask = async (
   taskId: number,
@@ -9,7 +9,7 @@ export const deleteTask = async (
   columnId: number
 ) => {
   try {
-    const task = await db.task.findUnique({
+    const task = await prisma.task.findUnique({
       where: {
         id: taskId,
       },
@@ -22,11 +22,11 @@ export const deleteTask = async (
     if (task.boardId !== boardId || task.columnId !== columnId) {
       return new Error("Task dosent belong to this board or column");
     }
-    await db.userTask.deleteMany({
+    await prisma.userTask.deleteMany({
       where: { taskId },
     });
 
-    await db.task.delete({
+    await prisma.task.delete({
       where: {
         id: taskId,
       },

@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export const updateTaskOrder = async ({
@@ -15,7 +15,7 @@ export const updateTaskOrder = async ({
   boardId: number;
 }) => {
   try {
-    const tasksInColumn = await db.task.findMany({
+    const tasksInColumn = await prisma.task.findMany({
       where: {
         boardId,
         columnId: newColumnId,
@@ -23,7 +23,7 @@ export const updateTaskOrder = async ({
       orderBy: { order: "asc" },
     });
 
-    const taskToMove = await db.task.findUnique({
+    const taskToMove = await prisma.task.findUnique({
       where: { id: taskId },
     });
 
@@ -41,7 +41,7 @@ export const updateTaskOrder = async ({
 
     const updates = updatedTasks.map((task, idx) => {
       const newOrder = (idx + 1) * 10;
-      return db.task.update({
+      return prisma.task.update({
         where: { id: task.id },
         data: {
           columnId: newColumnId,
@@ -50,7 +50,7 @@ export const updateTaskOrder = async ({
       });
     });
 
-    await db.$transaction(updates);
+    await prisma.$transaction(updates);
 
     await normalizeTaskOrderValues(newColumnId, boardId);
 
@@ -65,7 +65,7 @@ export const updateTaskOrder = async ({
 };
 
 async function normalizeTaskOrderValues(columnId: number, boardId: number) {
-  const tasks = await db.task.findMany({
+  const tasks = await prisma.task.findMany({
     where: {
       boardId,
       columnId,
@@ -74,13 +74,13 @@ async function normalizeTaskOrderValues(columnId: number, boardId: number) {
   });
 
   const updates = tasks.map((task, index) => {
-    return db.task.update({
+    return prisma.task.update({
       where: { id: task.id },
       data: { order: index + 1 },
     });
   });
 
-  await db.$transaction(updates);
+  await prisma.$transaction(updates);
 
   revalidatePath(`/board/${boardId}`);
 }

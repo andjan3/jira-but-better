@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export const updateTaskDescription = async (
@@ -10,7 +10,7 @@ export const updateTaskDescription = async (
   description: string
 ) => {
   try {
-    const task = await db.task.findUnique({
+    const task = await prisma.task.findUnique({
       where: {
         id: taskId,
       },
@@ -24,7 +24,7 @@ export const updateTaskDescription = async (
       return new Error("Task dosent belong to this board or column");
     }
 
-    await db.task.update({
+    await prisma.task.update({
       where: {
         id: taskId,
       },

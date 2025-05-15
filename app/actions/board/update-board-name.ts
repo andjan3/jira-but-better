@@ -1,13 +1,13 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export const updateBoardName = async (boardId: number, newTitle: string) => {
   try {
     const convertedBoardId = Number(boardId);
 
-    const existingBoard = await db.board.findUnique({
+    const existingBoard = await prisma.board.findUnique({
       where: { id: convertedBoardId },
     });
 
@@ -15,7 +15,7 @@ export const updateBoardName = async (boardId: number, newTitle: string) => {
       throw new Error("Board not found");
     }
 
-    const updatedBoard = await db.board.update({
+    const updatedBoard = await prisma.board.update({
       where: { id: convertedBoardId },
       data: { name: newTitle },
     });

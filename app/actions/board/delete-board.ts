@@ -1,31 +1,31 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 
 export async function deleteBoard(boardId: number) {
   try {
-    const tasks = await db.task.findMany({
+    const tasks = await prisma.task.findMany({
       where: { boardId },
       select: { id: true },
     });
 
     const taskIds = tasks.map((task) => task.id);
 
-    await db.userTask.deleteMany({
+    await prisma.userTask.deleteMany({
       where: {
         taskId: { in: taskIds },
       },
     });
 
-    await db.task.deleteMany({
+    await prisma.task.deleteMany({
       where: { boardId },
     });
 
-    await db.column.deleteMany({
+    await prisma.column.deleteMany({
       where: { boardId },
     });
 
-    await db.board.delete({
+    await prisma.board.delete({
       where: { id: boardId },
     });
 

@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export const CreateTask = async (
@@ -9,7 +9,7 @@ export const CreateTask = async (
   boardId: number
 ) => {
   try {
-    const column = await db.column.findUnique({
+    const column = await prisma.column.findUnique({
       where: { id: columnId },
     });
 
@@ -17,14 +17,14 @@ export const CreateTask = async (
       throw new Error("Invalid column or board");
     }
 
-    const maxOrderTask = await db.task.findFirst({
+    const maxOrderTask = await prisma.task.findFirst({
       where: { columnId: columnId },
       orderBy: { order: "desc" },
     });
 
     const newOrder = maxOrderTask ? maxOrderTask.order + 1 : 0;
 
-    const createdTask = await db.task.create({
+    const createdTask = await prisma.task.create({
       data: {
         title: message,
         description: "default description",
