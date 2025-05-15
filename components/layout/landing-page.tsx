@@ -37,7 +37,7 @@ export default function LandingPage() {
         <h1 className="text-[30px] lg:text-[60px] uppercase text-white drop-shadow-lg">
           Jira but better
         </h1>
-        <div className="w-[90%] lg:w-[30%] italic text-white drop-shadow-lg">
+        <div className="w-[90%] md:w-[70%] lg:w-[30%] italic text-white drop-shadow-lg">
           A collaborative task management with intuitive drag-and-drop. Perfect
           for teams who want clarity without complexity
         </div>
