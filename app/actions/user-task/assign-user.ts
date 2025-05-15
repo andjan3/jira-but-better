@@ -1,7 +1,7 @@
 "use server";
 
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { db } from "../../lib/prisma";
 
 export const assignUser = async (
   taskId: number,
@@ -9,7 +9,7 @@ export const assignUser = async (
   boardId: number
 ) => {
   try {
-    const userAlreadyAssigned = await db.userTask.findUnique({
+    const userAlreadyAssigned = await prisma.userTask.findUnique({
       where: {
         userId_taskId: {
           userId,
@@ -19,7 +19,7 @@ export const assignUser = async (
     });
 
     if (!userAlreadyAssigned) {
-      await db.userTask.create({
+      await prisma.userTask.create({
         data: {
           userId,
           taskId,

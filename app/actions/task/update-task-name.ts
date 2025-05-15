@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export async function updateTaskName(
@@ -20,7 +20,7 @@ export async function updateTaskName(
       return { success: false, error: "Invalid task or board ID" };
     }
 
-    const existingTask = await db.task.findUnique({
+    const existingTask = await prisma.task.findUnique({
       where: { id: convertedTaskId },
     });
 
@@ -35,7 +35,7 @@ export async function updateTaskName(
       };
     }
 
-    const updatedTask = await db.task.update({
+    const updatedTask = await prisma.task.update({
       where: { id: convertedTaskId },
       data: { title: taskName },
     });

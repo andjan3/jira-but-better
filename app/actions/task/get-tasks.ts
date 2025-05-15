@@ -1,10 +1,10 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 
 export const getTasks = async () => {
   try {
-    const task = await db.task.findMany({});
+    const task = await prisma.task.findMany({});
     return task;
   } catch (error) {
     console.error("Error while fetching tasks:", error);

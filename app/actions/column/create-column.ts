@@ -1,13 +1,13 @@
 "use server";
 
-import { db } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export async function createColumn(boardId: number, name: string) {
   try {
     const convertedBoardID = Number(boardId);
 
-    const boardExists = await db.board.findUnique({
+    const boardExists = await prisma.board.findUnique({
       where: { id: convertedBoardID },
     });
 
@@ -15,12 +15,12 @@ export async function createColumn(boardId: number, name: string) {
       throw new Error("Board not found");
     }
 
-    const existingColumns = await db.column.findMany({
+    const existingColumns = await prisma.column.findMany({
       where: { boardId: convertedBoardID },
     });
     const nextOrder = existingColumns.length;
 
-    const createdColumn = await db.column.create({
+    const createdColumn = await prisma.column.create({
       data: {
         title: name,
         boardId: convertedBoardID,
