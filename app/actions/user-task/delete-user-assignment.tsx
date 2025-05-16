@@ -31,7 +31,7 @@ export const deleteUserAssignment = async (
       },
     });
 
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
 
     return { success: true };
   } catch (error) {

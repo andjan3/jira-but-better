@@ -42,7 +42,7 @@ export const RegisterForm = () => {
         toast.error("Login after registration failed");
       } else {
         toast.success("Account created and logged in");
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch (err) {
       toast.error("Unexpected error");

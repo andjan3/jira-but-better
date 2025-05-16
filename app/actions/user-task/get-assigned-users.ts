@@ -10,7 +10,7 @@ export const getAssignedUsers = async (boardId?: number) => {
       },
     });
 
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
     return assignedUsers;
   } catch (error) {
     console.error("Failed to get user-task assignment", error);

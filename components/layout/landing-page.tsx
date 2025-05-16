@@ -20,7 +20,7 @@ export default function LandingPage() {
           src="https://res.cloudinary.com/dohf6gfqy/video/upload/v1747304826/4065218-uhd_4096_2160_25fps_qpo7xa.mp4"
           type="video/mp4"
         />
-        Din webbläsare stödjer inte videouppspelning.
+        Your browser does not support video playback.
       </video>
 
       <div className="lg:hidden absolute top-0 left-0 w-full h-full z-0">
@@ -37,13 +37,13 @@ export default function LandingPage() {
         <h1 className="text-[30px] lg:text-[60px] uppercase text-white drop-shadow-lg">
           Jira but better
         </h1>
-        <div className="w-[90%] md:w-[70%] lg:w-[30%] italic text-white drop-shadow-lg">
+        <div className="w-[90%] md:w-[70%] lg:w-[30%] italic text-white drop-shadow-lg z-20">
           A collaborative task management with intuitive drag-and-drop. Perfect
           for teams who want clarity without complexity
         </div>
         <button
           onClick={() => router.push("/auth/login")}
-          className="bg-[#1868Db] hover:bg-[#3b79d0] mt-3 text-white px-8 py-3 rounded-lg  font-medium"
+          className="bg-[#1868Db] hover:bg-[#3b79d0] mt-3 text-white px-8 py-3 rounded-lg  font-medium z-20"
         >
           Log in
         </button>

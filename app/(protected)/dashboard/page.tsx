@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth";
-
 import { authOptions } from "@/auth";
 import { DashboardPage } from "@/components/dashboard/dashboard-page";
-import { getAllBoards } from "../actions/board/get-all-boards";
+import { redirect } from "next/navigation";
+import { getAllBoards } from "@/app/actions/board/get-all-boards";
 
 export default async function Home() {
   try {
@@ -11,8 +11,8 @@ export default async function Home() {
       getServerSession(authOptions),
     ]);
 
-    if (session == null) {
-      return;
+    if (!session) {
+      redirect("/auth/login");
     }
 
     return <DashboardPage boards={boards} session={session} />;

@@ -40,7 +40,7 @@ export async function updateTaskName(
       data: { title: taskName },
     });
 
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
 
     return {
       success: true,

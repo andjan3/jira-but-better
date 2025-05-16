@@ -3,9 +3,7 @@ import { getBoard } from "@/app/actions/board/get-board";
 import { getTasks } from "@/app/actions/task/get-tasks";
 import { getUsers } from "@/app/actions/user/get-users";
 import { BoardProvider } from "@/app/context/board-context";
-
 import { notFound } from "next/navigation";
-import { ServerSidebar } from "@/components/layout/sidebar/server-sidebar";
 
 export default async function BoardLayout({
   children,
@@ -29,10 +27,7 @@ export default async function BoardLayout({
 
   return (
     <BoardProvider value={{ boardData, tasks, assignedUser, allUsers }}>
-      <div className="grid grid-cols-[0%_1fr] md:grid-cols-[200px_1fr] lg:grid-cols-[300px_1fr] mt-24 lg:mt-0 ">
-        <ServerSidebar />
-        {children}
-      </div>
+      {children}
     </BoardProvider>
   );
 }

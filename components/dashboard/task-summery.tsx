@@ -47,7 +47,7 @@ export const TaskSummery = async ({ session }: TaskSummeryProps) => {
               >
                 <TableCell className="pl-0">
                   <Link
-                    href={`/boards/${task.task.boardId}`}
+                    href={`/board/${task.task.boardId}`}
                     className="hover:underline"
                   >
                     {task.task.title}

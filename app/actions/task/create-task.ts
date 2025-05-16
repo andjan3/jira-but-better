@@ -35,7 +35,7 @@ export const CreateTask = async (
       },
     });
 
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
 
     return createdTask;
   } catch (error) {

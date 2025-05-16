@@ -29,7 +29,7 @@ export async function updateColumnName(
       data: { title: columnName, order: existingColumn.order },
     });
 
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
 
     return updatedColumn;
   } catch (error) {

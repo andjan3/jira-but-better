@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 const publicRoutes = ["/auth/login", "/auth/register"];
-const authRoutes = ["/boards", "/dashboard", "/app"];
+const authRoutes = ["/board", "/dashboard", "/app"];
 const DEFAULT_LOGIN_REDIRECT = "/login";
 
 export async function middleware(req: NextRequest) {
@@ -31,5 +31,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/boards/:path*", "/dashboard", "/app/:path*"],
+  matcher: ["/board/:path*", "/dashboard", "/app/:path*"],
 };
