@@ -8,7 +8,7 @@ export default function LandingPage() {
   return (
     <div className="relative h-screen w-full overflow-hidden">
       <div className="bg-black opacity-30 w-full absolute top-0 h-full z-10" />
-      {/*   <video
+      <video
         className="hidden lg:block lg:absolute top-0 left-0 w-full h-full object-cover z-0"
         autoPlay
         muted
@@ -31,7 +31,7 @@ export default function LandingPage() {
           className="object-cover"
           priority
         />
-      </div> */}
+      </div>
 
       <div className="relative z-20 h-screen w-full flex flex-col justify-center items-center gap-5 px-4 text-center">
         <h1 className="text-[30px] lg:text-[60px] uppercase text-white drop-shadow-lg">
