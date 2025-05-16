@@ -2,6 +2,7 @@
 
 import { Droppable } from "@hello-pangea/dnd";
 import { Column } from "./column";
+import { Priority } from "@/app/types/board-types";
 
 interface Column {
   id: number;
@@ -17,7 +18,7 @@ interface LocalTask {
   id: number;
   isDone?: boolean;
   order: number;
-  priority?: any;
+  priority?: Priority | null;
   title: string;
 }
 

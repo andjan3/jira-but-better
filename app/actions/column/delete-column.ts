@@ -2,6 +2,7 @@
 
 import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
+import type { Task } from "@prisma/client";
 
 export const deleteColumn = async (columnId: number, boardId: number) => {
   try {
@@ -22,7 +23,7 @@ export const deleteColumn = async (columnId: number, boardId: number) => {
       return new Error("Column does not belong to the specified board");
     }
 
-    const taskIds = column.tasks.map((task) => task.id);
+    const taskIds = column.tasks.map((task: Task) => task.id);
 
     await prisma.userTask.deleteMany({
       where: {

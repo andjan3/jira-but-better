@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { CreateBoard } from "../board/create-board";
-import { Boards } from "@/app/types/board-types";
+import { Board, BoardData, Boards } from "@/app/types/board-types";
 
 export const LatestProjects = ({ boards }: Boards) => {
-  const sortedBoards = boards.sort((a: any, b: any) => {
+  const sortedBoards = boards.sort((a: Board, b: Board) => {
     const dateA = new Date(a.createdAt);
     const dateB = new Date(b.createdAt);
     return dateB.getTime() - dateA.getTime();
@@ -15,7 +15,7 @@ export const LatestProjects = ({ boards }: Boards) => {
     <div>
       <h2 className="mb-3">Latest projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-center gap-5">
-        {sortedBoards.slice(0, 3).map((board: any, index: number) => (
+        {sortedBoards.slice(0, 3).map((board: BoardData, index: number) => (
           <Link
             href={`/board/${board.id}`}
             key={index}
