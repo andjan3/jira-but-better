@@ -1,0 +1,36 @@
+import prisma from "@/app/lib/prisma";
+
+export const deleteAccount = async (userId: number) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      return {
+        success: false,
+        error: "User not found",
+      };
+    }
+
+    await prisma.userTask.deleteMany({
+      where: {
+        userId: userId,
+      },
+    });
+
+    await prisma.user.delete({
+      where: { id: userId },
+    });
+
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    return {
+      success: false,
+      error: "Failed to delete user. Please try again later.",
+    };
+  }
+};
