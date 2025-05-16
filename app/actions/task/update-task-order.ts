@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/app/lib/prisma";
+import type { Task } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export const updateTaskOrder = async ({
@@ -31,7 +32,7 @@ export const updateTaskOrder = async ({
       return { success: false, error: "Task not found" };
     }
 
-    const otherTasks = tasksInColumn.filter((task) => task.id !== taskId);
+    const otherTasks = tasksInColumn.filter((task: Task) => task.id !== taskId);
 
     const updatedTasks = [
       ...otherTasks.slice(0, newIndex),
@@ -39,7 +40,7 @@ export const updateTaskOrder = async ({
       ...otherTasks.slice(newIndex),
     ];
 
-    const updates = updatedTasks.map((task, idx) => {
+    const updates = updatedTasks.map((task: Task, idx: any) => {
       const newOrder = (idx + 1) * 10;
       return prisma.task.update({
         where: { id: task.id },
@@ -73,7 +74,7 @@ async function normalizeTaskOrderValues(columnId: number, boardId: number) {
     orderBy: { order: "asc" },
   });
 
-  const updates = tasks.map((task, index) => {
+  const updates = tasks.map((task: Task, index: number) => {
     return prisma.task.update({
       where: { id: task.id },
       data: { order: index + 1 },

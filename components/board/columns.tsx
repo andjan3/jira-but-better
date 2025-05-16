@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useBoard } from "@/app/context/board-context";
 import { DragDropContext } from "@hello-pangea/dnd";
-
 import { useDragAndDrop } from "@/hooks/use-drag-and-drop";
 import { ColumnList } from "./column-list";
 import { AddColumnButton } from "./add-column-button";

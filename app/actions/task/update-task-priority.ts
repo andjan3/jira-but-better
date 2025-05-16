@@ -1,8 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { Priority } from "@prisma/client";
+
 import prisma from "@/app/lib/prisma";
+import { Priority } from "@/app/types/board-types";
 
 export const updateTaskPriority = async (
   taskId: number,

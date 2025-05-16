@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerUser } from "@/app/actions/user/register-user";
 import { FormField, FormItem, FormControl, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
+import Link from "next/link";
 
 export const RegisterForm = () => {
   const router = useRouter();
@@ -112,13 +113,9 @@ export const RegisterForm = () => {
             Sign up
           </button>
 
-          <button
-            type="button"
-            onClick={() => router.push("/auth/login")}
-            className="toggle-button"
-          >
+          <Link href={"/auth/login"} className="toggle-button mx-auto">
             Already have an account? <span className="font-bold">Log in</span>
-          </button>
+          </Link>
         </form>
       </FormProvider>
     </div>

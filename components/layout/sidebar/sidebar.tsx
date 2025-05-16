@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/app-sidebar";
+import { Board } from "@/app/types/board-types";
 
 interface Props {
-  boards: any[];
+  boards: Board[];
 }
 
 export const Sidebar = ({ boards }: Props) => {

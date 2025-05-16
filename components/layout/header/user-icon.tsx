@@ -4,18 +4,30 @@ import { signIn, signOut } from "next-auth/react";
 import { useState } from "react";
 import { FaRegUser } from "react-icons/fa6";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 export function UserIcon() {
   const [hover, setHover] = useState(false);
   const { data: session } = useSession();
+  const pathname = usePathname();
+  const isLandingpage = pathname === "/";
+
   return (
     <div
       className="relative flex items-center "
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="bg-[#1868DB] p-3 rounded-full">
-        <FaRegUser className="text-white cursor-pointer" fontSize={20} />
+      <div
+        className={`p-3 rounded-full ${
+          isLandingpage ? "bg-transparent" : "bg-[#1868DB]"
+        }`}
+      >
+        <FaRegUser
+          className={`text-white cursor-pointer ${
+            isLandingpage ? "text-[25px]" : "text-[20px]"
+          }`}
+        />
       </div>
 
       {hover && (

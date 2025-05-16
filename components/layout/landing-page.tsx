@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function LandingPage() {
@@ -17,7 +18,7 @@ export default function LandingPage() {
         controls={false}
       >
         <source
-          src="https://res.cloudinary.com/dohf6gfqy/video/upload/v1747304826/4065218-uhd_4096_2160_25fps_qpo7xa.mp4"
+          src="https://a.storyblok.com/f/330451/x/614b2f31df/4065218-uhd_4096_2160_25fps.mp4"
           type="video/mp4"
         />
         Your browser does not support video playback.
@@ -25,11 +26,12 @@ export default function LandingPage() {
 
       <div className="lg:hidden absolute top-0 left-0 w-full h-full z-0">
         <Image
-          src="https://res.cloudinary.com/dohf6gfqy/image/upload/v1747310377/bg_nhdihd.png"
+          src="https://a.storyblok.com/f/330451/668x616/a04a04ba7e/bg.png"
           alt="Hero-image with one woman working on her computer"
           fill
           className="object-cover"
           priority
+          unoptimized
         />
       </div>
 
@@ -41,12 +43,12 @@ export default function LandingPage() {
           A collaborative task management with intuitive drag-and-drop. Perfect
           for teams who want clarity without complexity
         </div>
-        <button
-          onClick={() => router.push("/auth/login")}
+        <Link
+          href={"/auth/login"}
           className="bg-[#1868Db] hover:bg-[#3b79d0] mt-3 text-white px-8 py-3 rounded-lg  font-medium z-20"
         >
           Log in
-        </button>
+        </Link>
       </div>
     </div>
   );
