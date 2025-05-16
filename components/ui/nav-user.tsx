@@ -71,7 +71,7 @@ export function NavUser({ user }: NavUserProps) {
 
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={() => signOut()}
+              onClick={() => signOut({ callbackUrl: "/" })}
               className="cursor-pointer"
             >
               <LogOut />
