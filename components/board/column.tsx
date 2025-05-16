@@ -1,3 +1,16 @@
+/**
+ * Column component.
+ * ---------------------
+ *
+ * Renders a single column within a board, including its title, tasks, and UI controls.
+ *
+ * Features:
+ * - Editable column title with inline editing and update functionality.
+ * - List of draggable tasks using the `Draggable` component for drag-and-drop reordering.
+ * - Button to toggle a form for adding new tasks to the column.
+ * - RemovePopOver to delete the column.
+ */
+
 import { Tasks } from "@/app/types/board-types";
 import { AddTaskForm } from "../form/add-task-form";
 import { TaskCard } from "./task-card";

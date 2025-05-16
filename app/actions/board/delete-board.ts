@@ -1,3 +1,11 @@
+/**
+ * Deletes a board by its ID, along with all related user-task relations,
+ * tasks, and columns.
+ *
+ * @param boardId - The ID of the board to delete.
+ * @returns An object indicating success or failure of the operation.
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

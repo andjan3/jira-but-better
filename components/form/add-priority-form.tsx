@@ -1,3 +1,12 @@
+/**
+ * AddPriorityForm component.
+ * -----------------------------------
+ *
+ * A form component for assigning a priority level to a task.
+ * - Validates input using a Zod schema.
+ * - Sends a request to the server via `updateTaskPriority` on change.
+ */
+
 import {
   Select,
   SelectContent,

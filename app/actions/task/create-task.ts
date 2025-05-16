@@ -1,10 +1,20 @@
+/**
+ * Creates a new task in the specified column and board.
+ *
+ * @param name - The name of the task.
+ * @param columnId - The ID of the column the task belongs to.
+ * @param boardId - The ID of the board the column is part of.
+ * @returns The newly created task object.
+ * @throws Error if the column is invalid or the task creation fails.
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export const CreateTask = async (
-  message: string,
+  name: string,
   columnId: number,
   boardId: number
 ) => {
@@ -26,7 +36,7 @@ export const CreateTask = async (
 
     const createdTask = await prisma.task.create({
       data: {
-        title: message,
+        title: name,
         description: "default description",
         isDone: false,
         boardId: boardId,

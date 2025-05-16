@@ -1,5 +1,14 @@
+/**
+ * TaskSummary component.
+ * ---------------------
+ *
+ * Fetches and displays tasks assigned to the logged-in user.
+ * Shows a table with task title, priority, and assignment date.
+ * If no tasks are assigned, displays a message.
+ *
+ */
+
 import { getAssignedUsers } from "@/app/actions/user-task/get-assigned-users";
-import { Tasks } from "@/app/types/board-types";
 import {
   Table,
   TableBody,

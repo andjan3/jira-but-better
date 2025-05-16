@@ -1,3 +1,17 @@
+/**
+ * EditableTitle component.
+ * ------------------------
+ *
+ * Provides an inline editable text field for updating titles on boards, columns, and tasks.
+ *
+ * Features:
+ * - Displays the title as text by default.
+ * - On click, switches to an input field for editing the title.
+ * - Validates the new title before saving (must be non-empty and different).
+ * - Calls the provided `onSave` function to persist changes asynchronously.
+ *
+ */
+
 "use client";
 
 import { useState } from "react";

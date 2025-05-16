@@ -1,3 +1,14 @@
+/**
+ * Updates the priority of a specific task.
+ *
+ * @param taskId - The ID of the task to update.
+ * @param boardId - The ID of the board the task belongs to (for validation).
+ * @param columnId - The ID of the column the task belongs to (for validation).
+ * @param priority - The new priority value to set for the task (or null to clear it).
+ * @returns An object indicating success or failure, with an optional error message.
+
+ */
+
 "use server";
 
 import { revalidatePath } from "next/cache";

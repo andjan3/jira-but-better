@@ -1,3 +1,10 @@
+/**
+ * Schema for validating register form inputs.
+ * -Username must be at least 2 characters long.
+ * - Email must be a valid email format.
+ * - Password must be at least 6 characters long.
+ */
+
 import { z } from "zod";
 
 export const registerSchema = z.object({

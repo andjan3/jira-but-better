@@ -1,3 +1,16 @@
+/**
+ * BoardHeader component.
+ * ----------------------
+ * Displays the header section for a board, including:
+ * - An editable board title using the EditableTitle component.
+ * - A remove button using the RemovePopOver component to delete the board.
+ *
+ * EditableTitle handles inline editing of the board name and triggers
+ * an update action on save.
+ *
+ * RemovePopOver provides a popover UI for board deletion confirmation.
+ */
+
 import { useBoard } from "@/app/context/board-context";
 import { RemovePopOver } from "../popover/remove-popover";
 import { EditableTitle } from "./editable-title";

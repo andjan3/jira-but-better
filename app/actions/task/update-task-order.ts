@@ -1,3 +1,17 @@
+/**
+ * updateTaskOrder
+ * -------------------
+ * Reorders a task within a column or moves it to a new column.
+ * Updates the order values of all tasks in the target column accordingly.
+ *
+ * @param taskId - The ID of the task to move.
+ * @param newColumnId - The ID of the column where the task is being moved.
+ * @param newIndex - The position in the column where the task should be inserted.
+ * @param boardId - The ID of the board for context/validation.
+ * @returns An object indicating success or failure.
+
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";
@@ -64,6 +78,15 @@ export const updateTaskOrder = async ({
     };
   }
 };
+
+/**
+ * normalizeTaskOrderValues
+ * ---------------------------
+ * Ensures that all tasks in a given column have sequential `order` values,
+ * starting from 1 and increasing by 1.
+ *
+ * This helps maintain consistent ordering after task insertions/movements.
+ **/
 
 async function normalizeTaskOrderValues(columnId: number, boardId: number) {
   const tasks = await prisma.task.findMany({

@@ -1,3 +1,13 @@
+/**
+ * Root Layout component.
+ * ----------------------
+ *
+ * - The `Providers` component wraps the app with necessary context providers, including NextAuth's SessionProvider for authentication state management.
+ *
+ * This setup ensures global styles, authentication context,
+ * and navigation are consistently applied across all pages.
+ */
+
 import "./globals.css";
 import { Nav } from "@/components/layout/header/nav";
 import { Providers } from "./providers";

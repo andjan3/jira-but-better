@@ -1,3 +1,13 @@
+/**
+ * Registers a new user with the given username, email, and password.
+ *
+ * @param username - The desired username for the new user.
+ * @param email - The user's email address.
+ * @param password - The user's password.
+ * @returns An object indicating success status, including the created user on success, or an error message on failure.
+ *
+ */
+
 "use server";
 
 import { prisma } from "@/app/lib/prisma";

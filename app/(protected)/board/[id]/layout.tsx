@@ -1,3 +1,15 @@
+/**
+ * BoardLayout
+ * ------------
+ * This layout is responsible for:
+ * - Fetching all necessary data for the board page:
+ *    • Board details
+ *    • Tasks
+ *    • Assigned users
+ *    • All users
+ * - Providing all the fetched data to child components using BoardContext
+ */
+
 import { getAssignedUsers } from "@/app/actions/user-task/get-assigned-users";
 import { getBoard } from "@/app/actions/board/get-board";
 import { getTasks } from "@/app/actions/task/get-tasks";

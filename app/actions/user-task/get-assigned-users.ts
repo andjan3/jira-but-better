@@ -1,3 +1,11 @@
+/**
+ * Gets all user-task assignments, including related user and task details.
+ *
+ * @param boardId - Optional ID of the board for cache revalidation.
+ * @returns An array of user-task assignment objects, each including user and task information. Returns an empty array if the fetch operation fails.
+ 
+ */
+
 import prisma from "@/app/lib/prisma";
 import { revalidatePath } from "next/cache";
 

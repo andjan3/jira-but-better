@@ -1,3 +1,9 @@
+/**
+ * Schema for validating login form inputs.
+ * - Email must be a valid email format.
+ * - Password must be at least 6 characters long.
+ */
+
 import { z } from "zod";
 
 export const logInSchema = z.object({

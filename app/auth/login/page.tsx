@@ -1,3 +1,10 @@
+/**
+ * LoginPage
+ * -----------------
+ * Displays the login form.
+ * - Uses the `LoginForm` component to handle authentication input and logic.
+ */
+
 import { LoginForm } from "@/components/form/login-form";
 
 export default function LoginPage() {

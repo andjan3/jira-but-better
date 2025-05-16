@@ -1,3 +1,11 @@
+/**
+ * Nav component.
+ * -----------------------------------
+ *
+ * Renders a navigation bar with a logo link and a hoverable UserIcon.
+ * - Adjusts styling based on current route (landing page vs all other routes).
+ */
+
 "use client";
 
 import { usePathname } from "next/navigation";

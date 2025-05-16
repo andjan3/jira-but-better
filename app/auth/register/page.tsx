@@ -1,3 +1,10 @@
+/**
+ * RegisterPage
+ * -----------------
+ * Displays the registration form
+ * - Uses the `RegisterForm` component to handle to handle user input, validation, and submission.
+ */
+
 import { RegisterForm } from "@/components/form/register-form";
 
 export default function RegisterPage() {

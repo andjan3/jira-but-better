@@ -1,3 +1,11 @@
+/**
+ * Deletes a user account by its ID, including all associated user-task relations.
+ *
+ * @param userId - The ID of the task to delete.
+ * @returns An object indicating whether the deletion was successful.
+ */
+
+"use server";
 import prisma from "@/app/lib/prisma";
 
 export const deleteAccount = async (userId: number) => {

@@ -1,3 +1,13 @@
+/**
+ * Updates the tasks description  by its ID.
+ *
+ * @param taskId - The ID of the task to update.
+ * @param boardId - The ID of the board the task belong to (for validation).
+ * @param columnId - The ID of the column that the task belong to (for validation).
+ * @param description - The new description for the task.
+ *  @returns An object indicating success or failure of the operation.
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

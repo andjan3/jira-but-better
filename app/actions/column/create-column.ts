@@ -1,3 +1,12 @@
+/**
+ * Creates a new column for a specific board.
+ *
+ * @param boardId - The ID of the board to which the column belongs.
+ * @param name - The name/title of the new column.
+ * @returns The newly created column object.
+ * @throws Throws an error if the board doesn't exist or the creation fails.
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

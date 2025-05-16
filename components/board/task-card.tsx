@@ -1,3 +1,17 @@
+/**
+ * TaskCard component.
+ * -------------------
+ *
+ * Displays an individual task with its title, priority indicator, assigned users and functionality for editing and deleting the task.
+ *
+ * Features:
+ * - Shows task title and priority with a colored bar and tooltip.
+ * - Displays assigned users along with more specified information by popovers.
+ * - Opens a detailed TaskDialog on click for viewing, editing and assigning members to the task.
+ * - Provides a delete button with confirmation dialog to remove the task.
+ *
+ */
+
 import { deleteTask } from "@/app/actions/task/delete-task";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";

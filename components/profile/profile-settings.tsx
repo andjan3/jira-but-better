@@ -1,3 +1,18 @@
+/**
+ * ProfileSettings component.
+ * -----------------------------------
+ *
+ * Renders user profile settings UI, including:
+ * - A toggleable form to update the user's password.
+ * - A button to delete the user account, which opens a confirmation dialog.
+ *
+ * Functionality:
+ * - Uses `useSession` to get the current user session.
+ * - Allows toggling the password form visibility.
+ * - On delete confirmation, calls `removeAccount` to delete the user's account.
+ * - Signs out the user and redirects to the landingpage after successful deletion.
+ */
+
 "use client";
 
 import { useState } from "react";

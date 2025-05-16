@@ -1,3 +1,17 @@
+/**
+ * Columns component.
+ * ---------------------
+ *
+ * Parent component responsible for rendering the board's columns.
+ *
+ * Key responsibilities:
+ * - Displays the board header by `BoardHeader`.
+ * - Manages the state for toggling the `Add Column`.
+ * - Wraps columns list with drag-and-drop context to enable reordering.
+ * - Renders the list of columns through  `ColumnList`.
+ * - Includes the  `AddColumnButton` to allow users to add new columns.
+ */
+
 "use client";
 
 import { useState } from "react";

@@ -1,3 +1,10 @@
+/**
+ * BoardPageLoading
+ * -----------------
+ * This component displays a loading skeleton for the board page.
+ * It provides visual feedback while the actual board data is being fetched.
+ */
+
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function BoardPageLoading() {

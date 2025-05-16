@@ -1,3 +1,13 @@
+/**
+ * LoginForm component.
+ * -----------------------------------
+ *
+ * A form component for user authentication.
+ * - Validates login credentials using a Zod schema.
+ * - Uses NextAuth's `signIn` with the "credentials" provider.
+ * - Redirects authenticated users to the dashboard.
+ */
+
 "use client";
 
 import { signIn } from "next-auth/react";

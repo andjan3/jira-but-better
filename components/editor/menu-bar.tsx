@@ -1,3 +1,18 @@
+/**
+ * MenuBar component
+ * -----------------
+ * Toolbar/menu for the rich text editor.
+ *
+ * Features:
+ * - Text formatting buttons (bold, italic, strikethrough, headings).
+ * - Text alignment controls (left, center, right).
+ * - List controls (ordered and unordered lists).
+ * - Color picker for text color.
+ * - Highlight toggle.
+ * - Clear formatting button to reset styles.
+ * - Shows a limited number of controls by default with a toggle to show more/less.
+ */
+
 import { ChevronLeft, X } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import { Toggle } from "../ui/toggle";

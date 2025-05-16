@@ -1,3 +1,16 @@
+/**
+ * RichTextEditor component
+ * ------------------------
+ * Wrapper around TipTap editor, providing rich text editing.
+ *
+ * Features:
+ * - Supports headings (levels 1, 2, 3)
+ * - Bullet and ordered lists with custom styles.
+ * - Supports text styling: color, highlight, alignment.
+ * - Renders `MenuBar` toolbar with formatting controls.
+ *
+ */
+
 "use client";
 
 import { EditorContent, useEditor } from "@tiptap/react";

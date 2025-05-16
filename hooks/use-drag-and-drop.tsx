@@ -1,3 +1,17 @@
+/**
+ * useDragAndDrop hook
+ * -----------------------------------
+ *
+ * Handles drag-and-drop logic for reordering tasks within a column or between columns.
+ *
+ * Features:
+ * - Manages a local state `localTasks` reflecting the current order of tasks.
+ * - Updates local state on drag end for immediate UI feedback.
+ * - Syncs task order changes with by `reorderTasks` action.
+ * - Handles rollback to previous state on action failure.
+
+ */
+
 import { useEffect, useState } from "react";
 import { DropResult } from "@hello-pangea/dnd";
 import { toast } from "sonner";

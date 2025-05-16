@@ -1,3 +1,16 @@
+/**
+ * LatestProjects component.
+ * ------------------------
+ *
+ * Displays a list of the most recently created project boards.
+ *
+ * Features:
+ * - Sorts the boards by creation date, showing the newest first.
+ * - Renders up to three of the latest boards as clickable links.
+ * - Includes a card for creating a new board by the CreateBoard component.
+ *
+ */
+
 "use client";
 
 import Link from "next/link";

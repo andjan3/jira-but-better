@@ -1,3 +1,13 @@
+/**
+ * Assigns a user to a specific task if not already assigned.
+ *
+ * @param taskId - The ID of the task to assign the user to.
+ * @param userId - The ID of the user to assign.
+ * @param boardId - The ID of the board (used for cache revalidation).
+ * @returns An object indicating success or failure of the assignment operation.
+ *
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

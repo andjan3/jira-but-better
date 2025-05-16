@@ -1,3 +1,13 @@
+/**
+ * AddTaskForm component.
+ * -----------------------------------
+ *
+ * A form component for creating a new task.
+ * - Validates input using a Zod schema.
+ * - Trims whitespace to prevent empty submissions.
+ * - Sends the task to the server by the `CreateTask` function on submit.
+ */
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";

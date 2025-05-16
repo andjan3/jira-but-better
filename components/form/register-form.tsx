@@ -1,3 +1,14 @@
+/**
+ * RegisterForm component.
+ * -----------------------------------
+ *
+ * A form component for user registration.
+ * - Validates input using a Zod schema.
+ * - Sends registration data to the server via `registerUser`.
+ * - Automatically signs the user in the registration was successful.
+ * - Redirects to the dashboard after login.
+ */
+
 "use client";
 
 import { signIn } from "next-auth/react";
