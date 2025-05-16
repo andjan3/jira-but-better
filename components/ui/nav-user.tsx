@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsUpDown, LogOut } from "lucide-react";
+import { ChevronsUpDown, LogOut, Settings2 } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/sidebar";
 import { signOut } from "next-auth/react";
 import { Session } from "next-auth";
+import { useRouter } from "next/navigation";
 
 interface NavUserProps {
   user: Session;
@@ -25,6 +26,7 @@ interface NavUserProps {
 
 export function NavUser({ user }: NavUserProps) {
   const { isMobile } = useSidebar();
+  const router = useRouter();
 
   return (
     <SidebarMenu>
@@ -74,6 +76,13 @@ export function NavUser({ user }: NavUserProps) {
             >
               <LogOut />
               Log out
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => router.push("/profile/settings")}
+            >
+              <Settings2 />
+              Settings
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
