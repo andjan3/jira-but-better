@@ -42,7 +42,7 @@ export const RegisterForm = () => {
         toast.error("Login after registration failed");
       } else {
         toast.success("Account created and logged in");
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch (err) {
       toast.error("Unexpected error");
@@ -107,7 +107,7 @@ export const RegisterForm = () => {
 
           <button
             type="submit"
-            className="bg-black text-white w-auto px-10 p-4 rounded-lg mx-auto hover:bg-[#212121] mt-2"
+            className="bg-black text-white w-auto px-8 p-3 rounded-lg mx-auto hover:bg-[#212121] mt-2"
           >
             Sign up
           </button>

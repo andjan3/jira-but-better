@@ -32,7 +32,7 @@ export const updateTaskDescription = async (
         description: description,
       },
     });
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
     return { success: true };
   } catch (error) {
     console.error("Error updating task description:", error);

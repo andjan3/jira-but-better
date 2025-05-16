@@ -46,7 +46,7 @@ export function AppSidebar({ boards }: AppSideBarProps) {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link href="/">
+                  <Link href="/dashboard">
                     <Home />
                     <span>Dashboard</span>
                   </Link>
@@ -69,7 +69,7 @@ export function AppSidebar({ boards }: AppSideBarProps) {
                     {boards.map((item: Board) => (
                       <SidebarMenuItem key={item.id}>
                         <SidebarMenuButton asChild>
-                          <Link href={`/boards/${item.id}`}>
+                          <Link href={`/board/${item.id}`}>
                             <LuDot />
                             {item.name}
                           </Link>

@@ -20,7 +20,7 @@ export const updateBoardName = async (boardId: number, newTitle: string) => {
       data: { name: newTitle },
     });
 
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
 
     return updatedBoard;
   } catch (error) {

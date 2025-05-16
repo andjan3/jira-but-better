@@ -28,7 +28,7 @@ export async function createColumn(boardId: number, name: string) {
       },
     });
 
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
 
     return createdColumn;
   } catch (error) {

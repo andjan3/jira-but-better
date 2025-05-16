@@ -21,7 +21,9 @@ export function UserIcon() {
       {hover && (
         <div className="absolute top-12 lg:top-[45px] text-center -right-6  bg-white text-black p-2 rounded shadow-lg w-[100px]">
           {session ? (
-            <button onClick={() => signOut()}>Log out</button>
+            <button onClick={() => signOut({ callbackUrl: "/" })}>
+              Log out
+            </button>
           ) : (
             <button onClick={() => signIn()}>Log in</button>
           )}

@@ -17,7 +17,7 @@ export const LatestProjects = ({ boards }: Boards) => {
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-center gap-5">
         {sortedBoards.slice(0, 3).map((board: any, index: number) => (
           <Link
-            href={`/boards/${board.id}`}
+            href={`/board/${board.id}`}
             key={index}
             className="shadow-lg w-full h-[250px] rounded-lg grid grid-rows-[70%,30%] hover:opacity-80 mb-5 lg:mb-0"
           >

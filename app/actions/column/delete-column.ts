@@ -42,7 +42,7 @@ export const deleteColumn = async (columnId: number, boardId: number) => {
       },
     });
 
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
 
     return { success: true };
   } catch (error) {

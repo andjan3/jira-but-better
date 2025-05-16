@@ -1,4 +1,3 @@
-// app/components/sidebar/server-sidebar.tsx
 import { getAllBoards } from "@/app/actions/board/get-all-boards";
 import { Sidebar } from "./sidebar";
 

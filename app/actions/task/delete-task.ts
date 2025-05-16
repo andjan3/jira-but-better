@@ -31,7 +31,7 @@ export const deleteTask = async (
         id: taskId,
       },
     });
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
     return { success: true };
   } catch (error) {
     console.error("Error updating task priority:", error);

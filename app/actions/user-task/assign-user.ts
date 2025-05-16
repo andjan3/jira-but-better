@@ -27,7 +27,7 @@ export const assignUser = async (
       });
     }
 
-    revalidatePath(`/boards/${boardId}`);
+    revalidatePath(`/board/${boardId}`);
     return { success: true };
   } catch (error) {
     console.error("Failed to assign user:", error);

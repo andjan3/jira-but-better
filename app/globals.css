@@ -9,7 +9,8 @@ input{
 }
 .form-container{
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 3rem;
+  padding: 1rem;
+  padding-bottom: 3rem;
   border-radius: 5px;
 }
 
@@ -140,4 +141,14 @@ input{
     font-size: 1.1rem; font-weight: bold; 
   }
   
+}
+
+
+@media screen and (min-width:1020px) {
+  .form-container{
+  
+  padding: 3rem;
+  padding-bottom: 3rem;
+  
+}
 }
