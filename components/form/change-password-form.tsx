@@ -1,3 +1,13 @@
+/**
+ * ChangePasswordForm component
+ * -----------------------------------
+ *
+ * A form component for allowing users to change their password.
+ * - Validates user input using a Zod schema.
+ * - Confirms that password and confirmation match.
+ * - Sends a password update request via the `changePassword` action.
+ */
+
 "use client";
 
 import { useSession } from "next-auth/react";

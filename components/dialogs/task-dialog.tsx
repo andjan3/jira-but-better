@@ -1,3 +1,20 @@
+/**
+ * TaskDialog component.
+ * ---------------------
+ *
+ * A modal dialog for viewing, editing and assign users to a task.
+ *
+ * Features:
+ * - Displays task priority with a color bar.
+ * - Editable task title with inline editing support.
+ * - Rich text editor for viewing and editing the task description.
+ * - Popovers for setting task priority label and managing task members.
+ * - Allows users to assign themselves to the task.
+ * - Handles state and server updates for task title and description.
+ * - Uses DOMPurify to safely render HTML content from task descriptions.
+ *
+ */
+
 "use client";
 
 import { useState } from "react";

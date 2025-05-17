@@ -1,3 +1,12 @@
+/**
+ * Deletes a task by its ID, including all related user-task relations.
+ *
+ * @param taskId - The ID of the task to delete.
+ * @param boardId - The ID of the board the task should belong to (for validation).
+ * @param columnId - The ID of the column the task should belong to (for validation).
+ * @returns An object indicating whether the deletion was successful.
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

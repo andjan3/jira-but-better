@@ -1,3 +1,13 @@
+/**
+ * Changes the password for a specified user.
+ *
+ * @param newPassword - The new password to be set for the user.
+ * @param userId - The ID of the user whose password will be changed.
+ * @returns An object indicating whether the password change was successful or not.
+ * @returns An object indicating success or failure of the operation.
+
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

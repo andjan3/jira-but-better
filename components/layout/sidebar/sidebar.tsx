@@ -1,3 +1,13 @@
+/**
+ * Sidebar component.
+ * -----------------------------------
+ *
+ * Client-side sidebar component that renders the list of boards.
+ * - Receives boards as props.
+ * - Wraps content in SidebarProvider context.
+ * - Contains `AppSidebar` for rendering boards and `SidebarTrigger` for toggling.
+ */
+
 "use client";
 
 import { useState, useEffect } from "react";

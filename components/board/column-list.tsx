@@ -1,3 +1,14 @@
+/**
+ * ColumnList component.
+ * ---------------------
+ * Renders a list of columns for a board along with their associated tasks.
+ *
+ * Each column is wrapped with a Droppable area (from react-beautiful-dnd) to
+ * enable drag-and-drop functionality for tasks within columns.
+ *
+ * Tasks are filtered by their columnId and sorted by their order property before rendering.
+ */
+
 "use client";
 
 import { Droppable } from "@hello-pangea/dnd";

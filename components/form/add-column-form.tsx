@@ -1,3 +1,12 @@
+/**
+ * AddColumnForm component.
+ * -----------------------------------
+ *
+ * A form component for adding a new column to a board.
+ * - Validates the column name using a Zod schema.
+ * - Sends a request to the server via `createColumn` on submission.
+ */
+
 "use client";
 
 import { useForm } from "react-hook-form";

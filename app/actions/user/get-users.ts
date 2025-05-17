@@ -1,3 +1,10 @@
+/**
+ * Gets all users from the database.
+ *
+ * @returns An array of user objects.
+ * @throws Returns empty array if the operation fails.
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

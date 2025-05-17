@@ -1,3 +1,18 @@
+/**
+ * Server-side action exports
+ *
+ * Exports server-side functions for managing:
+ * - Task ordering (reorderTasks)
+ * - User assignment to tasks (assignUserToTask)
+ * - Column removal (removeColumn)
+ * - Board removal (removeBoard)
+ * - User-task unassignment (unAssignUser)
+ * - User account deletion (removeAccount)
+ *
+ * Server Actions allow client components to safely trigger these operations
+ * without exposing any sensitive logic to the client or creating separate API routes.
+ */
+
 "use server";
 
 import { deleteBoard } from "./board/delete-board";

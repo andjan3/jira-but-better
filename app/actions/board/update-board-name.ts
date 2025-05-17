@@ -1,3 +1,12 @@
+/**
+ * Updates the name of a specific board by its ID.
+ *
+ * @param boardId - The ID of the board to update.
+ * @param newTitle - The new name/title for the board.
+ * @returns The updated board object.
+ * @throws Throws an error if the board is not found or the update fails.
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

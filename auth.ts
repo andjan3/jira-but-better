@@ -1,3 +1,14 @@
+/**
+ * NextAuth configuration for authentication using credentials provider.
+ * -----------------------------------------------------------
+ *
+ * This setup allows users to sign in with email and password.
+ * - Fetches user data from Prisma ORM based on email.
+ * - Implements JWT sessions to keep users authenticated.
+ * - Defines callbacks to add custom user fields (`id`, `email`, `username`) to JWT token and session.
+ * - Redirects users to a custom login page at `/auth/login`.
+ */
+
 import { compare } from "bcrypt";
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";

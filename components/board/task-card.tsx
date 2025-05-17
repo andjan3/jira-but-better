@@ -1,3 +1,17 @@
+/**
+ * TaskCard component.
+ * -------------------
+ *
+ * Displays an individual task with its title, priority indicator, assigned users and functionality for editing and deleting the task.
+ *
+ * Features:
+ * - Shows task title and priority with a colored bar and tooltip.
+ * - Displays assigned users along with more specified information by popovers.
+ * - Opens a detailed TaskDialog on click for viewing, editing and assigning members to the task.
+ * - Provides a delete button with confirmation dialog to remove the task.
+ *
+ */
+
 import { deleteTask } from "@/app/actions/task/delete-task";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
@@ -10,8 +24,8 @@ import {
 } from "@/components/tiptap-ui-primitive/tooltip";
 import { useBoard } from "@/app/context/board-context";
 import { AssignedUserPopover } from "../popover/assigned-user-popover";
-import { getPriorityClass } from "@/lib/priority-utils";
-import { User } from "@/app/types/board-types";
+import { getPriorityClass, Task } from "@/lib/priority-utils";
+import { AssignedUser } from "@/app/types/board-types";
 import { ConvertPriorityLabels } from "@/lib/convert-priority-labels";
 import { DeleteConfirmationDialog } from "../dialogs/delete-confirmation-dialog";
 
@@ -26,13 +40,6 @@ interface TaskCardProps {
     columnId: number | null;
     order: number;
   };
-}
-
-interface UserProps {
-  assignedAt: Date;
-  taskId: number;
-  user: User;
-  userId: number;
 }
 
 export const TaskCard = ({ task }: TaskCardProps) => {
@@ -80,7 +87,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
   };
 
   const assignedMembers = assignedUser.filter(
-    (user: UserProps) => user.taskId === task.id
+    (user: AssignedUser) => user.taskId === task.id
   );
 
   const handleDeleteIconClick = (e: React.MouseEvent) => {
@@ -132,11 +139,11 @@ export const TaskCard = ({ task }: TaskCardProps) => {
         </div>
         <div>{task.title}</div>
         <div className="flex justify-end gap-1">
-          {assignedMembers.map((item: any) => (
+          {assignedMembers.map((assignedUser: AssignedUser) => (
             <AssignedUserPopover
-              item={item}
+              item={assignedUser}
               boardId={task.boardId}
-              key={`${item.userId}-${task.id}`}
+              key={`${assignedUser.userId}-${task.id}`}
             />
           ))}
         </div>

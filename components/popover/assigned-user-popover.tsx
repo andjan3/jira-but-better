@@ -1,3 +1,18 @@
+/**
+ * AssignedUserPopover component.
+ * -----------------------------------
+ *
+ * Displays a button showing the initials of a user assigned to a task.
+ * - On hover, shows a tooltip with the user's full username.
+ * - Clicking the button opens a popover with detailed user info (username and email).
+ * - The popover also contains an option to unassign (remove) the user from the task.
+ *
+ * Functionality:
+ * - Uses local state to manage tooltip visibility on hover.
+ * - Calls `unAssignUser` async action when removing the user assignment.
+
+ */
+
 import { useState } from "react";
 import { unAssignUser } from "@/app/actions/client-actions";
 import { Button } from "@/components/ui/button";

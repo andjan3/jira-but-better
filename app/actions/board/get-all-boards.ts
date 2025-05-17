@@ -1,3 +1,10 @@
+/**
+ * Gets all boards from the database.
+ *
+ * @returns An array of board objects.
+ * @throws Throws an error if the fetch operation fails.
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

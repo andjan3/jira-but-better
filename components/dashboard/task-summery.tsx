@@ -1,5 +1,15 @@
+/**
+ * TaskSummary component.
+ * ---------------------
+ *
+ * Fetches and displays tasks assigned to the logged-in user.
+ * Shows a table with task title, priority, and assignment date.
+ * If no tasks are assigned, displays a message.
+ *
+ */
+
 import { getAssignedUsers } from "@/app/actions/user-task/get-assigned-users";
-import { Tasks } from "@/app/types/board-types";
+import { AssignedTask } from "@/app/types/board-types";
 import {
   Table,
   TableBody,
@@ -20,7 +30,9 @@ export const TaskSummery = async ({ session }: TaskSummeryProps) => {
   const userId = Number(session.user.id);
   const assignedTasks = await getAssignedUsers();
 
-  const tasks = assignedTasks.filter((a: any) => a.userId === userId);
+  const tasks = assignedTasks.filter(
+    (assignedTask: AssignedTask) => assignedTask.userId === userId
+  );
 
   return (
     <div>
@@ -41,7 +53,7 @@ export const TaskSummery = async ({ session }: TaskSummeryProps) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {tasks.map((task: any) => (
+            {tasks.map((task: AssignedTask) => (
               <TableRow
                 key={`${task.userId}-${task.taskId}`}
                 className="grid grid-cols-3"

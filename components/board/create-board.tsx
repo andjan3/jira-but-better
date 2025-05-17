@@ -1,3 +1,15 @@
+/**
+ * CreateBoard component.
+ * ---------------------
+ *
+ * Provides a user interface for creating a new board.
+ *
+ * Key responsibilities:
+ * - Displays a button that triggers a Popover form.
+ * - The Popover contains an input field for the board name.
+ * - Handles form submission to create a new board via `createBoard` action.
+ */
+
 "use client";
 
 import { Button } from "@/components/ui/button";

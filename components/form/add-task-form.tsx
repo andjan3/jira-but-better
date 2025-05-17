@@ -1,3 +1,13 @@
+/**
+ * AddTaskForm component.
+ * -----------------------------------
+ *
+ * A form component for creating a new task.
+ * - Validates input using a Zod schema.
+ * - Trims whitespace to prevent empty submissions.
+ * - Sends the task to the server by the `CreateTask` function on submit.
+ */
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,19 +36,19 @@ export function AddTaskForm({ columnId, boardId }: TaskFormProps) {
   const form = useForm<z.infer<typeof TaskFormSchema>>({
     resolver: zodResolver(TaskFormSchema),
     defaultValues: {
-      message: "",
+      taskTitle: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof TaskFormSchema>) {
-    const trimmedMessage = values.message.trim();
+    const trimmedTitle = values.taskTitle.trim();
 
-    if (!trimmedMessage) {
-      toast("Task message cannot be empty or only spaces.");
+    if (!trimmedTitle) {
+      toast("Task title cannot be empty or only spaces.");
       return;
     }
     try {
-      const response = await CreateTask(trimmedMessage, columnId, boardId);
+      const response = await CreateTask(trimmedTitle, columnId, boardId);
       if (response) {
         form.reset();
 
@@ -61,7 +71,7 @@ export function AddTaskForm({ columnId, boardId }: TaskFormProps) {
             <div>
               <FormField
                 control={form.control}
-                name="message"
+                name="taskTitle"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>

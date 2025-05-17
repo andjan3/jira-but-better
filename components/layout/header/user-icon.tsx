@@ -1,3 +1,13 @@
+/**
+ * UserIcon component.
+ * -----------------------------------
+ *
+ * A user icon that toggles login/logout actions on hover.
+ * - Uses `useSession` to check authentication state.
+ * - Displays a login or logout button depending on the user's session.
+ * - On hover, shows a small popup with log out functionality.
+ */
+
 "use client";
 
 import { signIn, signOut } from "next-auth/react";

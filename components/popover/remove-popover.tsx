@@ -1,3 +1,17 @@
+/**
+ * RemovePopOver component.
+ * -----------------------------------
+ *
+ * Provides a popover menu triggered by a button.
+ * - Allows the user to initiate deletion of either a board or a column.
+ * - Shows a confirmation dialog before executing the delete action.
+ *
+ * Functionality::
+ * - On delete confirmation, calls the appropriate action (`removeColumn` or `removeBoard`).
+ * - If a board is deleted successfully, redirects the user to the dashboard.
+ * - Manages dialog open/close state locally.s
+ */
+
 import { Button } from "@/components/ui/button";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import {

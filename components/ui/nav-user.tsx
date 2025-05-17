@@ -56,7 +56,7 @@ export function NavUser({ user }: NavUserProps) {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <div className="text-white bg-[#1868DB] rounded-full w-8 h-8 flex items-center justify-center text-xs uppercase hover:bg-[#3b79d0]">
-                  AN
+                  {user.user.name.slice(0, 2)}
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <div className="grid flex-1 text-left text-sm leading-tight">

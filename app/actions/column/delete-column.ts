@@ -1,3 +1,12 @@
+/**
+ * Deletes a column by its ID, along with all related user-task relations,
+ * tasks, and columns.
+ *
+ * @param columnId - The ID of the column to delete.
+ * @param boardId - The ID of the board the column should belong to (for validation).
+ * @returns An object indicating success or failure of the operation.
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

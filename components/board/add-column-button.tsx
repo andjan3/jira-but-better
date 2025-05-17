@@ -1,3 +1,13 @@
+/**
+ * AddColumnButton component.
+ * --------------------------
+ *
+ * Renders a button to toggle the display of a form for adding a new column to the current board.
+ * - When `addColumn` is false, shows a button that opens the column form.
+ * - When `addColumn` is true, shows the `AddColumnForm` component allowing the user to input column name.
+ *
+ */
+
 import { AddColumnForm } from "../form/add-column-form";
 import { GoPlus } from "react-icons/go";
 import { useBoard } from "@/app/context/board-context";

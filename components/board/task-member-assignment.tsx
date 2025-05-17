@@ -1,3 +1,16 @@
+/**
+ * TaskMemberAssignment component.
+ * ------------------------------
+ *
+ * Allows assigning users to a specific task within a board.
+ *
+ * Features:
+ * - Displays a dropdown select populated with all users from the board context.
+ * - Uses react-hook-form with Zod schema for validation (userId must be valid).
+ * - Calls async `assignUser` action on user selection to assign the selected user to the task.
+ *
+ */
+
 "use client";
 
 import {
@@ -31,11 +44,7 @@ export const TaskMemberAssignment = ({ boardId, taskId }: MembersProps) => {
 
   const handleAssignMember = async (userId: string) => {
     try {
-      const assignmentRes = await assignUser(
-        Number(taskId),
-        Number(userId),
-        boardId
-      );
+      await assignUser(Number(taskId), Number(userId), boardId);
       toast.message("Assignment was successful!", {
         description: "The user has been assigned to the task.",
       });

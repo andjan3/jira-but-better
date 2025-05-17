@@ -1,3 +1,13 @@
+/**
+ * Updates the name of a specific column by its ID.
+ *
+ * @param columnId - The ID of the column to update.
+ * @param columnName - The new name/title for the column.
+ * @param boardId - The ID of the board the column should belong to (for validation).
+ * @returns The updated column object.
+ * @throws Throws an error if the update fails.
+ */
+
 "use server";
 
 import prisma from "@/app/lib/prisma";

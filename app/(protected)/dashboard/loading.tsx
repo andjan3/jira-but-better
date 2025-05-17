@@ -1,3 +1,10 @@
+/**
+ * DashboardLoading
+ * -----------------
+ * This component displays a loading skeleton for the Dashboard page.
+ * It provides visual feedback while the actual dashboard data is being fetched.
+ */
+
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function DashboardLoading() {

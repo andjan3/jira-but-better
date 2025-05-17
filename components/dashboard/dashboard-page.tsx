@@ -1,3 +1,16 @@
+/**
+ * DashboardPage component.
+ * ------------------------
+ *
+ * Renders the main dashboard view for a logged-in user.
+ *
+ * Features:
+ * - Displays a personalized welcome message using the user's session data.
+ * - Shows a list of latest projects (boards) by the `LatestProjects` component.
+ * - Includes a summary of tasks relevant to the user by the`TaskSummery` component.
+ *
+ */
+
 import { Board } from "@/app/types/board-types";
 import { LatestProjects } from "./latest-projects";
 import { Session } from "next-auth";

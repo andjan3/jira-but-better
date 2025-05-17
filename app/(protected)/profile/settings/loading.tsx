@@ -1,3 +1,10 @@
+/**
+ * ProfileSettingsLoading
+ * ----------------------
+ * Displays a loading skeleton for the profile settings page.
+ * Provides visual feedback while the settings view is being loaded.
+ */
+
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProfileSettingsLoading() {

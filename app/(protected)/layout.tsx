@@ -1,3 +1,15 @@
+/**
+ * ProtectedLayout
+ * -------------------
+
+ * Ensures that only authenticated users can access its child pages by:
+ * - Checking the server session for a logged-in user
+ * - Redirecting unauthenticated users to the login page
+ * - Rendering the sidebar and protected content for authorized users
+ *
+  * Routes are also protected and redirected by the middleware,  which uses     * NextAuth.js for authentication.
+ */
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import { redirect } from "next/navigation";

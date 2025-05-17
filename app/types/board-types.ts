@@ -32,7 +32,7 @@ export interface User {
   password: string;
   username: string;
 }
-export interface AssignedUsers {
+export interface AssignedUser {
   userId: number;
   taskId: number;
   assignedAt: Date;
@@ -48,4 +48,26 @@ export interface Board {
 
 export interface Boards {
   boards: Board[];
+}
+
+export interface AssignedTask {
+  userId: number;
+  taskId: number;
+  assignedAt: string | Date;
+  user: {
+    id: number;
+    email: string;
+    username: string;
+    password: string;
+  };
+  task: {
+    id: number;
+    title: string;
+    description: string;
+    isDone: boolean;
+    priority: "lowPriority" | "mediumPriority" | "highPriority" | null;
+    order: number;
+    boardId: number;
+    columnId: number;
+  };
 }
