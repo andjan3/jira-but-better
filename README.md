@@ -13,7 +13,7 @@ The tech stack includes Next.js, Prisma, PostgreSQL, NextAuth, ShadCN UI, Tailwi
 - Dashboard: landing page showing latest projects and tasks assigned to the logged-in user.
 - Drag-and-drop for moving tasks within and between columns.
 
-## :rocket: **Getting Started
+## :rocket: Getting Started
 Follow these steps to set up the project locally:
 
 1. **Install dependencies:**
