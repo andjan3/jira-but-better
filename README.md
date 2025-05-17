@@ -1,5 +1,5 @@
 ## Degree project - Jira but better
-This project was developed as part of my final degree project in Front End Development(400 YH) at Grit Academy.
+This project was developed as part of my final degree project in Front End Development (400 YH) at Grit Academy.
 
 ## Overview
 This application is designed as an agile project management tool to help organize projects and assign tasks efficiently. Inspired by Jira, it offers a straightforward and easy-to-navigate interface. 
