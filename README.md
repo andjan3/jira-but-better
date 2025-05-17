@@ -3,7 +3,7 @@ This project was developed as part of my final degree project in Front End Devel
 
 ## Overview
 The application is designed as an agile project management tool to help organize projects and assign tasks efficiently. Inspired by Jira, it offers a straightforward and easy-to-navigate interface. 
-The tech stack includes Next.js, Prisma, PostgreSQL, NextAuth, ShadCN UI and Tailwind CSS.
+The tech stack includes Next.js, Prisma, PostgreSQL, NextAuth, ShadCN UI, Tailwind CSS and hello-pangea/dnd (for drag-and-drop functionality).
 
 ## Features
 - Task management: create, edit, and delete tasks with priority labels and rich text descriptions.
@@ -11,6 +11,7 @@ The tech stack includes Next.js, Prisma, PostgreSQL, NextAuth, ShadCN UI and Tai
 - Boards & columns: create, rename, and delete both boards and columns.
 - User authentication: register, log in, update password, and delete account.
 - Dashboard: landing page showing latest projects and tasks assigned to the logged-in user.
+- Drag-and-drop for moving tasks within and between columns.
 
 ## Getting Started
 1. **Install dependencies:**
