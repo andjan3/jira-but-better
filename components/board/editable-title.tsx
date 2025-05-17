@@ -38,12 +38,15 @@ export const EditableTitle = ({
   const handleSave = async () => {
     if (value.trim() === title.trim() || value.trim() === "") {
       setIsEditing(false);
-      toast.message("Failed to update title");
+      toast.message("Failed to update title", {
+        description: "Make sure that it’s not the same title.",
+      });
       return;
     }
 
     try {
       await onSave(value.trim());
+      toast.message("Succesfully updated new title");
     } catch (error) {
       toast.message("Failed to update title");
     } finally {

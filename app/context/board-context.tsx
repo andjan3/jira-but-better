@@ -12,12 +12,12 @@
 
 "use client";
 import { createContext, useContext } from "react";
-import { AssignedUsers, BoardData, Tasks, User } from "../types/board-types";
+import { AssignedUser, BoardData, Tasks, User } from "../types/board-types";
 
 export const BoardContext = createContext<{
   boardData: BoardData;
   tasks: Tasks[];
-  assignedUser: AssignedUsers[];
+  assignedUser: AssignedUser[];
   allUsers: User[];
 }>({
   boardData: { id: 0 },
@@ -38,7 +38,7 @@ export function BoardProvider({
   value: {
     boardData: BoardData;
     tasks: Tasks[];
-    assignedUser: AssignedUsers[];
+    assignedUser: AssignedUser[];
     allUsers: User[];
   };
 }) {

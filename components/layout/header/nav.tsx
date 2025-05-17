@@ -25,7 +25,7 @@ export const Nav = () => {
       }`}
     >
       <a
-        href="/"
+        href={isLandingpage ? "/" : "/dashboard"}
         className={`font-semibold ${isLandingpage ? "text-white" : ""}`}
       >
         Jira but better

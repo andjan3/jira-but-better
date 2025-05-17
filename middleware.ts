@@ -16,7 +16,7 @@ import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 const publicRoutes = ["/auth/login", "/auth/register"];
-const authRoutes = ["/board", "/dashboard", "/app"];
+const authRoutes = ["/board", "/dashboard", "/app", "/profile/settings"];
 const DEFAULT_LOGGED_IN_REDIRECT = "/dashboard";
 
 export async function middleware(req: NextRequest) {
@@ -40,5 +40,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/board/:path*", "/dashboard", "/app/:path*"],
+  matcher: ["/board/:path*", "/dashboard", "/app/:path*", "/profile/settings"],
 };
