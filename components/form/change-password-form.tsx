@@ -73,9 +73,13 @@ export const ChangePasswordForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
+                <label htmlFor="newPassword" className="sr-only">
+                  New password
+                </label>
                 <FormControl>
                   <Input
                     {...field}
+                    id="newPassword"
                     placeholder="New password"
                     type="password"
                     className="w-[300px]"
@@ -91,9 +95,13 @@ export const ChangePasswordForm = () => {
             name="controlPassword"
             render={({ field }) => (
               <FormItem>
+                <label htmlFor="confirmPassword" className="sr-only">
+                  Confirm password
+                </label>
                 <FormControl>
                   <Input
                     {...field}
+                    id="confirmPassword"
                     placeholder="Confirm password"
                     type="password"
                     className="w-[300px]"
@@ -106,7 +114,7 @@ export const ChangePasswordForm = () => {
 
           <button
             type="submit"
-            className="bg-black text-white lg:py-2 rounded-lg  hover:bg-[#212121] mt-2 lg:w-[45%] text-sm w-[300px] py-3"
+            className="bg-black text-white lg:py-2 rounded-lg hover:bg-[#212121] mt-2 lg:w-[45%] text-sm w-[300px] py-3"
           >
             Change password
           </button>

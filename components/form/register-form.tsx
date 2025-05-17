@@ -77,8 +77,15 @@ export const RegisterForm = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
+                <label htmlFor="registerUsername" className="sr-only">
+                  Username
+                </label>
                 <FormControl>
-                  <Input {...field} placeholder="Username" />
+                  <Input
+                    {...field}
+                    id="registerUsername"
+                    placeholder="Username"
+                  />
                 </FormControl>
                 <FormMessage>
                   {methods.formState.errors.username?.message}
@@ -92,8 +99,16 @@ export const RegisterForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
+                <label htmlFor="registerEmail" className="sr-only">
+                  Email
+                </label>
                 <FormControl>
-                  <Input {...field} placeholder="E-mail" type="email" />
+                  <Input
+                    {...field}
+                    id="registerEmail"
+                    placeholder="E-mail"
+                    type="email"
+                  />
                 </FormControl>
                 <FormMessage>
                   {methods.formState.errors.email?.message}
@@ -107,8 +122,16 @@ export const RegisterForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
+                <label htmlFor="registerPassword" className="sr-only">
+                  Password
+                </label>
                 <FormControl>
-                  <Input {...field} placeholder="Password" type="password" />
+                  <Input
+                    {...field}
+                    id="registerPassword"
+                    placeholder="Password"
+                    type="password"
+                  />
                 </FormControl>
                 <FormMessage>
                   {methods.formState.errors.password?.message}

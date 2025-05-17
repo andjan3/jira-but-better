@@ -27,9 +27,9 @@ export default async function ProtectedLayout({
   }
 
   return (
-    <div className="grid grid-cols-[0%_1fr] md:grid-cols-[200px_1fr] lg:grid-cols-[300px_1fr] mt-24 lg:mt-0">
+    <main className="grid grid-cols-[0%_1fr] md:grid-cols-[200px_1fr] lg:grid-cols-[300px_1fr] mt-24 lg:mt-0">
       <ServerSidebar />
       {children}
-    </div>
+    </main>
   );
 }

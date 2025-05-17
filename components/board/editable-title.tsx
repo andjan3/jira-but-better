@@ -76,14 +76,17 @@ export const EditableTitle = ({
       className="flex items-center gap-3 cursor-pointer"
       onClick={() => setIsEditing(true)}
     >
-      <div
+      <button
         className={`font-semibold ${
-          variant === "board" ? "text-[26px]" : "text-[18px]"
+          variant === "board" ? "text-[26px]" : "min-w-[40px] text-[18px]"
         }`}
+        aria-label={`Change ${variant} name`}
       >
         {title}
-      </div>
-      {variant !== "board" && <HiOutlinePencilSquare fontSize={20} />}
+      </button>
+      {variant !== "board" && (
+        <HiOutlinePencilSquare fontSize={20} aria-label="Pencil icon" />
+      )}
     </div>
   );
 };

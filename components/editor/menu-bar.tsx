@@ -203,9 +203,12 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
               aria-label={showAll ? "Show less" : "Show more"}
             >
               {showAll ? (
-                <ChevronLeft className="size-4" />
+                <ChevronLeft className="size-4" aria-label="Arrow left icon" />
               ) : (
-                <ChevronRight className="size-4" />
+                <ChevronRight
+                  className="size-4"
+                  aria-label="Arrow right icon"
+                />
               )}
             </button>
           </TooltipTrigger>

@@ -25,7 +25,7 @@ export const LatestProjects = ({ boards }: Boards) => {
   });
 
   return (
-    <div>
+    <section>
       <h2 className="mb-3">Latest projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-center gap-5">
         {sortedBoards.slice(0, 3).map((board: BoardData, index: number) => (
@@ -45,6 +45,6 @@ export const LatestProjects = ({ boards }: Boards) => {
           <CreateBoard />
         </div>
       </div>
-    </div>
+    </section>
   );
 };

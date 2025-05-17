@@ -22,13 +22,13 @@ interface DashboardPageProps {
 }
 export const DashboardPage = ({ boards, session }: DashboardPageProps) => {
   return (
-    <div>
+    <section>
       <div className="flex flex-col w-[85%] lg:w-[92%] mx-auto gap-5 my-10 mt-20 lg:mt-40">
         <div className="flex flex-col lg:items-center">
           {session?.user?.name && (
             <div className="flex text-xl gap-2 text-center">
               <span>👋</span>
-              <span>{`Welcome ${session.user.name}`}</span>
+              <h1>{`Welcome ${session.user.name}`}</h1>
             </div>
           )}
         </div>
@@ -39,6 +39,6 @@ export const DashboardPage = ({ boards, session }: DashboardPageProps) => {
           <TaskSummery session={session} />
         </div>
       </div>
-    </div>
+    </section>
   );
 };

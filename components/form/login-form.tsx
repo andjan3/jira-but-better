@@ -19,6 +19,7 @@ import { FormField, FormItem, FormControl, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { LoginFormValues, logInSchema } from "./schemas/login-schema";
 import Link from "next/link";
+import { Label } from "@radix-ui/react-dropdown-menu";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -64,8 +65,16 @@ export const LoginForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
+                <label htmlFor="logInEmail" className="sr-only">
+                  Email address
+                </label>
                 <FormControl>
-                  <Input {...field} placeholder="E-mail" type="email" />
+                  <Input
+                    {...field}
+                    id="logInEmail"
+                    placeholder="E-mail"
+                    type="email"
+                  />
                 </FormControl>
                 <FormMessage>
                   {methods.formState.errors.email?.message}
@@ -79,8 +88,16 @@ export const LoginForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
+                <label htmlFor="logInPassword" className="sr-only">
+                  Password
+                </label>
                 <FormControl>
-                  <Input {...field} placeholder="Password" type="password" />
+                  <Input
+                    {...field}
+                    id="logInPassword"
+                    placeholder="Password"
+                    type="password"
+                  />
                 </FormControl>
                 <FormMessage>
                   {methods.formState.errors.password?.message}

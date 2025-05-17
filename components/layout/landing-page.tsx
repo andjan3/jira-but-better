@@ -15,7 +15,7 @@ export default function LandingPage() {
   const router = useRouter();
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <main className="relative h-screen w-full overflow-hidden">
       <div className="bg-black opacity-30 w-full absolute top-0 h-full z-10" />
       <video
         className="hidden lg:block lg:absolute top-0 left-0 w-full h-full object-cover z-0"
@@ -43,21 +43,21 @@ export default function LandingPage() {
         />
       </div>
 
-      <div className="relative z-20 h-screen w-full flex flex-col justify-center items-center gap-5 px-4 text-center">
+      <section className="relative z-20 h-screen w-full flex flex-col justify-center items-center gap-5 px-4 text-center">
         <h1 className="text-[30px] lg:text-[60px] uppercase text-white drop-shadow-lg">
           Jira but better
         </h1>
-        <div className="w-[90%] md:w-[70%] lg:w-[30%] italic text-white drop-shadow-lg z-20">
+        <p className="w-[90%] md:w-[70%] lg:w-[30%] italic text-white drop-shadow-lg z-20">
           A collaborative task management with intuitive drag-and-drop. Perfect
           for teams who want clarity without complexity
-        </div>
+        </p>
         <Link
           href={"/auth/login"}
           className="bg-[#1868Db] hover:bg-[#3b79d0] mt-3 text-white px-8 py-3 rounded-lg  font-medium z-20"
         >
           Log in
         </Link>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

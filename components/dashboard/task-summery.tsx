@@ -35,7 +35,7 @@ export const TaskSummery = async ({ session }: TaskSummeryProps) => {
   );
 
   return (
-    <div>
+    <section>
       <h2 className="mb-3">Assigned tasks</h2>
 
       {tasks.length == 0 ? (
@@ -77,6 +77,6 @@ export const TaskSummery = async ({ session }: TaskSummeryProps) => {
           </TableBody>
         </Table>
       )}
-    </div>
+    </section>
   );
 };

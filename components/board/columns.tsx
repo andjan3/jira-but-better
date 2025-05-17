@@ -36,7 +36,7 @@ export const Columns = () => {
   const { localTasks, handleDragEnd } = useDragAndDrop();
 
   return (
-    <div className="pt-8 px-4 lg:pl-8 lg:pr-0 py-10 lg:py-0 lg:mt-28 mx-auto md:mx-0">
+    <section className="pt-8 px-4 lg:pl-8 lg:pr-0 py-10 lg:py-0 lg:mt-28 mx-auto md:mx-0">
       <BoardHeader />
 
       <div className="flex flex-col md:flex-row gap-6 md:gap-10 overflow-x-auto pb-4">
@@ -58,6 +58,6 @@ export const Columns = () => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
