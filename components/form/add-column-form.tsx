@@ -83,6 +83,7 @@ export function AddColumnForm({
           <div className="flex items-center gap-2 ">
             <Button type="submit">Add column</Button>
             <button
+              type="button"
               className="cursor-pointer pt-4 lg:pt-0 text-[45px] lg:text-[30px]"
               onClick={onCancel}
             >

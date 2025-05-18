@@ -41,7 +41,6 @@ export function UserIcon() {
       onMouseLeave={() => setIsOpen(false)}
       onFocus={handleFocus}
       onBlur={handleBlur}
-      tabIndex={-1}
     >
       <button
         aria-haspopup="true"
@@ -64,6 +63,7 @@ export function UserIcon() {
           id="user-popup"
           role="menu"
           className="absolute top-12 lg:top-[45px] text-center -right-6 bg-white text-black p-2 rounded shadow-lg w-[100px]"
+          tabIndex={-1}
         >
           {session ? (
             <li role="none">
