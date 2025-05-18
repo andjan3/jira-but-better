@@ -128,6 +128,7 @@ export function TaskDialog({
           className={`${getPriorityClass(task)} w-[60px] h-[10px] rounded mb-4`}
         ></div>
         <DialogHeader>
+          <DialogDescription className="!h-0 !pt-0 !pb-0" />
           <EditableTitle
             title={task.title || ""}
             id={task.id}
@@ -150,12 +151,13 @@ export function TaskDialog({
             <DialogTitle className="font-medium mb-2">Description</DialogTitle>
 
             {!editingDescription ? (
-              <DialogDescription
-                className="cursor-pointer "
+              <button
+                className="cursor-pointer hover:bg-slate-200 w-full p-2 text-start"
                 onClick={() => setEditingDescription(true)}
                 dangerouslySetInnerHTML={{
                   __html: safeHTML || "No description. Click to add one.",
                 }}
+                aria-label="Change task description"
               />
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col h-full">
@@ -206,12 +208,13 @@ export function TaskDialog({
               <PopoverContent className="max-h-[250px] w-[300px] ">
                 <div className="space-y-2">
                   <h4 className="font-medium leading-none">Members</h4>
-                  <div
+                  <button
                     className="lg:text-sm text-[16px]  text-muted-foreground cursor-pointer hover:text-black"
                     onClick={() => handleAssignment()}
+                    aria-label={`Assign yourself to task: ${task.title}`}
                   >
                     Assign yourself
-                  </div>
+                  </button>
                 </div>
                 <TaskMemberAssignment taskId={task.id} boardId={task.boardId} />
               </PopoverContent>

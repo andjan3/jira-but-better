@@ -65,9 +65,13 @@ export function AddColumnForm({
             name="name"
             render={({ field }) => (
               <FormItem>
+                <label htmlFor="addColumnName" className="sr-only">
+                  Add column name
+                </label>
                 <FormControl>
                   <Input
                     {...field}
+                    id="addColumnName"
                     placeholder="Add column name.."
                     className="w-full"
                   />
@@ -77,12 +81,14 @@ export function AddColumnForm({
             )}
           />
           <div className="flex items-center gap-2 ">
-            <Button type="submit">Add column</Button>{" "}
-            <IoIosCloseCircleOutline
+            <Button type="submit">Add column</Button>
+            <button
+              type="button"
               className="cursor-pointer pt-4 lg:pt-0 text-[45px] lg:text-[30px]"
-              aria-label="Close form for adding column to board"
               onClick={onCancel}
-            />
+            >
+              <IoIosCloseCircleOutline aria-label="Close form for adding column to board" />
+            </button>
           </div>
         </form>
       </Form>

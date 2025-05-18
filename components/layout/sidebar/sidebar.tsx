@@ -45,9 +45,9 @@ export const Sidebar = ({ boards }: Props) => {
             <AppSidebar boards={boards} />
           </div>
 
-          <main className="flex-1 overflow-auto p-4 lg:p-6">
+          <div className="flex-1 overflow-auto p-4 lg:p-6">
             <SidebarTrigger />
-          </main>
+          </div>
         </div>
       </div>
     </SidebarProvider>

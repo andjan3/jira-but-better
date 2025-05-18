@@ -84,15 +84,16 @@ export function AssignedUserPopover({ item, boardId }: MembersPopOverProps) {
               </div>
             </div>
             <div className="grid gap-2 p-4 mt-6">
-              <div
-                className="cursor-pointer hover:bg-[#F7F8F9] p-4"
+              <button
+                className="cursor-pointer hover:bg-[#F7F8F9] p-4 text-start"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleRemoveAssignment();
                 }}
+                aria-label={`Remove user ${item.user.username} from assignment`}
               >
                 Remove from card
-              </div>
+              </button>
             </div>
           </div>
         </PopoverContent>

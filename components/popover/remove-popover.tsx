@@ -69,12 +69,12 @@ export function RemovePopOver({
               onConfirm={handleRemove}
               item={isColumn ? "column" : "board"}
             />
-            <div
-              className="font-medium leading-none text-center cursor-pointer"
+            <button
+              className="mx-auto w-full h-full font-medium leading-none text-center cursor-pointer"
               onClick={() => setIsAlertOpen(true)}
             >
               {isColumn ? "Delete column" : "Delete board"}
-            </div>
+            </button>
           </div>
         </div>
       </PopoverContent>

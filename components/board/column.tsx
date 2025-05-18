@@ -82,19 +82,20 @@ export const Column = ({
       {showForm === column.id ? (
         <div className="flex items-end">
           <AddTaskForm columnId={column.id} boardId={column.boardId} />
-          <IoIosCloseCircleOutline
-            fontSize={30}
+          <button
             className="cursor-pointer -ml-44 lg:-ml-60"
             onClick={() => onToggleForm(null)}
             aria-label="Close form for adding task to a column"
-          />
+          >
+            <IoIosCloseCircleOutline fontSize={30} aria-label="Close icon" />
+          </button>
         </div>
       ) : (
         <button
           className="cursor-pointer text-base flex items-center gap-2 hover:bg-slate-200 p-4 rounded-md"
           onClick={() => onToggleForm(column.id)}
         >
-          <GoPlus fontSize={25} aria-label="Create a task" />
+          <GoPlus fontSize={25} aria-label="Plus icon" />
           Create task
         </button>
       )}

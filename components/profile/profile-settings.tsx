@@ -60,17 +60,17 @@ export const ProfileSettings = () => {
     }
   };
   return (
-    <div className="flex flex-col w-[90%] lg:w-[92%] mx-auto gap-5 my-10 mt-20 lg:mt-40">
+    <section className="flex flex-col w-[90%] lg:w-[92%] mx-auto gap-5 my-10 mt-20 lg:mt-40">
       <h1>Settings</h1>
 
       <div className="text-xl p-4 w-[100%] lg:w-[90%]  gap-4 mb-5 rounded-xl border border-slate-200 text-slate-950 shadow py-5">
-        <div
-          className="flex items-center justify-between cursor-pointer"
+        <button
+          className="flex items-center justify-between cursor-pointer text-[20px] font-bold w-full"
           onClick={() => handlePasswordForm()}
         >
-          <h2>Update password</h2>
-          <GoPlus fontSize={35} aria-label="Change password" />
-        </div>
+          Change password
+          <GoPlus fontSize={35} aria-label="Plus icon" />
+        </button>
 
         {isPasswordFormVisible && <ChangePasswordForm />}
       </div>
@@ -91,6 +91,6 @@ export const ProfileSettings = () => {
         onConfirm={handleConfirmDelete}
         item={"account"}
       />
-    </div>
+    </section>
   );
 };

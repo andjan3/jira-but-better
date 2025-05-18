@@ -24,7 +24,7 @@ import {
 } from "@/components/tiptap-ui-primitive/tooltip";
 import { useBoard } from "@/app/context/board-context";
 import { AssignedUserPopover } from "../popover/assigned-user-popover";
-import { getPriorityClass, Task } from "@/lib/priority-utils";
+import { getPriorityClass } from "@/lib/priority-utils";
 import { AssignedUser } from "@/app/types/board-types";
 import { ConvertPriorityLabels } from "@/lib/convert-priority-labels";
 import { DeleteConfirmationDialog } from "../dialogs/delete-confirmation-dialog";
@@ -90,26 +90,30 @@ export const TaskCard = ({ task }: TaskCardProps) => {
     (user: AssignedUser) => user.taskId === task.id
   );
 
-  const handleDeleteIconClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (task.columnId != null) {
-      handleDeleteClick({
-        taskId: task.id,
-        boardId: task.boardId!,
-        columnId: task.columnId!,
-      });
-    } else {
-      toast.error("Task has no valid columnId!");
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleDialog();
+    }
+  };
+
+  const handleDeleteKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      e.stopPropagation();
+      if (task.columnId != null) {
+        handleDeleteClick({
+          taskId: task.id,
+          boardId: task.boardId!,
+          columnId: task.columnId!,
+        });
+      }
     }
   };
 
   return (
-    <div
-      className=" p-4  bg-white hover:bg-slate-200 rounded-xl border border-slate-200  text-slate-950 shadow "
-      data-task-id={task.id}
-      data-order={task.order}
-    >
-      <div onClick={handleDialog} className="cursor-pointer">
+    <div className="p-4 bg-white hover:bg-slate-200 rounded-xl border border-slate-200 text-slate-950 shadow cursor-pointer">
+      <div className="cursor-pointer " onClick={handleDialog}>
         <div
           className={`flex items-center justify-between ${
             task.priority == null && "mt-2"
@@ -122,24 +126,49 @@ export const TaskCard = ({ task }: TaskCardProps) => {
                   className={`${getPriorityClass(
                     task
                   )} w-[60px] h-[10px] rounded mb-4`}
-                ></div>
+                />
               </TooltipTrigger>
               <TooltipContent>
                 <p>Priority: {ConvertPriorityLabels[task.priority]}</p>
               </TooltipContent>
             </Tooltip>
           ) : (
-            <div></div>
+            <div className="mb-4 w-[60px] h-[10px]" />
           )}
-          <MdClose
-            className="delete-icon -mt-2"
-            onClick={handleDeleteIconClick}
-            aria-label="Delete task"
-          />
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (task.columnId != null) {
+                handleDeleteClick({
+                  taskId: task.id,
+                  boardId: task.boardId!,
+                  columnId: task.columnId!,
+                });
+              }
+            }}
+            onKeyDown={handleDeleteKeyDown}
+            aria-label={`Delete task ${task.title}`}
+          >
+            <MdClose
+              className="delete-icon -mt-2 "
+              fontSize={25}
+              aria-label="Delete icon"
+            />
+          </button>
         </div>
-        <div>{task.title}</div>
-        <div className="flex justify-end gap-1">
-          {assignedMembers.map((assignedUser: AssignedUser) => (
+        <div
+          onKeyDown={handleKeyDown}
+          tabIndex={0}
+          role="button"
+          aria-label={`Open task dialog for ${task.title}`}
+        >
+          {task.title}
+        </div>
+
+        <div className="flex justify-end gap-1 mt-2">
+          {assignedMembers.map((assignedUser) => (
             <AssignedUserPopover
               item={assignedUser}
               boardId={task.boardId}
@@ -148,7 +177,6 @@ export const TaskCard = ({ task }: TaskCardProps) => {
           ))}
         </div>
       </div>
-
       <DeleteConfirmationDialog
         isOpen={isAlertOpen}
         onClose={() => setIsAlertOpen(false)}
