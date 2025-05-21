@@ -7,7 +7,7 @@
  * Features:
  * - Manages a local state `localTasks` reflecting the current order of tasks.
  * - Updates local state on drag end for immediate UI feedback.
- * - Syncs task order changes with by `reorderTasks` action.
+ * - Syncs task order changes by `reorderTasks` action.
  * - Handles rollback to previous state on action failure.
 
  */

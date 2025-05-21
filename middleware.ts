@@ -2,13 +2,16 @@
  * Middleware for route protection and authentication handling.
  * ------------------------------------------------------------
  *
- * - Protects authenticated routes by checking for a valid NextAuth JWT token.
- * - Redirects unauthenticated users trying to access protected routes (like /board, /dashboard, /app) to the landing page (/).
- * - Redirecting logged-in users to the dashboard (/dashboard).
+  Public Routes:
+ * - /auth/login, /auth/register
+ * - Redirect authenticated users to dashboard
+ * 
+ * Protected Routes:
+ * - /board, /dashboard, /app, /profile/settings
+ * - Redirect unauthenticated users to landingpage (/)
+ * 
  * - Uses `getToken` from next-auth/jwt to verify if a user is authenticated.
- 
- * This middleware ensures secure access control and smooth user navigation flow
- * based on authentication state.
+ *
  */
 
 import { NextResponse } from "next/server";
