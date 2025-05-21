@@ -2,8 +2,10 @@
  * updateTaskOrder
  * -------------------
  * Reorders a task within a column or moves it to a new column.
- * Updates the order values of all tasks in the target column accordingly.
- *
+ * Updates the order values of all tasks in the target column.
+ * After updating, uses normalizeTaskOrder to reset all order values 
+ * to simple numbering (1, 2, 3...) in the target column.
+ * 
  * @param taskId - The ID of the task to move.
  * @param newColumnId - The ID of the column where the task is being moved.
  * @param newIndex - The position in the column where the task should be inserted.
@@ -85,7 +87,7 @@ export const updateTaskOrder = async ({
  * Ensures that all tasks in a given column have sequential `order` values,
  * starting from 1 and increasing by 1.
  *
- * This helps maintain consistent ordering after task insertions/movements.
+ * This helps maintain consistent ordering after task movements.
  **/
 
 async function normalizeTaskOrderValues(columnId: number, boardId: number) {
