@@ -3,7 +3,15 @@ This project was developed as part of my final degree project in Front End Devel
 
 ## :pushpin: Overview
 Designed as an agile project management tool, the application helps manage projects, organize tasks, and assign them efficiently. Inspired by Jira, it offers a straightforward and easy-to-navigate interface. 
-The tech stack includes Next.js, Typescript, Prisma, PostgreSQL, NextAuth, ShadCN UI, Tailwind CSS and hello-pangea/dnd (for drag-and-drop functionality).
+The tech stack includes:
+- Next.js
+- Typescript
+- Prisma
+- PostgreSQL
+- NextAuth
+- ShadCN UI
+- Tailwind CSS
+- hello-pangea/dnd (drag-and-drop library).
 
 ## :sparkles: Features
 - Task management: create, edit, and delete tasks with priority labels and rich text descriptions.
